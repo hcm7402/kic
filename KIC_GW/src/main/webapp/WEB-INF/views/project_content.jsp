@@ -49,7 +49,6 @@
 		</tr>			
 	</table>
 			
-			
 </div>
 <div class="table">
 	<div align="right">

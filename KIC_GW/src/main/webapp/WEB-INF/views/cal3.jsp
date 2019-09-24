@@ -74,6 +74,7 @@ body {
 $(document).ready(function() {
 	fn_get_events();
 });
+
 function date_to_str(format)
 {
     var year = format.getFullYear();

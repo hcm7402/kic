@@ -2,6 +2,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="./resources/styles.css">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style type="text/css">
 body {
 	margin: 0;
@@ -11,7 +12,6 @@ body {
 }
 
 #header {
-text-align: center;
 	margin-top: 5px;
 	height:70px;
 }
@@ -25,18 +25,38 @@ text-align: center;
 li {
 	width: 200px;
 }
-.main-icon {
-	
-	margin-top: 5px;
+.info {
+	position: absolute;
+	top: 1%;
+	right:0%;
+}
+.main-img {
+	text-align: center;
+}
+.info-table {
+	width: 250px;
+	border: 0px solid black !important;
 }
 </style>
 
 
-    <div id="header"><img src="./resources/img/kic.png" class="main-icon" /></div>
+    <div id="header">
+	    <div class="main-img">
+	    	<a href="./main.do"><img src="./resources/img/kic.png" class="main-icon" /></a>
+	    </div>
+	    <div class="info">
+	    <table class="info-table">
+	    	<tr>
+	    	<td>홍길동 님</td>
+	    	<td><a href="#"><img src="./resources/img/logout.png" class="main-icon" /></a></td>
+	    	</tr>
+	    </table>
+	    </div>
+	</div>
     <div id='cssmenu'>
 	<ul>
    <li class="home"><a href="./main.do">Home</a></li>
-   <li><a href='./Management.do'>My page</a></li>
+   <li><a href='./mypage.do'>My page</a></li>
    <li><a href='./address.do'>주소록</a></li>
    <li><a href='#'>게시판</a></li>
    <li><a href='./auth.do'>전자결재</a></li>

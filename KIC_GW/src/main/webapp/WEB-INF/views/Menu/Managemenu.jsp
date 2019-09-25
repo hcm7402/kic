@@ -43,9 +43,8 @@
    </li>
    <li class='active has-sub'><a href='#'>근태관리</a>
    <ul>
-   	<li><a href='#'>근태 현황</a>
+   	<li><a class="manage">근태 현황</a></li>
    </ul>
-   </li>
    <li class='active has-sub'><a href='#'>나의일정</a>
    <ul>
    	<li><a href='#'>나의 일정</a>

@@ -1,21 +1,6 @@
 <%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-	Calendar cal = Calendar.getInstance();
-	int year = cal.get(Calendar.YEAR);
-	int month = (cal.get(Calendar.MONTH) + 1);
-	
-	Calendar sDay = Calendar.getInstance();
-	Calendar eDay = Calendar.getInstance();
-	
-	sDay.set( year, month-1, 1 );
-	eDay.set( year, month, 1-1 );
-	
-	int End_day = eDay.get(Calendar.DATE);
-	
-	
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,43 +8,27 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
 	content="width=device-width,initial-scale=1.0,minimun-scale=1.0,maximun-scale=1.0">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="./resources/tree.css">
 
 <title>근태관리 페이지</title>
 <style type="text/css">
-#mainleft {
-
-}
-
-.row {
-	padding-left: 14px;
-	padding-bottom: 30px;
-	width: auto;
-	height: auto;
-}
 
 .board-table {
+	text-align: center;  
 	border: 3px solid #47c9af;
 	width: 100%;
 	height: 100%;
-	
-}
-
-table{
 	border-collapse: collapse;
-  	width: 100%;
 }
 
-th {
+.board-table th {
 	text-align: center;   
-	border-right: 2px solid #47c9af;              
+	border-right: 2px solid #47c9af;          
 	padding: 8px;
 	background-color: #47c9af;
 	opacity: 0.5;
 	color: black;
 }
-td {
+.board-table td {
 	border-right: 2px solid #47c9af;
 	text-align: center;
 	padding: 8px;
@@ -69,8 +38,15 @@ tr:nth-child(even){background-color: #f2f2f2}
 
 <script type="text/javascript" src="./resources/js/jquery-3.4.1.js"></script>
 <script type="text/javascript">
+	var today = null;
+	var year = null;
+	var month = null;
+	var firstDay = null;
+	var lastDay = null;
+	
 	$(document).ready( function() {
-		
+		cal();
+		drawcal();
 		var manage = function( eno ) {
 			$.ajax({
 				url: './managelist.do',
@@ -85,6 +61,8 @@ tr:nth-child(even){background-color: #f2f2f2}
 						var mdate = this.mdate;
 						var checkins = this.checkin;
 						var checkouts = this.checkout;
+						var total = this.total;
+						var etc = this.etc;
 						
 						var checkin = checkins.split(' ');
 						var checkout = '';
@@ -95,6 +73,8 @@ tr:nth-child(even){background-color: #f2f2f2}
 								if( date == mdate ) {
 									$( '.checkin'+i ).html(checkin[1].substring(0,8));
 									$( '.checkout'+i ).html(checkout[1].substring(0,8));
+									$( '.total'+i ).html( total );
+									$( '.etc'+i ).html( etc );
 								}
 							}
 						}else {
@@ -103,6 +83,8 @@ tr:nth-child(even){background-color: #f2f2f2}
 								if( date == mdate ) {
 									$( '.checkin'+i ).html(checkin[1].substring(0,8));
 									$( '.checkout'+i ).html('');
+									$( '.total'+i ).html( total );
+									$( '.etc'+i ).html( etc );
 								}
 							}
 						}
@@ -114,34 +96,91 @@ tr:nth-child(even){background-color: #f2f2f2}
 		manage('1');
 		
 		var asd = $('.checkin23').text();
-		console.log( asd );
-		console.log( 'asd' );
 		var total = function( eno ) {
 			for( var i = 1; i <= 31; i++ ) {
 				console.log($('.checkin'+ i ).text());
 			}
 		}
+		
+		$('.lastmonth').on( 'click', function() {
+			month--;
+			if( month <= 0 ) {
+				month = 12;
+				year--;
+			}
+			firstDay = new Date(year,month-1,1);
+			lastDay = new Date(year,month,0);
+			drawcal();
+			manage('1');
+		});
+		
+		$('.nextmonth').on( 'click', function() {
+			month++;
+			if( month > 12 ) {
+				month = 1;
+				year++;
+			}
+			firstDay = new Date(year,month-1,1);
+			lastDay = new Date(year,month,0);
+			drawcal();
+			manage('1');
+		});
 	});
+	//달력 초기화
+	function cal() {
+		today = new Date();
+		year = today.getFullYear();
+		month = today.getMonth()+1;
+		firstDay = new Date(year,month-1,1);
+		lastDay = new Date(year,month,0);
+	}
+	// 년 월 일 출력
+	function drawcal() {
+		var html = '';
+		for( var i=firstDay.getDate(); i<=lastDay.getDate(); i++ ) {
+			html += '<tr>';
+			var months = '';
+			if( month < 10 ) {
+				months = '0' + month;
+			} else {
+				months = month;
+			}
+				if( i < 10 ) {
+					html += '<td class="date'+ i +'">' + year + '-' + months + '-0' + i + '</td>';
+				} else {
+					html += '<td class="date'+ i +'">' + year + '-' + months + '-' + i + '</td>';
+				}
+				html += '<td class="checkin'+ i +'"></td>';
+				html += '<td class="checkout'+ i +'"></td>';
+				html += '<td class="total'+ i +'"></td>';
+				html += '<td class="etc'+ i +'"></td>';
+				html += '</tr>';
+			}
+		$('.calendar').html( html );
+	}
+	
 	// 페이지 새로고침
-	 if (self.name != 'reload') {
+	/*  if (self.name != 'reload') {
         self.name = 'reload';
         self.location.reload(true);
     }
-    else self.name = ''; 
+    else self.name = '';  */
 </script>
 </head>
 <body>
-	<div id="wrapper">
-		<%@include file="../Menu/topmenu.jsp"%>
-		<div id="container">
-		<div class="row">
-		<div class="menubar col-sm-3">
-		<%@include file="../Menu/menu.jsp" %>
+		
+		<div style="float: left; width: 33%;">
+		<button class="lastmonth">&lt;</button>
 		</div>
-			<div id="mainleft" class="col-sm-8">
-				<div class="board">
-					<table class="board-table">
-						<thead>
+		<div style="float: left; width: 34%;">
+		<h3 style="text-align: center;">근태현황</h3>
+		</div>
+		<div style="float: left; width: 33%; text-align: right">
+		<button class="nextmonth">&gt;</button>
+		</div>
+		
+	<table class="board-table" >
+		<thead>
 			<tr>
 				<th scope="col" class="date">날짜</th>
 				<th scope="col" class="in_time">출근 시간</th>
@@ -151,40 +190,9 @@ tr:nth-child(even){background-color: #f2f2f2}
 			</tr>
 			
 		</thead>
-		<tbody>
-		<%
-			String months = "";
-			if( month < 10 ) {
-				months = "0" + month;
-				System.out.println( months );
-			}else {
-				months = "" + month;
-			}
-			for( int i=1; i<=End_day; i++ ) {
-				out.println("<tr>");
-				if( i< 10 ) {
-					out.println("<td class='date"+ i +"'>" + year + "-" + months + "-0" + i + "</td>");
-				} else {
-					out.println("<td class='date"+ i +"'>" + year + "-" + months + "-" + i + "</td>");
-				}
-				out.println("<td class='checkin"+ i +"'></td>");
-				out.println("<td class='checkout"+ i +"'></td>");
-				out.println("<td class='total"+ i +"'></td>");
-				out.println("<td class='other"+ i +"'>-</td>");
-				out.println("</tr>");
-			}
-		%>
-
+		<tbody class="calendar">
 		</tbody>
-					</table>
-				</div>
-
-			</div>
-			</div>
-		</div>
-		
-	</div>
-	<script src="./resources/js/bootstrap.bundle.min.js"></script>
+	</table>
 </body>
 
 </html>

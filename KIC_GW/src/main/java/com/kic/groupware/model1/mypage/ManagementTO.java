@@ -1,12 +1,20 @@
 package com.kic.groupware.model1.mypage;
 
 public class ManagementTO {
+	private String mno;
 	private String empno;
 	private String m_date;
 	private String checkin;
 	private String checkout;
 	private String total;
-	private String other;
+	private String etc;
+	
+	public String getMno() {
+		return mno;
+	}
+	public void setMno(String mno) {
+		this.mno = mno;
+	}
 	public String getEmpno() {
 		return empno;
 	}
@@ -37,11 +45,12 @@ public class ManagementTO {
 	public void setTotal(String total) {
 		this.total = total;
 	}
-	public String getOther() {
-		return other;
+	public String getEtc() {
+		return etc;
 	}
-	public void setOther(String other) {
-		this.other = other;
+	public void setEtc(String etc) {
+		this.etc = etc;
 	}
+	
 	
 }

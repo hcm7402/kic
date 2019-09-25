@@ -11,18 +11,8 @@
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800&amp;subset=korean" rel="stylesheet">
 <title>메인페이지</title>
 <style type="text/css">
-/* #aside {
-	position: absolute;
-	left: 0;
-} */
 .checkin-time {
 	margin-top: 10px;
-}
-.checkout-time {
-	
-}
-.checkin-time, .checkout-time {
-	font-family: "Nanum Gothic", sans-serif;
 }
 .checkin, .checkout {
 	margin-top: 10px;
@@ -152,12 +142,19 @@ background-color:#fff;      }
 					$( results ).each( function() {
 						var flag = this.flag;
 						if( flag == 0 ) {
-							alert('출근되었습니다.');
+							swal({
+								  title: '출근 처리 되었습니다.',
+								  icon: 'success'
+								});
 							var intime = indate.split(' ');
 							$( '.checkin-time').html( '출근시간 : ' + intime[1] );
 							$('.checkin').val('출근완료').prop( 'disabled', true );
 						}else {
-							alert('출근하기에 실패하였습니다.');
+							swal({
+								  title: '출근하기에 실패하였습니다.',
+								  text: '계속 문제가 있을시 담당관리자에게 문의 하시기 바랍니다',
+								  icon: 'warning'
+								});
 						}
 					});
 				},
@@ -180,12 +177,19 @@ background-color:#fff;      }
 					$( results ).each( function() {
 						var flag = this.flag;
 						if( flag == 0 ) {
-							alert('퇴근되었습니다.');
+							swal({
+								  title: '퇴근 처리 되었습니다.',
+								  icon: 'success'
+								});
 							var outtime = outdate.split(' ');
 							$( '.checkout-time').html( '퇴근시간 : ' + outtime[1] );
 							$('.checkout').val('퇴근완료').prop( 'disabled', true );
 						}else {
-							alert('퇴근하기에 실패하였습니다.');
+							swal({
+								  title: '퇴근하기에 실패하였습니다.',
+								  text: '계속 문제가 있을시 담당관리자에게 문의 하시기 바랍니다',
+								  icon: 'warning'
+								});
 						}
 					});
 				},

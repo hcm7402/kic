@@ -39,10 +39,10 @@ li {
 }
 </style>
 
-
+<div class="body">
     <div id="header">
 	    <div class="main-img">
-	    	<a href="./main.do"><img src="./resources/img/kic.png" class="main-icon" /></a>
+	    	<a href="./main.do"><img src="./resources/img/kicmark.png" class="main-icon" /></a>
 	    </div>
 	    <div class="info">
 	    <table class="info-table">
@@ -64,6 +64,6 @@ li {
    <li><a href='./cal.do'>캘린더</a></li>
 	</ul>
 	</div>
-	
+	</div>
     
 

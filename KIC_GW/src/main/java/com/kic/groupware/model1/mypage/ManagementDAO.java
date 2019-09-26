@@ -82,8 +82,12 @@ public class ManagementDAO {
 			SimpleDateFormat format = new SimpleDateFormat( "kk:mm:ss", Locale.KOREA );
 			
 			try {
-				Date d1 = format.parse(checkin.substring(11, 19));
-				Date d2 = format.parse(checkout.substring(10));
+				String[] checkins = checkin.split(" ");
+				String[] checkouts = checkout.split(" ");
+				
+				Date d1 = format.parse(checkins[1].substring(0,8));
+				Date d2 = format.parse(checkouts[1].substring(0,8));
+				
 				
 				diff = d2.getTime() - d1.getTime();
 				sec = diff/1000;

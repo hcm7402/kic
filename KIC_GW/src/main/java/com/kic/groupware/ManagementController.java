@@ -15,6 +15,16 @@ import com.kic.groupware.model1.mypage.ManagementTO;
 @Controller
 public class ManagementController {
 	
+	@RequestMapping(value = "/mypage.do")
+	public ModelAndView mypage( HttpServletRequest request, HttpServletResponse response) {
+		System.out.println( "management 컨트롤러 호출" );
+		
+		ModelAndView model = new ModelAndView();
+		model.setViewName( "MyPage/mypage" );
+		
+		return model;
+	}
+	
 	@RequestMapping(value = "/Management.do")
 	public ModelAndView management( HttpServletRequest request, HttpServletResponse response) {
 		System.out.println( "management 컨트롤러 호출" );

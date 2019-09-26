@@ -62,14 +62,68 @@ public class ManagementDAO {
 		int flag = 1;
 		
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		
 		try {
+			String mno = null;
+			String checkin = null, hours = null, second = null, minute = null;
+			long diff = 0, sec = 0, min = 0, hour = 0;
 			
-			String sql = "update management set checkout = ? where eno = ? and mdate = date_format( now(), '%Y-%m-%d')";
+			String sql = "select mno, checkin from management where eno = ? and mdate = date_format( now(), '%Y-%m-%d')";
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, "1");
+			
+			rs = pstmt.executeQuery();
+			if( rs.next() ) {
+				mno = rs.getString("mno");
+				checkin = rs.getString("checkin");
+			}
+			SimpleDateFormat format = new SimpleDateFormat( "kk:mm:ss", Locale.KOREA );
+			
+			try {
+				Date d1 = format.parse(checkin.substring(11, 19));
+				Date d2 = format.parse(checkout.substring(10));
+				
+				diff = d2.getTime() - d1.getTime();
+				sec = diff/1000;
+				
+				min = sec / 60;
+				hour = min / 60;
+				sec = sec % 60;
+				min = min % 60;
+				
+				if( hour < 10 ) {
+					hours = "0" + hour;
+				}else {
+					hours = "" + hour;
+				}
+				
+				if( min < 10 ) {
+					minute = "0" + min;
+				}else {
+					minute = "" + min;
+				}
+				
+				if( sec < 10 ) {
+					second = "0" + sec;
+				}else {
+					second = "" + sec;
+				}
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			String total = hours + ":" + minute + ":" + second;
+			
+			sql = "update management set checkout = ?, total = ? where mno =? and eno = ? and mdate = date_format( now(), '%Y-%m-%d')";
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString( 1, checkout );
-			pstmt.setString( 2, "1" );
+			pstmt.setString( 2, total );
+			pstmt.setString( 3, mno );
+			pstmt.setString( 4, "1" );
 			
 			int result = pstmt.executeUpdate();
 			if( result == 1 ) {
@@ -127,7 +181,7 @@ public ArrayList<ManagementTO> managelist( String eno ) {
 		ArrayList<ManagementTO> manageLists = new ArrayList<ManagementTO>();
 		
 		try {
-			String sql = "select mdate, checkin, checkout from management where eno = ?";
+			String sql = "select * from management where eno = ?";
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, "1");
@@ -140,10 +194,14 @@ public ArrayList<ManagementTO> managelist( String eno ) {
 				String mdate = rs.getString("mdate");
 				String checkin = rs.getString("checkin");
 				String checkout = rs.getString("checkout");
+				String total = rs.getString("total");
+				String etc = rs.getString("etc");
 				
 				to.setM_date(mdate);
 				to.setCheckin(checkin);
 				to.setCheckout(checkout);
+				to.setTotal(total);
+				to.setEtc(etc);
 				
 				manageLists.add(to);
 			}

@@ -1,13 +1,81 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-	<title>Login V6</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="./resources/util.css">
-	<link rel="stylesheet" type="text/css" href="./resources/main.css">
-	
+<title>Login 페이지</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="./resources/util.css">
+<link rel="stylesheet" type="text/css" href="./resources/main.css">
+<script type="text/javascript" src="./resources/js/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="./resources/js/jquery-ui.js"></script>
+<link rel="stylesheet" href="./resources/css/base/jquery-ui.css">
+<script type="text/javascript">
+	$(document).ready( function() {
+		
+		// session 값 부여 함수
+		var session = function( eno ) {
+			$.ajax({
+				url: './session.do',
+				type: 'post',
+				data: {
+					eno: eno
+				},
+				success: function() {
+					location.href = './main2.do';
+				}
+			});
+		}
+		
+		var logcheck = function( u_id, u_password ) {
+			$.ajax({
+				url: './login_ok.do',
+				type: 'post',
+				data: {
+					u_id: u_id,
+					u_password: u_password
+				},
+				dataType: 'JSON',
+				success: function( json ) {
+					logchecks = json.logchecks;
+					
+					$(logchecks).each( function () {
+						var flag = this.flag;
+						var eno = this.eno;
+							
+						if(flag == 2) {
+							alert('존재하지 않는 아이디 입니다.');
+						}else if(flag == 1) {
+							alert('비밀번호가 다릅니다.');
+						}else {
+							alert('로그인 성공!');
+							session( eno );
+						}
+					});
+					
+				},
+				error: function(xhr, status, error ) {
+					alert('에러 : ' + status + '\n\n' + error );
+				}
+			});
+		} // end of logcheck
+		
+		// 로그인 버튼 클릭 시 이벤트
+		
+		$('#submit').on('click', function() {
+			if( $('#u_id').val() == '' ) {
+				alert('아이디를 입력하셔야 합니다.');
+			}else if( $('#u_password').val() == '' ){
+				alert('비밀번호를 입력하셔야 합니다.');
+			}else {
+				var u_id = $('#u_id').val();
+				var u_password = $('#u_password').val();
+				logcheck( u_id, u_password );
+			}
+		});
+	});
+</script>
 	<style type="text/css">
 	.arial {font-family: arial;
 			z-index: 20;
@@ -18,7 +86,6 @@
 	.s3 { text-shadow: 2px 2px 6px black; }
 	
 .box {
-
   border-radius: 5px;
   box-shadow: 0 2px 30px rgba(black, .2);
   background: lighten(#f0f4c3);
@@ -87,50 +154,46 @@
   from { transform: rotate(0deg); }
   from { transform: rotate(360deg); }
 }
-	</style>
+</style>
 </head>
 <body>
 	<div id="main">
 		<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-t-85 p-b-20 fs-50 box">
-				<form class="login100-form validate-form">
+				<form class="login100-form validate-form" action="login_ok.do" method="post" name="frm">
 					<div class='wave -one'></div>
   					<div class='wave -two'></div>
   					<div class='wave -three'></div>
-				<span class="login100-form-title arial s3"> KIC Groupware</span> <br /><br />
+					<span class="login100-form-title arial s3"> KIC Groupware</span> <br /><br />
 					<div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate = "Enter username">
-						<input class="input100" type="text" name="username">
-						<span class="focus-input100" data-placeholder="Username"></span>
+						<input class="input100" type="text" id="u_id">
+						<span class="focus-input100" data-placeholder="아이디"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
-						<input class="input100" type="password" name="pass">
-						<span class="focus-input100" data-placeholder="Password"></span>
+						<input class="input100" type="password" id="u_password">
+						<span class="focus-input100" data-placeholder="비밀번호"></span>
 					</div>
 
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
-							Login
-						</button>
+						<button type="button" id="submit" class="login100-form-btn">로그인</button>
 					</div>
 					<ui>
 						<li class="m-b-0">
-							<span class="txt1">
-								Forgot
-							</span>
-
 							<a href="#" class="txt2">
-								Username / Password?
+								아이디 / 비밀번호
 							</a>
+							<span class="txt1">
+								찾기
+							</span>
 						</li>
 						<li>
 							<span class="txt1">
-								Don’t have an account?
+								아이디가 없으신가요?
 							</span>
-
-							<a href="#" class="txt2">
-								Sign up
+							<a href="./useradd.do" class="txt2">
+								회원가입
 							</a>
 						</li>
 					</ui>
@@ -139,23 +202,7 @@
 		</div>
 	</div>
 	</div>
-	
-<!--===============================================================================================-->
-	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/bootstrap/js/popper.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/daterangepicker/moment.min.js"></script>
-	<script src="vendor/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/countdowntime/countdowntime.js"></script>
-<!--===============================================================================================-->
-	<script src="js/main.js"></script>
+
 
 </body>
 </html>

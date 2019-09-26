@@ -25,19 +25,19 @@
 				<tr >
 				total
 				<div class='graph stack1'>
-					<span style="width:75%";>75%</span>
+					<span style="width:75%">75%</span>
 				</div>
 				</tr>
 				<tr>
 				ing
 				<div class='graph stack2'>
-					<span style="width:60%";>60%</span>
+					<span style="width:60%">60%</span>
 				</div>
 				</tr>
 				<tr>
-				ed
+				end
 				<div class='graph stack3'>
-					<span style="width:25%";>25%</span>
+					<span style="width:25%">25%</span>
 				</div>
 				</tr>
 			</table>

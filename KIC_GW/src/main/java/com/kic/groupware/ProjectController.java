@@ -32,40 +32,22 @@ public class ProjectController {
 		
 		return model;
 	}
+	@RequestMapping(value = "/projectlist.do")
+	public ModelAndView projectlist( HttpServletRequest request, HttpServletResponse response) {
+		System.out.println( "project 컨트롤러 호출" );
+		
+		ModelAndView model = new ModelAndView();
+		model.setViewName( "Project/projectlist" );
+		
+		return model;
+	}
 	
-	@RequestMapping(value = "/project_ing.do")
-	public ModelAndView project_ing( HttpServletRequest request, HttpServletResponse response) {
-		System.out.println( "project_ing 컨트롤러 호출" );
+	@RequestMapping(value = "/projectcreate.do")
+	public ModelAndView projectcreate( HttpServletRequest request, HttpServletResponse response) {
+		System.out.println( "project 컨트롤러 호출" );
 		
 		ModelAndView model = new ModelAndView();
-		model.setViewName( "Project/project_ing" );
-		
-		return model;
-	}
-	@RequestMapping(value = "/project_ed.do")
-	public ModelAndView project_ed( HttpServletRequest request, HttpServletResponse response) {
-		System.out.println( "project_ed 컨트롤러 호출" );
-		
-		ModelAndView model = new ModelAndView();
-		model.setViewName( "Project/project_ed" );
-		
-		return model;
-	}
-	@RequestMapping(value = "/project_create.do")
-	public ModelAndView project_create( HttpServletRequest request, HttpServletResponse response) {
-		System.out.println( "project_create 컨트롤러 호출" );
-		
-		ModelAndView model = new ModelAndView();
-		model.setViewName( "Project/project_create" );
-		
-		return model;
-	}
-	@RequestMapping(value = "/project_content.do")
-	public ModelAndView project_content( HttpServletRequest request, HttpServletResponse response) {
-		System.out.println( "project_content 컨트롤러 호출" );
-		
-		ModelAndView model = new ModelAndView();
-		model.setViewName( "Project/project_content" );
+		model.setViewName( "Project/projectcreate" );
 		
 		return model;
 	}

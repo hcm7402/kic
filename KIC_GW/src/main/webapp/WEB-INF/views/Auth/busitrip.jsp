@@ -18,7 +18,7 @@
 	left: 0;
 } */
 
-.row {
+.mainleft {
 	padding-top: 30px;
 	padding-left: 20px;
 	width: 1300px;
@@ -223,27 +223,14 @@ li {
 </script>
 </head>
 <body>
-	<div id="wrapper">
-		<%@include file="../Menu/topmenu.jsp"%>
-		<div id="container">
-		<div class="row">
-		<div class="menubar col-sm-3">
-			<div id='menu'>
-			<ul>
-			   <li onclick="javascript: location.href='./auth.do'"><a>결재목록</a></li>
-			   <li onclick="javascript: location.href='./vacation.do'"><a>휴가신청서</a></li>
-			   <li onclick="javascript: location.href='./busitrip.do'"><a>출장신청서</a></li>
-			   <li onclick="javascript: location.href='./auth4.do'"><a>교통비신청서</a></li>
-			</ul>
-			</div>
-			</div>
-			<div id="mainleft" class="col-sm-7">
-				<%@include file="./busitrip.html" %>
-			</div>
+	
+	<form action="./busitrip_ok.do" method="post" name="frm">
+		<div id="mainleft" class="col-sm-7">
+			<%@include file="./busitrip.html" %>
 		</div>
-		<a href="#" class="button" style="margin-bottom:100px;margin-right:0px;float:right;text-decoration:none" onclick="location.href='./busitrip_ok.do'">신청</a>
-		</div>
-	</div>
+		<button class="button" style="color:#4f4f4f; margin-bottom:100px;float:right;text-decoration:none">신청</button>
+	</form>
+
 	<script src="./resources/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

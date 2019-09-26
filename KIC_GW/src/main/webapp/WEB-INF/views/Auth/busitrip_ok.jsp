@@ -6,7 +6,7 @@
 	out.println("<script type='text/javascript'>");
 	if(flag == 0) {
 		out.println("alert('신청에 성공했습니다.');");
-		out.println("location.href='auth.do'");
+		out.println("location.href='authpage.do'");
 	} else {
 		out.println("alert('신청에 실패했습니다.');");
 		out.println("history.back();");

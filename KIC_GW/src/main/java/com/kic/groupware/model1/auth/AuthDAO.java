@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+
 public class AuthDAO {
 	private Connection conn = null;
 	
@@ -69,48 +70,17 @@ public class AuthDAO {
 		PreparedStatement pstmt = null;
 		
 		try {
-			//String sql = "insert into auth_vacation ( vno, authno, ename, deptno, vdate, pno, vtype, vtime, vreason ) values ( ?, ?, ?, ?, now(), ?, ?, ?, ?)";
-			String sql = "insert into test values ?";
+			String sql = "insert into auth_vacation values ( 0, ?, ?, ?, now(), ?, ?, ?, ?)";
+			
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, to.getAuthno());
-			/*pstmt.setString(1, "1");
-			pstmt.setString(2, to.getAuthno());
-			pstmt.setString(3, to.getEname());
-			pstmt.setString(4, to.getDeptno());
-			pstmt.setString(5, to.getPno());
-			pstmt.setString(6, to.getVtype());
-			pstmt.setString(7, to.getVtime());
-			pstmt.setString(8, to.getVreason());
-			*/
-			int result = pstmt.executeUpdate();
-			if( result == 1 ) {
-				flag = 0;
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if( pstmt != null ) try { pstmt.close(); } catch(SQLException e) {};
-			if( conn != null ) try { conn.close(); } catch(SQLException e) {};
-		}
-		
-		
-		return flag;
-	}
-	/*
-	public int checkout( String checkout ) {
-		int flag = 1;
-		
-		PreparedStatement pstmt = null;
-		
-		try {
-			
-			String sql = "update management set checkout = ? where eno = ? and mdate = date_format( now(), '%Y-%m-%d')";
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString( 1, checkout );
-			pstmt.setString( 2, "1" );
+			pstmt.setString(2, to.getEname());
+			pstmt.setString(3, to.getDeptno());
+			pstmt.setString(4, to.getPno());
+			pstmt.setString(5, to.getVtype());
+			pstmt.setString(6, to.getVtime());
+			pstmt.setString(7, to.getVreason());
 			
 			int result = pstmt.executeUpdate();
 			if( result == 1 ) {
@@ -128,38 +98,42 @@ public class AuthDAO {
 		return flag;
 	}
 	
-	public AuthTO checkinout( String eno ) {
-		
+	public ArrayList<AuthvacationTO> authVList() {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		AuthTO to = new AuthTO();
 		
+		ArrayList<AuthvacationTO> authVLists = new ArrayList<AuthvacationTO>();
 		try {
-			String sql = "select checkin, checkout from management where eno = ? and mdate = date_format( now(), '%Y-%m-%d')";
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, "1");
+
+			String sql = "select vno, authno, ename, deptno, date_format(vdate, '%Y.%m.%d') vdate, pno, vtype, vtime, vreason from auth_vacation order by vno desc";
+			pstmt = conn.prepareStatement( sql );
 			
 			rs = pstmt.executeQuery();
-			
-			if( rs.next() ) {
-				String checkin = rs.getString("checkin");
-				String checkout = rs.getString("checkout");
-				
-				to.setCheckin(checkin);
-				to.setCheckout(checkout);
+			while( rs.next() ) {
+				AuthvacationTO to = new AuthvacationTO();
+				to.setVno( rs.getString("vno") );
+				to.setAuthno( rs.getString("authno") );
+				to.setEname( rs.getString( "ename" ) );
+				to.setDeptno( rs.getString( "deptno" ) );
+				to.setVdate( rs.getString( "vdate" ) );
+				to.setPno( rs.getString( "pno" ) );
+				to.setVtype( rs.getString( "vtype" ) );
+				to.setVtime( rs.getString( "vtime" ) );
+				to.setVreason( rs.getString( "vreason" ) );
+				authVLists.add( to );
 			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch(SQLException e) {
+			System.out.println("[에러] " + e.getMessage());
 		} finally {
-			if( pstmt != null ) try { pstmt.close(); } catch(SQLException e) {};
-			if( conn != null ) try { conn.close(); } catch(SQLException e) {};
+			if(rs != null) try { rs.close(); } catch( SQLException e ) {}
+			if(pstmt != null) try { pstmt.close(); } catch( SQLException e ) {}
+			if(conn != null) try { conn.close(); } catch( SQLException e ) {}
 		}
-		
-		
-		return to;
+		return authVLists;
 	}
+	
+	/*
+	
 	
 	public ArrayList<AuthTO> managelist( String eno ) {
 		

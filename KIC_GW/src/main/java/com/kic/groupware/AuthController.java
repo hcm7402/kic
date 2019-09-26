@@ -1,5 +1,6 @@
 package com.kic.groupware;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -26,14 +27,29 @@ public class AuthController {
     /**
      * 리스트.
      */
-    @RequestMapping(value = "/auth.do")
-	public ModelAndView auth( HttpServletRequest request, HttpServletResponse response) {
-		System.out.println( "auth 컨트롤러 호출" );
+    		 
+    @RequestMapping(value = "/authpage.do")
+   	public ModelAndView authpage( HttpServletRequest request, HttpServletResponse response) {
+   		System.out.println( "authpage 컨트롤러 호출" );
+   		
+   		ModelAndView model = new ModelAndView();
+   		model.setViewName( "Auth/authpage" );
+   		
+   		return model;
+   	}
+    
+    @RequestMapping(value = "/authlist.do")
+	public ModelAndView authlist( HttpServletRequest request, HttpServletResponse response) {
+		System.out.println( "authlist 컨트롤러 호출" );
 		
-		ModelAndView model = new ModelAndView();
-		model.setViewName( "Auth/auth" );
+		AuthDAO dao = new AuthDAO();
+		ArrayList<AuthvacationTO> authVLists = dao.authVList();
 		
-		return model;
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName( "Auth/authlist" );
+		modelAndView.addObject("authVLists", authVLists);
+
+		return modelAndView;
 	}
 	@RequestMapping(value = "/vacation.do")
 	public ModelAndView vacation( HttpServletRequest request, HttpServletResponse response) {
@@ -49,15 +65,15 @@ public class AuthController {
 	public ModelAndView vacation_ok( HttpServletRequest request, HttpServletResponse response) {
 
 		AuthvacationTO to = new AuthvacationTO();	
-	//	to.setVno(request.getParameter("vno"));
+		to.setVno(request.getParameter("vno"));
 		to.setAuthno(request.getParameter("authno"));
-	//	to.setEname(request.getParameter("ename"));
-	//	to.setDeptno(request.getParameter("deptno"));
-	//	to.setVdate(request.getParameter("vdate"));
-	//	to.setPno(request.getParameter("pno"));
-	//	to.setVtype(request.getParameter("vtype"));
-	//	to.setVtime(request.getParameter("vtime"));
-	//	to.setVreason(request.getParameter("vreason"));
+		to.setEname(request.getParameter("ename"));
+		to.setDeptno(request.getParameter("deptno"));
+		to.setVdate(request.getParameter("vdate"));
+		to.setPno(request.getParameter("pno"));
+		to.setVtype(request.getParameter("vtype"));
+		to.setVtime(request.getParameter("vtime"));
+		to.setVreason(request.getParameter("vreason"));
 
 		AuthDAO dao = new AuthDAO();
 		int flag = dao.vacationin(to);
@@ -100,12 +116,12 @@ public class AuthController {
 		
 		return modelAndView;
 	}
-	@RequestMapping(value = "/auth4.do")
-	public ModelAndView auth4( HttpServletRequest request, HttpServletResponse response) {
-		System.out.println( "auth4 컨트롤러 호출" );
+	@RequestMapping(value = "/transportation.do")
+	public ModelAndView transportation( HttpServletRequest request, HttpServletResponse response) {
+		System.out.println( "transportation 컨트롤러 호출" );
 		
 		ModelAndView model = new ModelAndView();
-		model.setViewName( "Auth/auth4" );
+		model.setViewName( "Auth/transportation" );
 		
 		return model;
 	}

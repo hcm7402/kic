@@ -226,7 +226,6 @@ li {
 		<div id="mainleft" class="col-sm-7">
 				<%@include file="./transportation.html" %>
 		</div>
-		<button class="button" style="color:#4f4f4f; margin-bottom:20px;float:right;text-decoration:none">신청</button>
 	</form>
 	<script src="./resources/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -13,17 +13,59 @@
 <link rel="stylesheet" type="text/css" href="./resources/util.css">
 <link rel="stylesheet" type="text/css" href="./resources/main.css">
 <link rel="stylesheet" href="./resources/css/bootstrap.min.css">
-<link href="./resources/css/datepicker.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="./resources/css/bootstrap-datepicker3.css">
 <script type="text/javascript" src="./resources/js/jquery-3.4.1.js"></script>
-<script src="./resources/js/bootstrap-datepicker.js"></script>
+<script src="./resources/js/bootstrap-datepicker.min.js"></script>
+<script src="./resources/js/bootstrap-datepicker.ko.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+	var idcertify = 0;
+	var check = function( eid ) {
+		$.ajax({
+			url: './id_check.do',
+			type: 'get',
+			data: {
+				eid: eid
+			},
+			dataType: 'JSON',
+			success: function( json ) {
+				checks = json.checks;
+				$(checks).each( function() {
+					var flag = this.flag;
+					
+					if(flag == 1) {
+						alert('이미 존재하는 아이디입니다.');
+						idcertify = 0;
+					}else {
+						alert('사용 가능한 아이디입니다.');
+						idcertify = 1;
+					}
+				});
+			},
+			error: function(xhr, status, error ) {
+				alert('에러 : ' + status + '\n\n' + error );
+			}
+		});
+	} // end of idCheck
+	
+	$('#id_certify').on('click', function() {
+		if($('#eid').val() == '') {
+			alert('아이디를 입력하셔야 합니다.');
+		}else {
+			var eid = $('#eid').val();
+			check(eid);
+		}
+	});
+	
 	$('#useradd').on('click', function() {
 		if( $('#ename').val() == '' ) {
 			alert('이름을 입력하셔야 합니다.');
 			return false;
 		}else if( $('#eid').val() == '' ) {
 			alert('아이디를 입력하셔야 합니다.');
+			return false;
+		}else if ( idcertify != 1) {
+			alert( '아이디 중복검사 하셔야 합니다.');
 			return false;
 		}else if( $('#epw').val() == '' || $('#epw_ok').val() == '') {
 			alert('비밀번호를 입력하셔야 합니다.');
@@ -69,19 +111,16 @@ $(document).ready(function() {
 		history.back();
 	});
 });
-
-window.onload = function() {
-    $('#hiredate').datepicker().on('changeDate', function(ev) {
-        if (ev.viewMode=="days"){
-            $('#hiredate').datepicker('hide');
-        }
-    });
-    $('#birth').datepicker().on('changeDate', function(ev) {
-        if (ev.viewMode=="days"){
-            $('#birth').datepicker('hide');
-        }
-    });
-}
+$( document ).ready( function() {
+	$('#hiredate').datepicker({
+		format: 'yyyy-mm-dd',
+		language: 'ko'
+	});
+	$('#birth').datepicker({
+		format: 'yyyy-mm-dd',
+		language: 'ko'
+	});
+});
 </script>
 <style type="text/css">
 .arial {font-family: arial;
@@ -148,12 +187,12 @@ label {
 		<div class="wrap-login100">
 			<form class="login100-form validate-form" action="./useradd_ok.do" name="frm" method="post">
 				<div class="wrap-input100" data-validate = "Enter username">
-					<label>아이디</label>
+					<label>이름</label>
 					<input class="input100" name="ename" type="text" id="ename">
 				</div>
 	
 				<div class="wrap-input100" data-validate = "Enter username">
-					<label>아이디</label>
+					<label>아이디</label><input type="button" class="btn btn-success" id="id_certify" style="float: right;" value="중복확인">
 					<input class="input100" type="text" name="eid" id="eid">
 				</div>
 				
@@ -190,7 +229,6 @@ label {
 					<label>생년월일</label>
 					<input class="form-control" size="16" id="birth" name="birth" readonly>
 				</div>
-				<hr />
 				<div class="wrap-input100">
 					<label>부서</label>
 					<select id="deptno" name="deptno" class="form-control">

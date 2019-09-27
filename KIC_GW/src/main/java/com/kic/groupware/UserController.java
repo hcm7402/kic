@@ -66,10 +66,11 @@ public class UserController {
     	System.out.println(to.getEid());
 		
 		UserDAO dao = new UserDAO();
-		dao.useradd(to);
+		int flag = dao.useradd(to);
 		
 		ModelAndView model = new ModelAndView();
 		model.setViewName( "Main/useradd_ok" );
+		model.addObject("flag", flag);
 		
 		return model;
     }
@@ -88,11 +89,13 @@ public class UserController {
 		UserTO enoflag = dao.login(to);
 		int flag = enoflag.getFlag();
 		int eno = enoflag.getEno();
+		int level = enoflag.getLevel();
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("Main/login_ok");
 		modelAndView.addObject("flag", flag);
 		modelAndView.addObject("eno", eno);
+		modelAndView.addObject("level", level);
 		return modelAndView;
 	}
 	
@@ -101,10 +104,28 @@ public class UserController {
 		System.out.println("session() 호출");
 		
 		String eno = request.getParameter("eno");
+		String level = request.getParameter("level");
 
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("Main/session");
 		modelAndView.addObject("eno", eno);
+		modelAndView.addObject("level", level);
+		return modelAndView;
+	}
+	
+	@RequestMapping(value="/id_check.do")
+	public ModelAndView id_check(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("id_check() 호출");
+		
+		String eid = request.getParameter("eid");
+		UserDAO dao = new UserDAO();
+		
+		int flag = dao.id_certify(eid);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("Main/id_check");
+		modelAndView.addObject("flag", flag);
+		
 		return modelAndView;
 	}
 }

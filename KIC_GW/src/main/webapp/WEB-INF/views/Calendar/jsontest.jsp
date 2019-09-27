@@ -12,7 +12,7 @@
 		
 		resultObj.put("title", Integer.toString(i) );
 		resultObj.put("start", "2019-09-0" + i);
-		resultObj.put("end", "2019-09-0" + i);
+		resultObj.put("end", "2019-09-0" + (i+1));
 		resultObj.put("className", "green");
 		
 		arrayObj.add(resultObj);

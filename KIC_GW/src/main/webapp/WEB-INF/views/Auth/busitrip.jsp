@@ -229,6 +229,7 @@ li {
 			<%@include file="./busitrip.html" %>
 		</div>
 		<button class="button" style="color:#4f4f4f; margin-bottom:100px;float:right;text-decoration:none">신청</button>
+		
 	</form>
 
 	<script src="./resources/js/bootstrap.bundle.min.js"></script>

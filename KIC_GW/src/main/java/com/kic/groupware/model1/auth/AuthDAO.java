@@ -74,10 +74,13 @@ public class AuthDAO {
 			
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, to.getAuthno());
-			pstmt.setString(2, to.getEname());
-			pstmt.setString(3, to.getDeptno());
-			pstmt.setString(4, to.getPno());
+			pstmt.setString(1, "1");
+			pstmt.setString(2, "홍길동");
+			pstmt.setString(3, "1");
+			pstmt.setString(4, "1");
+			//pstmt.setString(2, to.getEname());
+			//pstmt.setString(3, to.getDeptno());
+			//pstmt.setString(4, to.getPno());
 			pstmt.setString(5, to.getVtype());
 			pstmt.setString(6, to.getVtime());
 			pstmt.setString(7, to.getVreason());

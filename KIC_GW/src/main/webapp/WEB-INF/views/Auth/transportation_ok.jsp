@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("UTF-8");
-
+	
 	int flag = (Integer)request.getAttribute("flag");
 
 	out.println("<script type='text/javascript'>");

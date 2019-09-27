@@ -3,6 +3,8 @@
 <%@page import="com.kic.groupware.model1.auth.AuthvacationTO"%>
 <%@page import="java.util.ArrayList"%>
 <%
+	request.setCharacterEncoding("UTF-8");
+
 	ArrayList<AuthvacationTO> authVLists = (ArrayList)request.getAttribute( "authVLists" );
 	
 	int totalRecord = 0;
@@ -18,6 +20,12 @@
 		String vtype = to.getVtype();
 		String vtime = to.getVtime();
 		String vreason = to.getVreason();
+		
+		if(authno.equals("1")){
+			authno = "결재대기중";
+		} else if(authno.equals("2")){
+			authno = "결재완료";
+		} 
 		
 		html.append("<tr>");
 		html.append("<td>" + vno + "</td>");
@@ -71,11 +79,6 @@
 .board-table {
 	border: 3px solid #47c9af;
 	width: 150%;
-}
-
-table{
-	text-align: center; 
-	height: 400px;
 }
 
 th {
@@ -173,26 +176,7 @@ li {
 <script type="text/javascript" src="./resources/js/jquery.animateNumber.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-	
-			$('#menu li.active').addClass('open').children('ul').show();
-	   		$('#menu li.has-sub>a').on('click', function(){
-	   			$(this).removeAttr('href');
-	   			var element = $(this).parent('li');
-	   			if (element.hasClass('open')) {
-	   				element.removeClass('open');
-	   				element.find('li').removeClass('open');
-	   				element.find('ul').slideUp(200);
-	   			}
-	   			else {
-	   				element.addClass('open');
-	   				element.children('ul').slideDown(200);
-	   				element.siblings('li').children('ul').slideUp(200);
-	   				element.siblings('li').removeClass('open');
-	   				element.siblings('li').find('li').removeClass('open');
-	   				element.siblings('li').find('ul').slideUp(200);
-	   			}
-	   		});
-	   		
+
 	   
 
 	});

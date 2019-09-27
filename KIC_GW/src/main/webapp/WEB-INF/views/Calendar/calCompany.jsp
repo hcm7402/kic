@@ -7,6 +7,7 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
+	request.setCharacterEncoding("UTF-8");
 	String eno = (String)session.getAttribute("eno");
 	String level = (String)session.getAttribute("level");
 	
@@ -15,9 +16,12 @@
 		out.println("alert('로그인이 필요합니다.')");
 		out.println("location.href='./login.do'");
 		out.println("</script>");
-	} else if(level == "4") {
-		
-	}
+	} /* else if(level == "4") {
+		out.println("<script type='text/javascript'>");
+		out.println("alert('권한이 필요합니다.')");
+		out.println("location.href='./login.do'");
+		out.println("</script>");
+	} */
 %>
 <!DOCTYPE html>
 <html>
@@ -31,7 +35,12 @@
 	border: 1px solid #000;
 	padding: 15px;
 }
-
+.row {
+	padding-left: 14px;
+	padding-bottom: 30px;
+	width: auto;
+	height: auto;
+}
 #cal {
 	border: 1px solid #000;
 	padding: 15px;

@@ -8,6 +8,7 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
+	request.setCharacterEncoding("UTF-8");
 	String eno = (String)session.getAttribute("eno");
 	String level = (String)session.getAttribute("level");
 	
@@ -31,7 +32,12 @@
 	border: 1px solid #000;
 	padding: 15px;
 }
-
+.row {
+	padding-left: 14px;
+	padding-bottom: 30px;
+	width: auto;
+	height: auto;
+}
 #cal {
 	border: 1px solid #000;
 	padding: 15px;
@@ -243,7 +249,7 @@ $( document ).ready( function() {
 			                            <label class="col-lg-2">구분</label>
 			                            <div class="col-lg-2">
 											<select id="cdcolor" name="cdcolor" class="form-control">
-												<c:forTokens var="item" items="초록색,파랑색,노랑색,빨강색,주황색,보라색,갈색" delims=",">
+												<c:forTokens var="item" items="업무,회의,외근,출장,교육,휴가,기타" delims=",">
 					                           		<option value="${item}" <c:if test='${item==caldata.cdcolor}'>selected</c:if>>${item}</option>
 											 	</c:forTokens>
 											</select>

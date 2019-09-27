@@ -39,7 +39,6 @@
 	height: auto;
 }
 
-table { width: 800px; border-collapse: collapse;}
 .timeInput {
 	font-family: 나눔고딕, NanumGothic;
 	font-size: 4em;
@@ -107,25 +106,13 @@ a {
   transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
 }
 </style>
-<link rel="stylesheet" href="./resources/css/bootstrap-datepicker3.css">
+<link rel="stylesheet" href="./resources/css/bootstrap-datepicker.min.css">
 <script type="text/javascript" src="./resources/js/jquery-3.4.1.js"></script>
 <script type="text/javascript" src="./resources/js/jquery.animateNumber.min.js"></script>
 <script src="./resources/js/bootstrap-datepicker.min.js"></script>
 <script src="./resources/js/bootstrap-datepicker.ko.min.js"></script>
 <script src="./resources/js/project9.js"></script>
 <script type="text/javascript">
-window.onload = function() {
-    $('#startdate').datepicker().on('changeDate', function(ev) {
-        if (ev.viewMode=="days"){
-            $('#startdate').datepicker('hide');
-        }
-    });
-    $('#enddate').datepicker().on('changeDate', function(ev) {
-        if (ev.viewMode=="days"){
-            $('#enddate').datepicker('hide');
-        }
-    });
-}
 function fn_formSubmit(){
 	if ( ! chkInputValue("#cdname", "일정명")) return false;
 	if ( ! chkInputValue("#startdate", "날짜")) return false;
@@ -140,11 +127,11 @@ function fn_formSubmit(){
 	$("#form1").submit();
 }
 $( document ).ready( function() {
-	$('#hiredate').datepicker({
+	$('#startdate').datepicker({
 		format: 'yyyy-mm-dd',
 		language: 'ko'
 	});
-	$('#birth').datepicker({
+	$('#enddate').datepicker({
 		format: 'yyyy-mm-dd',
 		language: 'ko'
 	});

@@ -150,44 +150,12 @@ $(document).ready(function() {
 			});
 			return false;
 		}else {
-			document.frm.submit();
+			useradd_ok();
 		}
 	});
 	
-	var useradd_ok = function( indate ) {
-		$.ajax({
-			url: './useradd_ok.do',
-			type: 'get',
-			data: {
-				date: indate
-			},
-			dataType: 'JSON',
-			success: function( json ) {
-				results = json.results;
-				$( results ).each( function() {
-					var flag = this.flag;
-					if( flag == 0 ) {
-						swal({
-							  title: '가입 되었습니다.',
-							  icon: 'success'
-						});
-						location.href='cal.do';
-					}else {
-						swal({
-							  title: '가입에 실패하였습니다.',
-							  icon: 'warning'
-						});
-					}
-				});
-			},
-			error: function( xhr, status, error ) {
-				alert( '에러 : ' + status + '\n\n' + error );
-			}
-		});
-	}
-	
 	$('#cancel').on('click', function() {
-		history.back();
+		location.href='login.do';
 	});
 });
 $( document ).ready( function() {

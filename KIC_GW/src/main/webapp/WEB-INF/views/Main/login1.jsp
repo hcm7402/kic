@@ -66,7 +66,10 @@
 								  icon: 'warning'
 							});
 						}else {
-							alert('로그인 성공!');
+							swal({
+								  title: '로그인 성공!',
+								  icon: 'success'
+							});
 							session( eno, level );
 						}
 					});

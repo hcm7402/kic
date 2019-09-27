@@ -48,7 +48,7 @@ li {
 	    <table class="info-table">
 	    	<tr>
 	    	<td>홍길동 님</td>
-	    	<td><a href="#"><img src="./resources/img/logout.png" class="main-icon" /></a></td>
+	    	<td><a href="./logout.do"><img src="./resources/img/logout.png" class="main-icon" /></a></td>
 	    	</tr>
 	    </table>
 	    </div>

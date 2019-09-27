@@ -18,6 +18,7 @@
 <script type="text/javascript" src="./resources/js/jquery-3.4.1.js"></script>
 <script src="./resources/js/bootstrap-datepicker.min.js"></script>
 <script src="./resources/js/bootstrap-datepicker.ko.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	var idcertify = 0;
@@ -35,10 +36,16 @@ $(document).ready(function() {
 					var flag = this.flag;
 					
 					if(flag == 1) {
-						alert('이미 존재하는 아이디입니다.');
+						swal({
+							  title: '아이디를 입력하셔야 합니다.',
+							  icon: 'warning'
+						});
 						idcertify = 0;
 					}else {
-						alert('사용 가능한 아이디입니다.');
+						swal({
+							  title: '사용 가능한 아이디입니다.',
+							  icon: 'success'
+						});
 						idcertify = 1;
 					}
 				});
@@ -51,7 +58,10 @@ $(document).ready(function() {
 	
 	$('#id_certify').on('click', function() {
 		if($('#eid').val() == '') {
-			alert('아이디를 입력하셔야 합니다.');
+			swal({
+				  title: '아이디를 입력하셔야 합니다.',
+				  icon: 'warning'
+			});
 		}else {
 			var eid = $('#eid').val();
 			check(eid);
@@ -60,53 +70,121 @@ $(document).ready(function() {
 	
 	$('#useradd').on('click', function() {
 		if( $('#ename').val() == '' ) {
-			alert('이름을 입력하셔야 합니다.');
+			swal({
+				  title: '이름을 입력하셔야 합니다.',
+				  icon: 'warning'
+			});
 			return false;
 		}else if( $('#eid').val() == '' ) {
-			alert('아이디를 입력하셔야 합니다.');
+			swal({
+				  title: '아이디를 입력하셔야 합니다.',
+				  icon: 'warning'
+			});
 			return false;
 		}else if ( idcertify != 1) {
-			alert( '아이디 중복검사 하셔야 합니다.');
+			swal({
+				  title: '아이디 중복검사 하셔야 합니다.',
+				  icon: 'warning'
+			});
 			return false;
 		}else if( $('#epw').val() == '' || $('#epw_ok').val() == '') {
-			alert('비밀번호를 입력하셔야 합니다.');
+			swal({
+				  title: '비밀번호를 입력하셔야 합니다.',
+				  icon: 'warning'
+			});
 			return false;
 		}else if( $('#epw').val() !=  $('#epw_ok').val()) {
-			alert( '비밀번호가 서로 다릅니다.');
+			swal({
+				  title: '비밀번호가 서로 다릅니다.',
+				  icon: 'warning'
+			});
 			return false;
 		}else if( $('#epw').val().length < 6 || $('#epw').val().length > 15) {
-			alert('비밀번호는 10~15자만 가능합니다.');
+			swal({
+				  title: '비밀번호는 6~15자만 가능합니다.',
+				  icon: 'warning'
+			});
 			$('#epw').val('');
 			$('#epw_ok').val('');
 			return false;
 		}else if( $('#hiredate').val() == '') {
-			alert( '입사일을 입력하셔야 합니다.');
-			return false;
-		}else if( $('#sal').val() == '') {
-			alert( '연봉을 입력하셔야 합니다.');
+			swal({
+				  title: '입사일을 입력하셔야 합니다.',
+				  icon: 'warning'
+			});
 			return false;
 		}else if( $('#birth').val() == '') {
-			alert( '생년월일을 입력하셔야 합니다.');
+			swal({
+				  title: '생년월일을 입력하셔야 합니다.',
+				  icon: 'warning'
+			});
 			return false;
 		}else if( $('#deptno').val() == '') {
-			alert( '부서를 선택하셔야 합니다.');
+			swal({
+				  title: '부서를 선택하셔야 합니다.',
+				  icon: 'warning'
+			});
 			return false;
 		}else if( $('#address').val() == '') {
-			alert( '주소를 입력하셔야 합니다.');
+			swal({
+				  title: '주소를 입력하셔야 합니다.',
+				  icon: 'warning'
+			});
 			return false;
 		}else if( $('#email').val() == '') {
-			alert( '이메일을 입력하셔야 합니다.');
+			swal({
+				  title: '이메일을 입력하셔야 합니다.',
+				  icon: 'warning'
+			});
 			return false;
 		}else if( $('#ephoto').val() == '') {
-			alert( '증명사진을 등록하셔야 합니다.');
+			swal({
+				  title: '증명사진을 등록하셔야 합니다.',
+				  icon: 'warning'
+			});
 			return false;
 		}else if( $('#authphoto').val() == '') {
-			alert( '도장을 등록하셔야 합니다.');
+			swal({
+				  title: '도장을 등록하셔야 합니다.',
+				  icon: 'warning'
+			});
 			return false;
 		}else {
 			document.frm.submit();
 		}
 	});
+	
+	var useradd_ok = function( indate ) {
+		$.ajax({
+			url: './useradd_ok.do',
+			type: 'get',
+			data: {
+				date: indate
+			},
+			dataType: 'JSON',
+			success: function( json ) {
+				results = json.results;
+				$( results ).each( function() {
+					var flag = this.flag;
+					if( flag == 0 ) {
+						swal({
+							  title: '가입 되었습니다.',
+							  icon: 'success'
+						});
+						location.href='cal.do';
+					}else {
+						swal({
+							  title: '가입에 실패하였습니다.',
+							  icon: 'warning'
+						});
+					}
+				});
+			},
+			error: function( xhr, status, error ) {
+				alert( '에러 : ' + status + '\n\n' + error );
+			}
+		});
+	}
 	
 	$('#cancel').on('click', function() {
 		history.back();

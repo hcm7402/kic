@@ -28,7 +28,7 @@ public class UserController {
 		
 		ModelAndView model = new ModelAndView();
 
-		model.setViewName( "login1" );
+		model.setViewName( "Main/login1" );
 		
 		return model;
     }
@@ -41,7 +41,7 @@ public class UserController {
 		UserDAO dao = new UserDAO();
 		ArrayList<String> deptList = dao.deptList();
 		
-		model.setViewName( "useradd" );
+		model.setViewName( "Main/useradd" );
 		model.addObject("deptList", deptList);
 		
 		return model;
@@ -52,9 +52,9 @@ public class UserController {
     	System.out.println( "useradd_ok 컨트롤러 호출" );
     	UserTO to = new UserTO();
     	to.setEname(request.getParameter("ename"));
-    	to.setPno(request.getParameter("pno"));
+    	/*to.setPno(request.getParameter("pno"));*/
     	to.setHiredate(request.getParameter("hiredate"));
-    	to.setSal(request.getParameter("sal"));
+    	/*to.setSal(request.getParameter("sal"));*/
     	to.setBirth(request.getParameter("birth"));
     	to.setAddress(request.getParameter("address"));
     	to.setDeptno(request.getParameter("deptno"));
@@ -69,7 +69,7 @@ public class UserController {
 		dao.useradd(to);
 		
 		ModelAndView model = new ModelAndView();
-		model.setViewName( "useradd_ok" );
+		model.setViewName( "Main/useradd_ok" );
 		
 		return model;
     }
@@ -90,7 +90,7 @@ public class UserController {
 		int eno = enoflag.getEno();
 		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("login_ok");
+		modelAndView.setViewName("Main/login_ok");
 		modelAndView.addObject("flag", flag);
 		modelAndView.addObject("eno", eno);
 		return modelAndView;
@@ -103,7 +103,7 @@ public class UserController {
 		String eno = request.getParameter("eno");
 
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("session");
+		modelAndView.setViewName("Main/session");
 		modelAndView.addObject("eno", eno);
 		return modelAndView;
 	}

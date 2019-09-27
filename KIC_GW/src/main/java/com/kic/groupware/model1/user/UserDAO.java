@@ -55,20 +55,20 @@ public class UserDAO {
 		int flag = 0;
 
 		try {
-			String sql = "insert into emp values(0, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)";
+			String sql = "insert into emp values(0, 0, ?, ?, 0, ?, ?, ?, ?, ?, ?, ?, ?, 0)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, to.getEname());
-			pstmt.setString(2, to.getPno());
-			pstmt.setString(3, to.getHiredate());
-			pstmt.setString(4, to.getSal());
-			pstmt.setString(5, to.getBirth());
-			pstmt.setString(6, to.getAddress());
-			pstmt.setString(7, to.getDeptno());
-			pstmt.setString(8, to.getEmail());
-			pstmt.setString(9, to.getEphoto());
-			pstmt.setString(10, to.getEid());
-			pstmt.setString(11, to.getEpw());
-			pstmt.setString(12, to.getAuthphoto());
+			/*pstmt.setString(2, to.getPno());*/
+			pstmt.setString(2, to.getHiredate());
+			/*pstmt.setString(3, to.getSal());*/
+			pstmt.setString(3, to.getBirth());
+			pstmt.setString(4, to.getAddress());
+			pstmt.setString(5, to.getDeptno());
+			pstmt.setString(6, to.getEmail());
+			pstmt.setString(7, to.getEphoto());
+			pstmt.setString(8, to.getEid());
+			pstmt.setString(9, to.getEpw());
+			pstmt.setString(10, to.getAuthphoto());
 
 			rs = pstmt.executeQuery();
 		} catch(SQLException e) {

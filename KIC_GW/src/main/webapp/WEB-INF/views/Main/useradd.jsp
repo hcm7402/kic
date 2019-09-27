@@ -31,13 +31,10 @@ $(document).ready(function() {
 		}else if( $('#epw').val() !=  $('#epw_ok').val()) {
 			alert( '비밀번호가 서로 다릅니다.');
 			return false;
-		}else if( $('#epw').val().length < 10 || $('#epw').val().length > 15) {
+		}else if( $('#epw').val().length < 6 || $('#epw').val().length > 15) {
 			alert('비밀번호는 10~15자만 가능합니다.');
 			$('#epw').val('');
 			$('#epw_ok').val('');
-			return false;
-		}else if( $('#pno').val() == '') {
-			alert( '직책을 입력하셔야 합니다.');
 			return false;
 		}else if( $('#hiredate').val() == '') {
 			alert( '입사일을 입력하셔야 합니다.');
@@ -86,14 +83,14 @@ window.onload = function() {
     });
 }
 </script>
-	<style type="text/css">
-	.arial {font-family: arial;
-			z-index: 20;
-			color : #000;
-			font-weight: bold;	
-	}
+<style type="text/css">
+.arial {font-family: arial;
+		z-index: 20;
+		color : #000;
+		font-weight: bold;	
+}
 	
-	.s3 { text-shadow: 2px 2px 6px black; }
+.s3 { text-shadow: 2px 2px 6px black; }
 	
 .box {
   border-radius: 5px;
@@ -139,6 +136,9 @@ window.onload = function() {
     cursor: inherit;
     display: block;
 }
+label {
+	margin-bottom: 0;
+}
 	</style>
 </head>
 <body>
@@ -148,23 +148,23 @@ window.onload = function() {
 		<div class="wrap-login100">
 			<form class="login100-form validate-form" action="./useradd_ok.do" name="frm" method="post">
 				<div class="wrap-input100" data-validate = "Enter username">
-					<label>이름</label>
-					<input class="input70" name="ename" type="text" id="ename">
+					<label>아이디</label>
+					<input class="input100" name="ename" type="text" id="ename">
 				</div>
 	
 				<div class="wrap-input100" data-validate = "Enter username">
+					<label>아이디</label>
 					<input class="input100" type="text" name="eid" id="eid">
-					<span class="focus-input100" data-placeholder="아이디"></span>
 				</div>
 				
 				<div class="wrap-input100" data-validate="Enter password">
+					<label>비밀번호</label>
 					<input class="input100" type="password" name="epw" id="epw">
-					<span class="focus-input100" data-placeholder="비밀번호"></span>
 				</div>
 				
 				<div class="wrap-input100" data-validate="Enter password_ok">
+					<label>비밀번호 확인</label>
 					<input class="input100" type="password" id="epw_ok">
-					<span class="focus-input100" data-placeholder="비밀번호 확인"></span>
 				</div>
 				<%-- <div>
 					직책 :
@@ -174,18 +174,18 @@ window.onload = function() {
 					 	</c:forEach>
 					</select>
 				</div> --%>
-				<div class="wrap-input100" data-validate = "Enter pno">
+				<%-- <div class="wrap-input100" data-validate = "Enter pno">
 					<input class="input100" type="text" name="pno" id="pno">
 					<span class="focus-input100" data-placeholder="직책"></span>
-				</div>
+				</div> --%>
 				<div class="wrap-input100">
 					<label>입사일</label>
 					<input class="input100 form-control" size="16" id="hiredate" name="hiredate" readonly>
 				</div>
-				<div class="wrap-input100" data-validate = "Enter sal">
+				<!-- <div class="wrap-input100" data-validate = "Enter sal">
 					<label>연봉</label>
 					<input class="input70" type="text" name="sal" id="sal">
-				</div>
+				</div> -->
 				<div class="wrap-input100">
 					<label>생년월일</label>
 					<input class="form-control" size="16" id="birth" name="birth" readonly>
@@ -200,12 +200,12 @@ window.onload = function() {
 					</select>
 				</div>
 				<div class="wrap-input100" data-validate = "Enter address">
+					<label>주소</label>
 					<input class="input100" type="text" name="address" id="address">
-					<span class="focus-input100" data-placeholder="주소"></span>
 				</div>
 				<div class="wrap-input100" data-validate = "Enter email">
+					<label>이메일</label>
 					<input class="input100" type="text" name="email" id="email">
-					<span class="focus-input100" data-placeholder="이메일"></span>
 				</div>
 				
 				<div class="wrap-input100">

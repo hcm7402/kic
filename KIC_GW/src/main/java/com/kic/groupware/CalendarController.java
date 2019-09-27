@@ -12,9 +12,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kic.groupware.model1.calendar.MonthTO;
 
 @Controller 
-public class calendarController {
+public class CalendarController {
 
-    static final Logger LOGGER = LoggerFactory.getLogger(calendarController.class);
+    static final Logger LOGGER = LoggerFactory.getLogger(CalendarController.class);
     
     /**
      * 리스트.
@@ -24,7 +24,7 @@ public class calendarController {
         System.out.println( "calList 컨트롤러 호출" );
 		
 		ModelAndView model = new ModelAndView();
-		model.setViewName( "cal3" );
+		model.setViewName( "Calendar/cal3" );
 		
 		return model;
     }
@@ -38,7 +38,7 @@ public class calendarController {
 		
     	searchVO.setDate(request.getParameter("date"));
     	model.addObject("searchVO", searchVO);
-    	model.setViewName( "calOne" );
+    	model.setViewName( "Calendar/calOne" );
         return model;
     }
     
@@ -51,7 +51,7 @@ public class calendarController {
 		
     	searchVO.setDate(request.getParameter("date"));
     	model.addObject("searchVO", searchVO);
-    	model.setViewName( "calDepart" );
+    	model.setViewName( "Calendar/calDepart" );
         return model;
     }
     
@@ -64,7 +64,7 @@ public class calendarController {
 		
     	searchVO.setDate(request.getParameter("date"));
     	model.addObject("searchVO", searchVO);
-    	model.setViewName( "calCompany" );
+    	model.setViewName( "Calendar/calCompany" );
         return model;
     }
     
@@ -73,7 +73,7 @@ public class calendarController {
         System.out.println( "jsontest 컨트롤러 호출" );
 		
 		ModelAndView model = new ModelAndView();
-		model.setViewName( "jsontest" );
+		model.setViewName( "Calendar/jsontest" );
 		
 		return model;
     }

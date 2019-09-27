@@ -35,10 +35,16 @@ $(document).ready(function() {
 					var flag = this.flag;
 					
 					if(flag == 1) {
-						alert('이미 존재하는 아이디입니다.');
+						swal({
+							  title: '아이디를 입력하셔야 합니다.',
+							  icon: 'warning'
+						});
 						idcertify = 0;
 					}else {
-						alert('사용 가능한 아이디입니다.');
+						swal({
+							  title: '사용 가능한 아이디입니다.',
+							  icon: 'success'
+						});
 						idcertify = 1;
 					}
 				});
@@ -51,7 +57,10 @@ $(document).ready(function() {
 	
 	$('#id_certify').on('click', function() {
 		if($('#eid').val() == '') {
-			alert('아이디를 입력하셔야 합니다.');
+			swal({
+				  title: '아이디를 입력하셔야 합니다.',
+				  icon: 'warning'
+			});
 		}else {
 			var eid = $('#eid').val();
 			check(eid);
@@ -60,47 +69,94 @@ $(document).ready(function() {
 	
 	$('#useradd').on('click', function() {
 		if( $('#ename').val() == '' ) {
-			alert('이름을 입력하셔야 합니다.');
+			swal({
+				  title: '이름을 입력하셔야 합니다.',
+				  icon: 'warning'
+			});
 			return false;
 		}else if( $('#eid').val() == '' ) {
-			alert('아이디를 입력하셔야 합니다.');
+			swal({
+				  title: '아이디를 입력하셔야 합니다.',
+				  icon: 'warning'
+			});
 			return false;
 		}else if ( idcertify != 1) {
+			swal({
+				  title: '아이디를 입력하셔야 합니다.',
+				  icon: 'warning'
+			});
 			alert( '아이디 중복검사 하셔야 합니다.');
 			return false;
 		}else if( $('#epw').val() == '' || $('#epw_ok').val() == '') {
+			swal({
+				  title: '아이디를 입력하셔야 합니다.',
+				  icon: 'warning'
+			});
 			alert('비밀번호를 입력하셔야 합니다.');
 			return false;
 		}else if( $('#epw').val() !=  $('#epw_ok').val()) {
+			swal({
+				  title: '아이디를 입력하셔야 합니다.',
+				  icon: 'warning'
+			});
 			alert( '비밀번호가 서로 다릅니다.');
 			return false;
 		}else if( $('#epw').val().length < 6 || $('#epw').val().length > 15) {
+			swal({
+				  title: '아이디를 입력하셔야 합니다.',
+				  icon: 'warning'
+			});
 			alert('비밀번호는 10~15자만 가능합니다.');
 			$('#epw').val('');
 			$('#epw_ok').val('');
 			return false;
 		}else if( $('#hiredate').val() == '') {
+			swal({
+				  title: '아이디를 입력하셔야 합니다.',
+				  icon: 'warning'
+			});
 			alert( '입사일을 입력하셔야 합니다.');
 			return false;
-		}else if( $('#sal').val() == '') {
-			alert( '연봉을 입력하셔야 합니다.');
-			return false;
 		}else if( $('#birth').val() == '') {
+			swal({
+				  title: '아이디를 입력하셔야 합니다.',
+				  icon: 'warning'
+			});
 			alert( '생년월일을 입력하셔야 합니다.');
 			return false;
 		}else if( $('#deptno').val() == '') {
+			swal({
+				  title: '아이디를 입력하셔야 합니다.',
+				  icon: 'warning'
+			});
 			alert( '부서를 선택하셔야 합니다.');
 			return false;
 		}else if( $('#address').val() == '') {
+			swal({
+				  title: '아이디를 입력하셔야 합니다.',
+				  icon: 'warning'
+			});
 			alert( '주소를 입력하셔야 합니다.');
 			return false;
 		}else if( $('#email').val() == '') {
+			swal({
+				  title: '아이디를 입력하셔야 합니다.',
+				  icon: 'warning'
+			});
 			alert( '이메일을 입력하셔야 합니다.');
 			return false;
 		}else if( $('#ephoto').val() == '') {
+			swal({
+				  title: '아이디를 입력하셔야 합니다.',
+				  icon: 'warning'
+			});
 			alert( '증명사진을 등록하셔야 합니다.');
 			return false;
 		}else if( $('#authphoto').val() == '') {
+			swal({
+				  title: '아이디를 입력하셔야 합니다.',
+				  icon: 'warning'
+			});
 			alert( '도장을 등록하셔야 합니다.');
 			return false;
 		}else {

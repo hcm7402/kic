@@ -85,9 +85,15 @@
 		
 		$('#submit').on('click', function() {
 			if( $('#u_id').val() == '' ) {
-				alert('아이디를 입력하셔야 합니다.');
+				swal({
+					  title: '아이디를 입력하셔야 합니다.',
+					  icon: 'warning'
+				});
 			}else if( $('#u_password').val() == '' ){
-				alert('비밀번호를 입력하셔야 합니다.');
+				swal({
+					  title: '비밀번호를 입력하셔야 합니다.',
+					  icon: 'warning'
+				});
 			}else {
 				var u_id = $('#u_id').val();
 				var u_password = $('#u_password').val();

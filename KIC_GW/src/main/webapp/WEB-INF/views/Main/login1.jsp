@@ -19,6 +19,7 @@
 <script type="text/javascript" src="./resources/js/jquery-3.4.1.js"></script>
 <script type="text/javascript" src="./resources/js/jquery-ui.js"></script>
 <link rel="stylesheet" href="./resources/css/base/jquery-ui.css">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
 	$(document).ready( function() {
 		
@@ -55,9 +56,15 @@
 						var level = this.level;
 							
 						if(flag == 2) {
-							alert('존재하지 않는 아이디 입니다.');
+							swal({
+								  title: '존재하지 않는 아이디 입니다.',
+								  icon: 'warning'
+							});
 						}else if(flag == 1) {
-							alert('비밀번호가 다릅니다.');
+							swal({
+								  title: '비밀번호가 다릅니다.',
+								  icon: 'warning'
+							});
 						}else {
 							alert('로그인 성공!');
 							session( eno, level );

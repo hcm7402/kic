@@ -7,7 +7,7 @@
 		out.println("alert('로그인이 필요합니다.')");
 		out.println("location.href='./login.do'");
 		out.println("</script>");
-	}
+	} 
 %>
 <!DOCTYPE html>
 <html>
@@ -24,6 +24,13 @@
 #mainleft {
 	border: 1px solid #000;
 	padding: 15px;
+}
+
+.row {
+	padding-left: 14px;
+	padding-bottom: 30px;
+	width: auto;
+	height: auto;
 }
 
 .timeInput {
@@ -81,7 +88,7 @@ body {
 </style>
 <script type='text/javascript'>
 $(document).ready(function() {
-	fn_get_events();
+	fn_get_events(<%= eno %>);
 });
 
 function date_to_str(format)
@@ -113,12 +120,15 @@ function fn_set_calendar(events){
         }
 	});
 };
-function fn_get_events()
+function fn_get_events(eno)
 {
 	$.ajax({
 		url: './jsontest.do', 
 		type : "post",
 		dataType: 'json',
+		data: {
+			eno: eno
+		},
 		success: function(json) {
 			fn_set_calendar(json);
 		}

@@ -108,7 +108,7 @@
 									<li><a class="lists">진행중 Project</a></li>
         							<li><a class="complete">완성된 Project</a></li>
 								</ul>
-								</li>
+							</li>
 							<li class='active has-sub'><a>About</a>
 								<ul>
 									<li><a class="">About</a></li>

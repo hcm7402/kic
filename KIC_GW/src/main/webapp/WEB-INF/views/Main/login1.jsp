@@ -96,7 +96,6 @@
 
 .wave {
   opacity: 0.3;
-  
   position: absolute;
   top: 3%;
   left: 50%;

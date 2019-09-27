@@ -183,16 +183,16 @@ function fn_formSubmit(){
 	if (!confirm("저장 하시겠습니까?")) return;
 	
 	$("#form1").submit();
-} 
+}
 </script>
 </head>
 <body>
 	<div id="wrapper">
-		<%@include file="../Menu/topmenu.jsp"%>
+		<%@include file="./asdqwe.do"%>
 		<div id="container">
 			<div class="row">
 				<div class="col-sm-2">
-					<%@include file="./calmenu.jsp"%>
+					<%@include file="./calmenu.do"%>
 				</div>
 				<form id="form1" class="col-sm-10" name="form1" role="form" action="./cal.do" method="post" >
 					<input type="hidden" name="cdno" value="<c:out value="${caldata.cdno}"/>">
@@ -255,6 +255,5 @@ function fn_formSubmit(){
 			</div>
 		</div>
 	</div>
-	
 </body>
 </html>

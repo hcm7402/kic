@@ -74,6 +74,7 @@ body {
 $(document).ready(function() {
 	fn_get_events();
 });
+
 function date_to_str(format)
 {
     var year = format.getFullYear();
@@ -97,7 +98,10 @@ function fn_set_calendar(events){
             window.location = "./calone.do?date=" + date_to_str(start);
 		},
 		editable: true,
-		events: events
+		events: events,
+		eventClick:function(event) {
+        	alert(event.title + "\n" + event.start + "\n" + event.end, "wicked", "width=700,height=600");
+        }
 	});
 };
 function fn_get_events()
@@ -119,11 +123,11 @@ function fn_get_events()
 </head>
 <body>
 	<div id="wrapper">
-		<%@include file="../Menu/topmenu.jsp"%>
+		<%@include file="./asdqwe.do"%>
 		<div id="container">
 			<div class="row">
 				<div class="col-sm-2">
-					<%@include file="./calmenu.jsp"%>
+					<%@include file="./calmenu.do"%>
 				</div>
 				<div id="cal" class="col-sm-10">
 					<div id='calendar'></div>

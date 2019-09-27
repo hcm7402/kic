@@ -33,6 +33,17 @@ public class UserController {
 		return model;
     }
     
+    @RequestMapping(value = "/logout.do")
+    public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
+    	System.out.println( "login 컨트롤러 호출" );
+		
+		ModelAndView model = new ModelAndView();
+
+		model.setViewName( "Main/logout" );
+		
+		return model;
+    }
+    
     @RequestMapping(value = "/useradd.do")
     public ModelAndView useradd(HttpServletRequest request, HttpServletResponse response) {
     	System.out.println( "useradd 컨트롤러 호출" );

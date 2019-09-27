@@ -24,7 +24,7 @@ public class CalendarController {
         System.out.println( "calList 컨트롤러 호출" );
 		
 		ModelAndView model = new ModelAndView();
-		model.setViewName( "Calendar/cal3" );
+		model.setViewName( "Calendar/cal" );
 		
 		return model;
     }

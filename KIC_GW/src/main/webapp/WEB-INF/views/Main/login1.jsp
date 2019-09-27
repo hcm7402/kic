@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	String eno = (String)session.getAttribute("eno");
+	if(eno != null) {
+		out.println("<script type='text/javascript'>");
+		out.println("location.href='./main.do'");
+		out.println("</script>");
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,15 +23,16 @@
 	$(document).ready( function() {
 		
 		// session 값 부여 함수
-		var session = function( eno ) {
+		var session = function( eno, level ) {
 			$.ajax({
 				url: './session.do',
 				type: 'post',
 				data: {
-					eno: eno
+					eno: eno,
+					level: level
 				},
 				success: function() {
-					location.href = './main2.do';
+					location.href = './main.do';
 				}
 			});
 		}
@@ -43,6 +52,7 @@
 					$(logchecks).each( function () {
 						var flag = this.flag;
 						var eno = this.eno;
+						var level = this.level;
 							
 						if(flag == 2) {
 							alert('존재하지 않는 아이디 입니다.');
@@ -50,7 +60,7 @@
 							alert('비밀번호가 다릅니다.');
 						}else {
 							alert('로그인 성공!');
-							session( eno );
+							session( eno, level );
 						}
 					});
 					

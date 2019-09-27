@@ -1,3 +1,4 @@
+<%@page import="java.io.Console"%>
 <%@ page import="java.util.Calendar"%>
 <%@ page import="com.kic.groupware.model1.calendar.MonthTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -6,6 +7,18 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%
+	String eno = (String)session.getAttribute("eno");
+	String level = (String)session.getAttribute("level");
+	
+	if(eno == null || eno.equals("")) {
+		out.println("<script type='text/javascript'>");
+		out.println("alert('로그인이 필요합니다.')");
+		out.println("location.href='./login.do'");
+		out.println("</script>");
+	}
+	System.out.println(level);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -153,10 +166,11 @@ a {
   transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
 }
 </style>
-<link href="./resources/css/datepicker.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="./resources/css/bootstrap-datepicker3.css">
 <script type="text/javascript" src="./resources/js/jquery-3.4.1.js"></script>
 <script type="text/javascript" src="./resources/js/jquery.animateNumber.min.js"></script>
-<script src="./resources/js/bootstrap-datepicker.js"></script>
+<script src="./resources/js/bootstrap-datepicker.min.js"></script>
+<script src="./resources/js/bootstrap-datepicker.ko.min.js"></script>
 <script src="./resources/js/project9.js"></script>
 <script type="text/javascript">
 window.onload = function() {
@@ -184,15 +198,25 @@ function fn_formSubmit(){
 	
 	$("#form1").submit();
 }
+$( document ).ready( function() {
+	$('#hiredate').datepicker({
+		format: 'yyyy-mm-dd',
+		language: 'ko'
+	});
+	$('#birth').datepicker({
+		format: 'yyyy-mm-dd',
+		language: 'ko'
+	});
+});
 </script>
 </head>
 <body>
 	<div id="wrapper">
-		<%@include file="./asdqwe.do"%>
+		<%@include file="../Menu/topmenu.jsp"%>
 		<div id="container">
 			<div class="row">
 				<div class="col-sm-2">
-					<%@include file="./calmenu.do"%>
+					<%@include file="../Menu/calmenu.jsp"%>
 				</div>
 				<form id="form1" class="col-sm-10" name="form1" role="form" action="./cal.do" method="post" >
 					<input type="hidden" name="cdno" value="<c:out value="${caldata.cdno}"/>">

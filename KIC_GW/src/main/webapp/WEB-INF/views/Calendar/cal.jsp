@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	String eno = (String)session.getAttribute("eno");
+	if(eno == null || eno.equals("")) {
+		out.println("<script type='text/javascript'>");
+		out.println("alert('로그인이 필요합니다.')");
+		out.println("location.href='./login.do'");
+		out.println("</script>");
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -123,11 +132,11 @@ function fn_get_events()
 </head>
 <body>
 	<div id="wrapper">
-		<%@include file="./asdqwe.do"%>
+		<%@include file="../Menu/topmenu.jsp"%>
 		<div id="container">
 			<div class="row">
 				<div class="col-sm-2">
-					<%@include file="./calmenu.do"%>
+					<%@include file="../Menu/calmenu.jsp"%>
 				</div>
 				<div id="cal" class="col-sm-10">
 					<div id='calendar'></div>

@@ -51,11 +51,10 @@ public class UserDAO {
 	
 	public int useradd(UserTO to) {
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		int flag = 0;
+		int flag = 1;
 
 		try {
-			String sql = "insert into emp values(0, 0, ?, ?, 0, ?, ?, ?, ?, ?, ?, ?, ?, 0)";
+			String sql = "insert into emp values(0, ?, 0, ?, 0, ?, ?, ?, ?, ?, ?, ?, ?, 0)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, to.getEname());
 			/*pstmt.setString(2, to.getPno());*/
@@ -70,11 +69,13 @@ public class UserDAO {
 			pstmt.setString(9, to.getEpw());
 			pstmt.setString(10, to.getAuthphoto());
 
-			rs = pstmt.executeQuery();
+			int result = pstmt.executeUpdate();
+			if(result == 1) {
+				flag = 0;
+			}
 		} catch(SQLException e) {
 			System.out.println("[에러] " + e.getMessage());
 		} finally {
-			if(rs != null) try {rs.close();} catch(SQLException e) {}
 			if(pstmt != null) try {pstmt.close();} catch(SQLException e) {}
 			if(conn != null) try {conn.close();} catch(SQLException e) {}
 		}
@@ -89,17 +90,17 @@ public class UserDAO {
 		to.setFlag(2);
 		
 		try {
-			String sql = "select eno, epw from emp where eid = ?";
+			String sql = "select eno, epw, level from emp where eid = ?";
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, to.getEid());
-			
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
 				if(to.getEpw().equals(rs.getString("epw"))) {
 					to.setFlag(0);
 					to.setEno(rs.getInt("eno"));
+					to.setLevel(rs.getInt("level"));
 				}else {
 					to.setFlag(1);
 				}
@@ -113,5 +114,36 @@ public class UserDAO {
 			if(conn != null) try {conn.close();} catch(SQLException e) {}
 		}
 		return to;
+	}
+	
+	public int id_certify(String eid) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int flag = 0;
+		
+		try {
+			String sql = "select eid from emp where eid = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, eid);
+			
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				String u_id = rs.getString("eid");
+				
+				if(!u_id.equals(eid)) {
+					flag = 0;
+				} else {
+					return flag = 1;
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if(rs != null) try {rs.close();} catch(SQLException e) {}
+			if(pstmt != null) try {pstmt.close();} catch(SQLException e) {}
+			if(conn != null) try {conn.close();} catch(SQLException e) {}
+		}
+		return flag;
 	}
 }

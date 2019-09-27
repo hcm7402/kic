@@ -4,6 +4,7 @@
 <%
 	int flag = (Integer)request.getAttribute("flag");
 	int eno = (Integer)request.getAttribute("eno");
+	int level = (Integer)request.getAttribute("level");
 	
 	JSONObject jsonObject = new JSONObject();
 	
@@ -12,6 +13,7 @@
 	
 	logcheckInfo.put("flag", flag);
 	logcheckInfo.put("eno", eno);
+	logcheckInfo.put("level", level);
 	jsonObject.put("logchecks", logcheckInfo);
 
 	String json = jsonObject.toJSONString();

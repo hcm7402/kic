@@ -79,20 +79,16 @@
 			});
 		} 
 		
-		// 생성 클릭시
+		// 프로젝트 생성 클릭시
 		$('.create').on('click', function() {
 			project_create();
 		});
-		// 내정보 클릭시
-		$('.myinfo').on('click', function() {
-			
+		// 진행중인 프로젝트 클릭시
+		$('.lists').on('click', function() {
+			projectlist();
 		});
-		// 내 정보 수정 클릭시
-		$('.infomodify').on('click', function() {
-			
-		});
-		// 내 일정 클릭 시
-		$('.mycal').on('click', function() {
+		// 완료된 프로젝트 클릭시
+		$('.complete').on('click', function() {
 			
 		});
 	});
@@ -109,8 +105,8 @@
 							<li class='active has-sub'><a>프로젝트</a>
 								<ul>
 									<li><a class="create">프로젝트 생성</a></li>
-									<li><a class="">진행중 Project</a></li>
-        							<li><a class="">완성된 Project</a></li>
+									<li><a class="lists">진행중 Project</a></li>
+        							<li><a class="complete">완성된 Project</a></li>
 								</ul>
 								</li>
 							<li class='active has-sub'><a>About</a>

@@ -1,5 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="com.kic.groupware.model1.auth.AuthvacationTO"%>
+<%@page import="java.util.ArrayList"%>
+<%
+	ArrayList<AuthvacationTO> authVLists = (ArrayList)request.getAttribute( "authVLists" );
+	
+	int totalRecord = 0;
+	StringBuffer html = new StringBuffer();
+	
+	for( AuthvacationTO to : authVLists) {
+		String vno = to.getVno();
+		String authno = to.getAuthno();
+		String ename = to.getEname();
+		String deptno = to.getDeptno();
+		String vdate = to.getVdate();
+		String pno = to.getPno();
+		String vtype = to.getVtype();
+		String vtime = to.getVtime();
+		String vreason = to.getVreason();
+		
+		html.append("<tr>");
+		html.append("<td>" + vno + "</td>");
+		html.append("<td class='left'>");
+		html.append("	<a href='./vacation.do?vno=" + vno + "'>" + vreason + "</a>");
+		html.append("</td>");
+		html.append("<td>" + vdate + "</td>");
+		html.append("<td>" + vtype + "</td>");
+		html.append("<td>" + ename + "</td>");
+		html.append("<td>" + authno + "</td>");
+		html.append("</tr>");
+		
+		totalRecord++;
+	}
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +52,7 @@
 	left: 0;
 } */
 
-.row {
+.mainleft {
 	padding-top: 30px;
 	padding-left: 20px;
 	width: 1300px;
@@ -133,6 +167,8 @@ li {
 }
 </style>
 
+
+
 <script type="text/javascript" src="./resources/js/jquery-3.4.1.js"></script>
 <script type="text/javascript" src="./resources/js/jquery.animateNumber.min.js"></script>
 <script type="text/javascript">
@@ -164,67 +200,56 @@ li {
 </script>
 </head>
 <body>
-		<div id="wrapper">
-		<%@include file="../Menu/topmenu.jsp"%>
-		<div id="container">
-		<div class="row">
-		<div class="menubar col-sm-3">
-			<div id='menu'>
-			<ul>
-			   <li onclick="javascript: location.href='./auth.do'"><a>결재목록</a></li>
-			   <li onclick="javascript: location.href='./vacation.do'"><a>휴가신청서</a></li>
-			   <li onclick="javascript: location.href='./busitrip.do'"><a>출장신청서</a></li>
-			   <li onclick="javascript: location.href='./auth4.do'"><a>교통비신청서</a></li>
-			</ul>
-			</div>
-			</div>
-			<div id="mainleft" class="col-sm-9">
-				<!-- 전자결재 -->
-				<table class="table table-hover">
-					<thead>
-						<tr>
-							<th>no.</th>
-							<th>결재명</th>
-							<th>작성일</th>
-							<th>결재종류</th>
-							<th>신청자명</th>
-							<th>결재상태</th>
-						</tr>
-					</thead>
-					<tbody>
-					<tr>
-						<td>1</td>
-						<td onClick="location.href='./auth5.do'">휴가에 대한 건</td>
-						<td>2019.10.01</td>
-						<td>휴가</td>
-						<td>마승호</td>
-						<td>결재대기중</td>
-					</tr>
-					
-					<tr>
-						<td>2</td>
-						<td>교통비에 대한 건</td>
-						<td>2019.10.01</td>
-						<td>교통비</td>
-						<td>홍길동</td>
-						<td>결재완료</td>
-					</tr>
-					
-					<tr>
-						<td>3</td>
-						<td>출장에 대한 건</td>
-						<td>2019.10.01</td>
-						<td>출장</td>
-						<td>박문수</td>
-						<td>결재대기중</td>
-					</tr>
-					</tbody>
-				</table>
-
-			</div>
+	
+	<div id="mainleft" class="col-sm-9">
+		<!-- 전자결재 -->
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>no.</th>
+					<th>결재명</th>
+					<th>작성일</th>
+					<th>결재종류</th>
+					<th>신청자명</th>
+					<th>결재상태</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%=html %>
+			<!-- 
+			<tr>
+				<td>1</td>
+				<td onClick="location.href='./auth5.do'">휴가에 대한 건</td>
+				<td>2019.10.01</td>
+				<td>휴가</td>
+				<td>마승호</td>
+				<td>결재대기중</td>
+			</tr>
 			
-			</div>
-		</div>
+			<tr>
+				<td>2</td>
+				<td>교통비에 대한 건</td>
+				<td>2019.10.01</td>
+				<td>교통비</td>
+				<td>홍길동</td>
+				<td>결재완료</td>
+			</tr>
+			
+			<tr>
+				<td>3</td>
+				<td>출장에 대한 건</td>
+				<td>2019.10.01</td>
+				<td>출장</td>
+				<td>박문수</td>
+				<td>결재대기중</td>
+			</tr>
+			
+			 -->
+			
+			</tbody>
+		</table>
+
 	</div>
+
 </body>
 </html>

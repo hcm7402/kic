@@ -18,7 +18,7 @@
 	left: 0;
 } */
 
-.row {
+.mainleft {
 	padding-top: 30px;
 	padding-left: 20px;
 	width: 1300px;
@@ -109,7 +109,7 @@ table.greenTable tfoot .links a{
 }
 tr:nth-child(even){background-color: #f2f2f2}
 
-a {
+button {
   color: #4f4f4f;
 }
 
@@ -223,27 +223,15 @@ li {
 </script>
 </head>
 <body>
-	<div id="wrapper">
-		<%@include file="../Menu/topmenu.jsp"%>
-		<div id="container">
-		<div class="row">
-		<div class="menubar col-sm-3">
-				<div id='menu'>
-				<ul>
-				   <li onclick="javascript: location.href='./auth.do'"><a>결재목록</a></li>
-				   <li onclick="javascript: location.href='./vacation.do'"><a>휴가신청서</a></li>
-				   <li onclick="javascript: location.href='./busitrip.do'"><a>출장신청서</a></li>
-				   <li onclick="javascript: location.href='./auth4.do'"><a>교통비신청서</a></li>
-				</ul>
-				</div>
-				</div>
-			<div id="mainleft" class="col-sm-7">
-				<%@include file="./vacation.html" %>
-			</div>
+	
+	<form action="./vacation_ok.do" method="post" name="frm">
+		<div id="mainleft" class="col-sm-7">
+			<%@include file="./vacation.html" %>
 		</div>
-		<a href="./vacation_ok.do" class="button" style="margin-bottom:50px;margin-right:350px;float:right;text-decoration:none">신청</a>
-		</div>
-	</div>
+		<button class="button" style="color:#4f4f4f; margin-bottom:50px;float:right;text-decoration:none">신청</button>
+		
+	</form>
+	
 	<script src="./resources/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

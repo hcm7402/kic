@@ -11,7 +11,7 @@
 	request.setCharacterEncoding("UTF-8");
 	String eno = (String)session.getAttribute("eno");
 	String level = (String)session.getAttribute("level");
-	
+	 
 	if(eno == null || eno.equals("")) {
 		out.println("<script type='text/javascript'>");
 		out.println("alert('로그인이 필요합니다.')");
@@ -224,7 +224,7 @@ $( document ).ready( function() {
 				<div class="col-sm-2">
 					<%@include file="../Menu/calmenu.jsp"%>
 				</div>
-				<form id="form1" class="col-sm-10" name="form1" role="form" action="./cal.do" method="post" >
+				<form id="form1" class="col-sm-10" name="form1" role="form" action="./calone_ok.do" method="post" >
 					<input type="hidden" name="cdno" value="<c:out value="${caldata.cdno}"/>">
 					<div id="container" style="padding-top: 0">
 						<div class="row">

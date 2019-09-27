@@ -5,7 +5,7 @@
 	int flag = (Integer)request.getAttribute("flag");
 	int eno = (Integer)request.getAttribute("eno");
 	int level = (Integer)request.getAttribute("level");
-	
+	 
 	JSONObject jsonObject = new JSONObject();
 	
 	JSONObject logcheckInfo = new JSONObject();

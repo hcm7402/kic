@@ -1,49 +1,45 @@
 package com.kic.groupware.model1.calendar;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-
 public class CalendarTO {
-	int cdno;
-	int eno;
-	int cddiv;
-	int deptno;
-	String cdcolor;
+	String cdno;
+	String eno;
+	String cddiv;
+	String deptno;
+	String cddivision;
 	String cdname;
 	String startdate;
 	String enddate;
 	String contents;
 	
-	public int getCdno() {
+	public String getCdno() {
 		return cdno;
 	}
-	public void setCdno(int cdno) {
+	public void setCdno(String cdno) {
 		this.cdno = cdno;
 	}
-	public int getEno() {
+	public String getEno() {
 		return eno;
 	}
-	public void setEno(int eno) {
+	public void setEno(String eno) {
 		this.eno = eno;
 	}
-	public int getCddiv() {
+	public String getCddiv() {
 		return cddiv;
 	}
-	public void setCddiv(int cddiv) {
+	public void setCddiv(String cddiv) {
 		this.cddiv = cddiv;
 	}
-	public int getDeptno() {
+	public String getDeptno() {
 		return deptno;
 	}
-	public void setDeptno(int deptno) {
+	public void setDeptno(String deptno) {
 		this.deptno = deptno;
 	}
-	public String getCdcolor() {
-		return cdcolor;
+	public String getCddivision() {
+		return cddivision;
 	}
-	public void setCdcolor(String cdcolor) {
-		this.cdcolor = cdcolor;
+	public void setCddivision(String cddivision) {
+		this.cddivision = cddivision;
 	}
 	public String getCdname() {
 		return cdname;

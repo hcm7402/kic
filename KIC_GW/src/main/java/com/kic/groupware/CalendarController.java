@@ -1,5 +1,7 @@
 package com.kic.groupware;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -9,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kic.groupware.model1.calendar.CalendarDAO;
+import com.kic.groupware.model1.calendar.CalendarTO;
 import com.kic.groupware.model1.calendar.MonthTO;
 
 @Controller 
@@ -42,6 +46,29 @@ public class CalendarController {
         return model;
     }
     
+    @RequestMapping(value = "/calone_ok.do")
+    public ModelAndView calOne_ok(HttpServletRequest request, HttpServletResponse response) {
+    	System.out.println( "calOne_ok 컨트롤러 호출" );
+		
+		ModelAndView model = new ModelAndView();
+		CalendarTO to = new CalendarTO();
+		to.setEno(request.getParameter("eno"));
+		to.setCddiv(request.getParameter("cddiv"));
+		to.setDeptno(request.getParameter("deptno"));
+		to.setCddivision(request.getParameter("cddivision"));
+		to.setCdname(request.getParameter("cdname"));
+		to.setStartdate(request.getParameter("startdate"));
+		to.setEnddate(request.getParameter("enddate"));
+		to.setContents(request.getParameter("contents"));
+		
+    	CalendarDAO dao = new CalendarDAO();
+    	int flag = dao.caloneadd(to);
+    	
+    	model.addObject("flag", flag);
+    	model.setViewName( "Calendar/calOne_ok" );
+        return model;
+    }
+    
     @RequestMapping(value = "/caldepart.do")
     public ModelAndView calDepart(HttpServletRequest request, HttpServletResponse response) {
     	System.out.println( "caldepart 컨트롤러 호출" );
@@ -71,8 +98,14 @@ public class CalendarController {
     @RequestMapping(value = "/jsontest.do")
     public ModelAndView jsontest(HttpServletRequest request, HttpServletResponse response) {
         System.out.println( "jsontest 컨트롤러 호출" );
+        
+		String eno = (String) request.getAttribute("eno");
 		
 		ModelAndView model = new ModelAndView();
+		CalendarDAO dao = new CalendarDAO();
+		
+		ArrayList<CalendarTO> callist = dao.cdList(eno);
+		model.addObject("callist", callist);
 		model.setViewName( "Calendar/jsontest" );
 		
 		return model;

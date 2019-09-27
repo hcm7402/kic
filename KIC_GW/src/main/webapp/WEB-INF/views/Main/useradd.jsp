@@ -5,7 +5,7 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <% request.setCharacterEncoding("UTF-8"); %>
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
 <head>
 <title>Login 페이지</title>

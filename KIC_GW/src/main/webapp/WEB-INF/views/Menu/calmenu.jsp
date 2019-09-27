@@ -8,11 +8,11 @@
    		$('#menu li.active').addClass('open').children('ul').show();
    		$('#menu li.has-sub>a').on('click', function(){
    			$(this).removeAttr('href');
-   			var element = $(this).parent('li'); 
+   			var element = $(this).parent('li');
    			if (element.hasClass('open')) {
    				element.removeClass('open');
    				element.find('li').removeClass('open');
-   				element.find('ul').slideUp(200);
+   				element.find('ul').slideUp(200); 
    			}
    			else {
    				element.addClass('open');

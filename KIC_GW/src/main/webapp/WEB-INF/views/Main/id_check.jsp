@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/plain; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	int flag = (Integer) request.getAttribute("flag");
-
+ 
 	JSONObject jsonObject = new JSONObject();
 
 	JSONObject idInfo = new JSONObject();

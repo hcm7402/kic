@@ -7,7 +7,7 @@
 		out.println("alert('로그인이 필요합니다.')");
 		out.println("location.href='./login.do'");
 		out.println("</script>");
-	}
+	} 
 %>
 <!DOCTYPE html>
 <html>

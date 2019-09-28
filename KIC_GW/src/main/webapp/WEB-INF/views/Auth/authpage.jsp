@@ -43,6 +43,15 @@
    				element.siblings('li').find('ul').slideUp(200);
    			}
    		});
+   		
+   		$.ajax({
+			url : './authlist.do',
+			type : 'get',
+			dataType : 'text',
+			success : function(data) {
+				$('#mainleft').html(data);
+			}
+		});
 		// 결재목록 페이지 가져오는 부분
 		function authlist() {
 			$.ajax({
@@ -107,6 +116,10 @@
 		$('.transportation').on('click', function() {
 			transportation();
 		});
+		$('.').on('click', function() {
+			authlist();
+		});
+		
 	});
 </script>
 </head>

@@ -1,7 +1,20 @@
+<%@page import="com.kic.groupware.model1.auth.AuthTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("UTF-8");
+
+	String eno = (String)session.getAttribute("eno");
+	
+	ArrayList<AuthTO> authVLists1 = (ArrayList)request.getAttribute( "auth" );
+
+	for( AuthTO to : authVLists1) {
+		String ename = to.getEname();
+		String job = to.getJob();
+		String Deptno = to.getDeptno();
+	}
+	out.println("dfsfdfsf"+eno);
 %>
 <!DOCTYPE html>
 <html>

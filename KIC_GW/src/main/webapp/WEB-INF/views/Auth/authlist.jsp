@@ -1,45 +1,105 @@
+<%@page import="com.kic.groupware.model1.auth.AuthtransportationTO"%>
+<%@page import="com.kic.groupware.model1.auth.AuthbusitripTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="com.kic.groupware.model1.auth.AuthvacationTO"%>
 <%@page import="java.util.ArrayList"%>
 <%
 	request.setCharacterEncoding("UTF-8");
+	String eno = (String)session.getAttribute("eno");
+	if(eno == null || eno.equals("")) {
+	      out.println("<script type='text/javascript'>");
+	      out.println("alert('로그인이 필요합니다.')");
+	      out.println("location.href='./login.do'");
+	      out.println("</script>");
+	} 
 
-	ArrayList<AuthvacationTO> authVLists = (ArrayList)request.getAttribute( "authVLists" );
+	ArrayList<AuthvacationTO> authVLists1 = (ArrayList)request.getAttribute( "authVLists1" );
+	ArrayList<AuthbusitripTO> authVLists2 = (ArrayList)request.getAttribute( "authVLists2" );
+	ArrayList<AuthtransportationTO> authVLists3 = (ArrayList)request.getAttribute( "authVLists3" );
 	
 	int totalRecord = 0;
-	StringBuffer html = new StringBuffer();
+	StringBuffer html1 = new StringBuffer();
 	
-	for( AuthvacationTO to : authVLists) {
+	for( AuthvacationTO to : authVLists1) {
 		String vno = to.getVno();
 		String authno = to.getAuthno();
 		String ename = to.getEname();
 		String deptno = to.getDeptno();
 		String vdate = to.getVdate();
-		String pno = to.getPno();
+		String job = to.getJob();
 		String vtype = to.getVtype();
-		String vtime = to.getVtime();
+		String vstart = to.getVstart();
+		String vend = to.getVend();
 		String vreason = to.getVreason();
+		String authstate = to.getAuthstate();
 		
-		if(authno.equals("1")){
-			authno = "결재대기중";
-		} else if(authno.equals("2")){
-			authno = "결재완료";
-		} 
-		
-		html.append("<tr>");
-		html.append("<td>" + vno + "</td>");
-		html.append("<td class='left'>");
-		html.append("	<a href='./vacation.do?vno=" + vno + "'>" + vreason + "</a>");
-		html.append("</td>");
-		html.append("<td>" + vdate + "</td>");
-		html.append("<td>" + vtype + "</td>");
-		html.append("<td>" + ename + "</td>");
-		html.append("<td>" + authno + "</td>");
-		html.append("</tr>");
+		html1.append("<tr>");
+		html1.append("<td>" + vno + "</td>");
+		html1.append("<td class='left'>");
+		html1.append("	<a href='./vacation.do?vno=" + vno + "'>" + vreason + "</a>");
+		html1.append("</td>");
+		html1.append("<td>" + vdate + "</td>");
+		html1.append("<td>" + authno + "</td>");
+		html1.append("<td>" + ename + "</td>");
+		html1.append("<td>" + authstate + "</td>");
+		html1.append("</tr>");
 		
 		totalRecord++;
 	}
+	/*
+	StringBuffer html2 = new StringBuffer();
+	
+	for( AuthbusitripTO to : authVLists2) {
+		String authno = to.getAuthno();
+		String bno = to.getBno();
+		String binsertdate = to.getBinsertdate();
+		String deptno = to.getDeptno();
+		String ename = to.getEname();
+		String bspot = to.getBspot();
+		String bpurpose = to.getBpurpose();
+		String authstate = to.getAuthstate();
+
+		html2.append("<tr>");
+		html2.append("<td>" + bno + "</td>");
+		html2.append("<td class='left'>");
+		html2.append("	<a href='./busitrip.do?bno=" + bno + "'>" + bpurpose + "</a>");
+		html2.append("</td>");
+		html2.append("<td>" + binsertdate + "</td>");
+		html2.append("<td>" + authno + "</td>");
+		html2.append("<td>" + ename + "</td>");
+		html2.append("<td>" + authstate + "</td>");
+		html2.append("</tr>");
+		
+		totalRecord++;
+	}
+	
+	StringBuffer html3 = new StringBuffer();
+	
+	for( AuthtransportationTO to : authVLists3) {
+		String atno = to.getAtno();
+		String authno = to.getAuthno();
+		String atdate = to.getAtdate();
+		String deptno = to.getDeptno();
+		String job = to.getJob();
+		String ename = to.getEname();
+		String authstate = to.getAuthstate();
+		String atreason = to.getAtreason();
+		
+		html1.append("<tr>");
+		html1.append("<td>" + atno + "</td>");
+		html1.append("<td class='left'>");
+		html1.append("	<a href='./vacation.do?atno=" + atno + "'>" + atreason + "</a>");
+		html1.append("</td>");
+		html1.append("<td>" + atdate + "</td>");
+		html1.append("<td>" + authno + "</td>");
+		html1.append("<td>" + ename + "</td>");
+		html1.append("<td>" + authstate + "</td>");
+		html1.append("</tr>");
+		
+		totalRecord++;
+	}
+	*/
 %>
 
 <!DOCTYPE html>
@@ -199,7 +259,8 @@ li {
 				</tr>
 			</thead>
 			<tbody>
-				<%=html %>
+				<%=html1 %>
+			
 			<!-- 
 			<tr>
 				<td>1</td>

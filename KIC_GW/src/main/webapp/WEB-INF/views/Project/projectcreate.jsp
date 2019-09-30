@@ -20,28 +20,25 @@
 }
 
 .create1 {
-	border: 0px solid pink;
 	float: left;
 	width: 40%;
 	height: 100%;
 }
 
 .create2 {
-	border: 0px solid yellow;
 	float: left;
 	width: 30%;
 	height: 100%;
 }
 
 .create3 {
-	border: 0px solid blue;
 	float: left;
 	width: 30%;
 	height: 100%;
 }
 
 body {
-	font-family: Sans-Serif;
+	font-family: 'Malgun Gothic';
 	margin-left: 40px;
 	margin-right: 40px;
 }
@@ -51,16 +48,8 @@ body {
 	color: #47C83E;
 }
 
-.click, .click2 {
-	-moz-box-shadow: inset 0px 1px 0px 0px #fcfffe;
-	-webkit-box-shadow: inset 0px 1px 0px 0px #fcfffe;
-	box-shadow: inset 0px 1px 0px 0px #fcfffe;
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #47c9af
-		), color-stop(1, #03ffcd));
-	background: -moz-linear-gradient(center top, #47c9af 5%, #03ffcd 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#47c9af',
-		endColorstr='#03ffcd');
-	background-color: #47c9af;
+.click, .click2, .click3 {
+	background-color: #56bafc;
 	-webkit-border-top-left-radius: 42px;
 	-moz-border-radius-topleft: 42px;
 	border-top-left-radius: 42px;
@@ -74,7 +63,6 @@ body {
 	-moz-border-radius-bottomleft: 42px;
 	border-bottom-left-radius: 42px;
 	text-indent: 0px;
-	border: 1px solid #47c9af;
 	display: inline-block;
 	color: #ffffff;
 	font-family: Arial;
@@ -84,12 +72,10 @@ body {
 	height: 31px;
 	line-height: 31px;
 	width: 30px;
-	text-decoration: none;
 	text-align: center;
-	text-shadow: 1px 1px 0px #689324;
 }
 
-.click:hover, .click2:hover {
+.click:hover, .click2:hover, .click3:hover {
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #03ffcd
 		), color-stop(1, #47c9af));
 	background: -moz-linear-gradient(center top, #03ffcd 5%, #47c9af 100%);
@@ -98,7 +84,7 @@ body {
 	background-color: #03ffcd;
 }
 
-.click:active, .click2:active {
+.click:active, .click2:active, .click3:active {
 	position: relative;
 	top: 1px;
 }
@@ -108,15 +94,7 @@ body {
 }
 
 .submit {
-	-moz-box-shadow: inset 0px 1px 0px 0px #47c9af;
-	-webkit-box-shadow: inset 0px 1px 0px 0px #47c9af;
-	box-shadow: inset 0px 1px 0px 0px #47c9af;
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #3dedca
-		), color-stop(1, #00cfa6));
-	background: -moz-linear-gradient(center top, #3dedca 5%, #00cfa6 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3dedca',
-		endColorstr='#00cfa6');
-	background-color: #3dedca;
+	background-color: #D5D5D5;
 	-webkit-border-top-left-radius: 15px;
 	-moz-border-radius-topleft: 15px;
 	border-top-left-radius: 15px;
@@ -142,7 +120,6 @@ body {
 	width: 79px;
 	text-decoration: none;
 	text-align: center;
-	text-shadow: 1px 1px 0px #86ae47;
 }
 
 .submit:hover {
@@ -151,7 +128,7 @@ body {
 	background: -moz-linear-gradient(center top, #00cfa6 5%, #3dedca 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00cfa6',
 		endColorstr='#3dedca');
-	background-color: #00cfa6;
+	background-color: #ccc;
 }
 
 .submit:active {
@@ -161,6 +138,34 @@ body {
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
+		var teamlist = function() {
+			$.ajax({
+				url: './teamlist.do',
+				type: 'get',
+				dataType: 'JSON',
+				async: false,
+				cache: false,
+				success: function( json ) {
+					results = json.results;
+					$.each( results, function(index, item) {
+						var eno = this.eno;
+						var ename = this.ename;
+						var deptno = this.deptno;
+						
+						
+						if( deptno == 1 ) {
+							$('.team1').append('<li class="nav-item"><a class="nav-link push" data-dept=' +deptno+ ' data-value="' + item.eno + '">'+ ename +'</a></li>');
+						}else if( deptno == 2 ) {
+							$('.team2').append('<li class="nav-item"><a class="nav-link push" data-dept=' +deptno+ ' data-value="' + item.eno + '">'+ ename +'</a></li>');
+						}else if( deptno == 3 ) {
+							$('.team3').append('<li class="nav-item"><a class="nav-link push" data-dept=' +deptno+ ' data-value="' + item.eno + '">'+ ename +'</a></li>');
+						}
+					})
+				}
+			});
+		}
+		
+		teamlist();
 		$('.start-date').datepicker({
 			format : 'yyyy-mm-dd',
 			language : 'ko'
@@ -171,27 +176,67 @@ body {
 		});
 
 		$('.click').on('click', function() {
-			if ($('.click-option1').is(':visible')) {
-				$('.click-option1').hide();
+			if ($('.team1').is(':visible')) {
+				$('.team1').hide();
 			} else {
-				$('.click-option1').show();
+				$('.team1').show();
 			}
 		});
 
 		$('.click2').on('click', function() {
-			if ($('.click-option2').is(':visible')) {
-				$('.click-option2').hide();
+			if ($('.team2').is(':visible')) {
+				$('.team2').hide();
 			} else {
-				$('.click-option2').show();
+				$('.team2').show();
 			}
 		});
-
-		$('.test').on('click', function() {
-			var text = $('.test').text();
-			var html = '<tr>';
-			html += '<td>' + text + '</td></tr>';
-			$('.addemp').append(html);
+		
+		$('.click3').on('click', function() {
+			if ($('.team3').is(':visible')) {
+				$('.team3').hide();
+			} else {
+				$('.team3').show();
+			}
 		});
+	
+		// 팀원 추가
+			$(document).on('click', '.push',function() {
+				var result = $(this).text();
+				// eno 값
+				var value = $(this).attr('data-value');
+				// 부서번호
+				var deptno = $(this).attr('data-dept');
+				
+				var html = '<tr class="in"><td class="out" data-dept=' +deptno+ ' data-value=' + value + '>' + result + '</td></tr>';
+				
+				$('.addemp').append( html );
+				if( $(this).attr('data-value') == value ) {
+					$(this).remove();
+				}
+			});
+			// 팀원 제거
+			$('.create3').on( 'click', 'table .addemp .in .out',function() {
+				var ename = $(this).text();
+				var deptno = $(this).attr('data-dept');
+				var eno = $(this).attr('data-value');
+				
+				if( deptno == 1 ) {
+					$('.team1').append('<li class="nav-item"><a class="nav-link push" data-dept=' +deptno+ ' data-value="' + eno + '">'+ ename +'</a></li>');
+					$(this).remove();
+				}else if ( deptno == 2 ) {
+					$('.team2').append('<li class="nav-item"><a class="nav-link push" data-dept=' +deptno+ ' data-value="' + eno + '">'+ ename +'</a></li>');
+					$(this).hide();
+				}else if( deptno == 3 ) {
+					$('.team3').append('<li class="nav-item"><a class="nav-link push" data-dept=' +deptno+ ' data-value="' + eno + '">'+ ename +'</a></li>');
+					$(this).hide();
+				}
+				
+			});
+			
+			$('.submit').on( 'click', function() {
+				console.log('asd');
+			});
+		
 	});
 </script>
 
@@ -239,22 +284,21 @@ body {
 							<div class="add">
 								<div class="click" style="float: left;">+</div>
 								<div style="padding: 3px; margin-left: 5px;">개발팀</div>
-								<ul class="nav click-option1">
-									<li class="nav-item"><a class="nav-link active">사원 홍길동</a>
-									</li>
-									<li class="nav-item"><a class="nav-link test" href="#">사원
-											박문수</a></li>
-									<li class="nav-item"><a class="nav-link">사원 이몽룡</a></li>
+								<ul class="nav team1">
 								</ul>
 							</div>
 							<br />
 							<div class="add">
 								<div class="click2" style="float: left;">+</div>
 								<div style="padding: 3px; margin-left: 5px;">인사팀</div>
-								<ul class="nav click-option2">
-									<li class="nav-item"><a class="nav-link">사원 성춘향</a></li>
-									<li class="nav-item"><a class="nav-link">사원 고창석</a></li>
-									<li class="nav-item"><a class="nav-link">사원 이민기</a></li>
+								<ul class="nav team2">
+								</ul>
+							</div>
+							<br />
+							<div class="add">
+								<div class="click3" style="float: left;">+</div>
+								<div style="padding: 3px; margin-left: 5px;">재무팀</div>
+								<ul class="nav team3">
 								</ul>
 							</div>
 						</div>
@@ -262,7 +306,7 @@ body {
 				</div>
 			</div>
 			<div class="create3 form-group">
-				<table class="table table-borderless">
+				<table class="table table-borderless emp">
 					<thead>
 						<tr>
 							<th>팀원이 추가됩니다.</th>

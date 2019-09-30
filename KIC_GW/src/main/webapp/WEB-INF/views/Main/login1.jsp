@@ -24,13 +24,14 @@
 	$(document).ready( function() {
 		
 		// session 값 부여 함수
-		var session = function( eno, level ) {
+		var session = function( eno, level, ename ) {
 			$.ajax({
 				url: './session.do',
 				type: 'post',
 				data: {
 					eno: eno,
-					level: level
+					level: level,
+					ename: ename
 				},
 				success: function() {
 					location.href = './main.do';
@@ -54,6 +55,7 @@
 						var flag = this.flag;
 						var eno = this.eno;
 						var level = this.level;
+						var ename = this.ename;
 							
 						if(flag == 2) {
 							swal({
@@ -70,7 +72,7 @@
 								  title: '로그인 성공!',
 								  icon: 'success'
 							});
-							session( eno, level );
+							session( eno, level, ename );
 						}
 					});
 					

@@ -17,7 +17,7 @@ public class ManagementController {
 	
 	@RequestMapping(value = "/mypage.do")
 	public ModelAndView mypage( HttpServletRequest request, HttpServletResponse response) {
-		System.out.println( "management 컨트롤러 호출" );
+		System.out.println( "mypage 컨트롤러 호출" );
 		
 		ModelAndView model = new ModelAndView();
 		model.setViewName( "MyPage/mypage" );
@@ -25,10 +25,20 @@ public class ManagementController {
 		return model;
 	}
 	
+	@RequestMapping(value = "/myinfo.do")
+	public ModelAndView myinfo( HttpServletRequest request, HttpServletResponse response) {
+		System.out.println( "myinfo 컨트롤러 호출" );
+		
+		ModelAndView model = new ModelAndView();
+		model.setViewName( "MyPage/myinfo" );
+		
+		return model;
+	}
+	
 	@RequestMapping(value = "/Management.do")
 	public ModelAndView management( HttpServletRequest request, HttpServletResponse response) {
 		System.out.println( "management 컨트롤러 호출" );
-		
+		// 여기서 호출
 		ModelAndView model = new ModelAndView();
 		model.setViewName( "MyPage/Management" );
 		
@@ -39,10 +49,11 @@ public class ManagementController {
 	public ModelAndView checkin( HttpServletRequest request, HttpServletResponse response) {
 		System.out.println( "checkin 컨트롤러 호출" );
 		
+		String eno = request.getParameter("eno");
 		String date = request.getParameter("date");
 		
 		ManagementDAO dao = new ManagementDAO();
-		int flag = dao.checkin(date);
+		int flag = dao.checkin(eno, date);
 		
 		ModelAndView model = new ModelAndView();
 		model.setViewName( "MyPage/checkin" );
@@ -55,10 +66,11 @@ public class ManagementController {
 	public ModelAndView checkout( HttpServletRequest request, HttpServletResponse response) {
 		System.out.println( "checkout 컨트롤러 호출" );
 		
+		String eno = request.getParameter("eno");
 		String date = request.getParameter("date");
 		
 		ManagementDAO dao = new ManagementDAO();
-		int flag = dao.checkout(date);
+		int flag = dao.checkout(eno, date);
 		
 		ModelAndView model = new ModelAndView();
 		model.setViewName( "MyPage/checkout" );
@@ -89,6 +101,7 @@ public class ManagementController {
 		System.out.println( "managementList 컨트롤러 호출" );
 		
 		String eno = request.getParameter("eno");
+		System.out.println(eno);
 		
 		ManagementDAO dao = new ManagementDAO();
 		ArrayList<ManagementTO> manageLists = dao.managelist(eno);

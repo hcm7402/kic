@@ -37,7 +37,7 @@ $(document).ready(function() {
 					
 					if(flag == 1) {
 						swal({
-							  title: '아이디를 입력하셔야 합니다.',
+							  title: '이미 존재하는 아이디입니다.',
 							  icon: 'warning'
 						});
 						idcertify = 0;
@@ -154,6 +154,38 @@ $(document).ready(function() {
 		}
 	});
 	
+	var useradd_ok = function( indate ) {
+		$.ajax({
+			url: './useradd_ok.do',
+			type: 'get',
+			data: {
+				date: indate
+			},
+			dataType: 'JSON',
+			success: function( json ) {
+				results = json.results;
+				$( results ).each( function() {
+					var flag = this.flag;
+					if( flag == 0 ) {
+						swal({
+							  title: '가입 되었습니다.',
+							  icon: 'success'
+						});
+						location.href='login.do';
+					}else {
+						swal({
+							  title: '가입에 실패하였습니다.',
+							  icon: 'warning'
+						});
+					}
+				});
+			},
+			error: function( xhr, status, error ) {
+				alert( '에러 : ' + status + '\n\n' + error );
+			}
+		});
+	}
+
 	$('#cancel').on('click', function() {
 		location.href='login.do';
 	});

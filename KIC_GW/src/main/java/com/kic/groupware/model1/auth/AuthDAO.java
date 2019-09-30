@@ -155,25 +155,27 @@ public class AuthDAO {
 		
 		return flag;
 	}
-	public ArrayList<AuthTO> auth(String eno) {
+	public AuthTO authEmp(AuthTO to) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		ArrayList<AuthTO> authVLists = new ArrayList<AuthTO>();
 		try {
-
+			Date date1 = new Date();
+			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+			String date = transFormat.format(date1);
+			
 			String sql = "select eno, ename, job, deptno from emp where eno=?";
 			pstmt = conn.prepareStatement( sql );
-			pstmt.setString(1, eno);
+			pstmt.setString(1, to.getEno());
 			
 			rs = pstmt.executeQuery();
 			while( rs.next() ) {
-				AuthTO to = new AuthTO();
 				to.setEname( rs.getString("ename") );
 				to.setJob( rs.getString("job") );
 				to.setDeptno( rs.getString("deptno") );
-				authVLists.add( to );
+				to.setDate(date);
 			}
+			
 		} catch(SQLException e) {
 			System.out.println("[에러] " + e.getMessage());
 		} finally {
@@ -181,7 +183,7 @@ public class AuthDAO {
 			if(pstmt != null) try { pstmt.close(); } catch( SQLException e ) {}
 			if(conn != null) try { conn.close(); } catch( SQLException e ) {}
 		}
-		return authVLists;
+		return to;
 	}
 	
 	public ArrayList<AuthvacationTO> authVList1(String eno) {

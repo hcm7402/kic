@@ -175,11 +175,17 @@ public class AuthController {
 	@RequestMapping(value = "/vacation.do")
 	public ModelAndView vacation( HttpServletRequest request, HttpServletResponse response) {
 		System.out.println( "vacation 컨트롤러 호출" );
+
+		AuthTO to = new AuthTO();
+		to.setEno( request.getParameter( "eno" ) );
 		
-		ModelAndView model = new ModelAndView();
-		model.setViewName( "Auth/vacation" );
-		
-		return model;
+		AuthDAO dao = new AuthDAO();
+		to = dao.authEmp( to );
+
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("Auth/vacation");
+		modelAndView.addObject("to", to);
+		return modelAndView;
 	}
 	
 	@RequestMapping(value = "/vacation_ok.do")

@@ -150,7 +150,7 @@ $(document).ready(function() {
 			});
 			return false;
 		}else {
-			document.frm.submit();
+			useradd_ok();
 		}
 	});
 	
@@ -185,9 +185,9 @@ $(document).ready(function() {
 			}
 		});
 	}
-	
+
 	$('#cancel').on('click', function() {
-		history.back();
+		location.href='login.do';
 	});
 });
 $( document ).ready( function() {

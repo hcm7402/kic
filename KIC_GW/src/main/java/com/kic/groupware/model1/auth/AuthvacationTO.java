@@ -4,13 +4,23 @@ public class AuthvacationTO {
 	
 	private String vno;
 	private String authno;
+	private String eno;
 	private String ename;
 	private String deptno;
 	private String vdate;
-	private String pno;
+	private String job;
 	private String vtype;
-	private String vtime;
+	private String vstart;
+	private String vend;
 	private String vreason;
+	private String authstate;
+	
+	public String getEno() {
+		return eno;
+	}
+	public void setEno(String eno) {
+		this.eno = eno;
+	}
 	public String getVno() {
 		return vno;
 	}
@@ -41,11 +51,12 @@ public class AuthvacationTO {
 	public void setVdate(String vdate) {
 		this.vdate = vdate;
 	}
-	public String getPno() {
-		return pno;
+	
+	public String getJob() {
+		return job;
 	}
-	public void setPno(String pno) {
-		this.pno = pno;
+	public void setJob(String job) {
+		this.job = job;
 	}
 	public String getVtype() {
 		return vtype;
@@ -53,11 +64,24 @@ public class AuthvacationTO {
 	public void setVtype(String vtype) {
 		this.vtype = vtype;
 	}
-	public String getVtime() {
-		return vtime;
+
+	public String getVstart() {
+		return vstart;
 	}
-	public void setVtime(String vtime) {
-		this.vtime = vtime;
+	public void setVstart(String vstart) {
+		this.vstart = vstart;
+	}
+	public String getVend() {
+		return vend;
+	}
+	public void setVend(String vend) {
+		this.vend = vend;
+	}
+	public String getAuthstate() {
+		return authstate;
+	}
+	public void setAuthstate(String authstate) {
+		this.authstate = authstate;
 	}
 	public String getVreason() {
 		return vreason;

@@ -18,8 +18,9 @@
 				
 기안자
 			</td>
-			<td style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
-			홍길동	<!-- <input name="ename" class="ipt_editor" type="text"> -->
+			<td name="ename" style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
+			<%=ename %>
+			<!-- <input name="ename" class="ipt_editor" type="text"> -->
 			</td>
 		</tr>
 		<tr>
@@ -27,8 +28,8 @@
 				
 기안부서
 			</td>
-			<td style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
-			개발부	<!-- <input name="ename" class="ipt_editor" type="text"> -->
+			<td name="deptno" style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
+			<!-- <input name="deptno" class="ipt_editor" type="text"> -->
 			</td>
 		</tr>
 		<tr>
@@ -36,17 +37,8 @@
 				
 기안일
 			</td>
-			<td style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
-			2019-09-27	<!-- <input name="ename" class="ipt_editor" type="text"> -->
-			</td>
-		</tr>
-		<tr>
-			<td style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
-				
-문서번호
-			</td>
-			<td style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
-				<!-- <input name="ename" class="ipt_editor" type="text"> -->
+			<td name="vdate" style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
+			<!-- <input name="vdate" class="ipt_editor" type="text"> -->
 			</td>
 		</tr>
 	</tbody>
@@ -61,7 +53,7 @@
 <table style="border: 0px solid rgb(0, 0, 0); width: 800px; font-family: malgun gothic, dotum, arial, tahoma; margin-top: 10px; border-collapse: collapse;"><!-- 품의서 --><colgroup><col width="200"><col width="350"><col width="200"><col width="200"></colgroup>
 	<tbody>
 		<tr>
-			<td style="padding: 5px; border: 1px solid black; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; vertical-align: middle; background-color: rgb(221, 221, 221);" colspan="4">
+			<td style="padding: 5px; border: 1px solid black; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; vertical-align: middle; background-color: rgb(221, 221, 221);" colspan="2">
 				<span style="font-weight: bold; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma; font-size: 11pt; line-height: normal; margin-top: 0px; margin-bottom: 0px;">신청인</span>
 			</td>
 		</tr>
@@ -70,8 +62,8 @@
 				
 소속
 			</td>
-			<td style="background: rgb(255, 255, 255); border-width: medium 1px 1px; border-style: none solid solid; border-color: currentColor black black; padding: 5px; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;" colspan="3" class="dext_table_border_t">
-			개발부	<!-- <input name="ename" class="ipt_editor" type="text"> -->
+			<td name="deptno" style="background: rgb(255, 255, 255); border-width: medium 1px 1px; border-style: none solid solid; border-color: currentColor black black; padding: 5px; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;" colspan="3" class="dext_table_border_t">
+			<!-- <input name="deptno" class="ipt_editor" type="text"> -->
 			</td>
 		</tr>
 		<tr>
@@ -79,8 +71,8 @@
 				
 직책
 			</td>
-			<td style="background: rgb(255, 255, 255); border-width: medium 1px 1px; border-style: none solid solid; border-color: currentColor black black; padding: 5px; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;" colspan="3" class="dext_table_border_t">
-			사원	<!-- <input name="ename" class="ipt_editor" type="text"> -->
+			<td name="job" style="background: rgb(255, 255, 255); border-width: medium 1px 1px; border-style: none solid solid; border-color: currentColor black black; padding: 5px; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;" colspan="3" class="dext_table_border_t">
+			<!-- <input name="job" class="ipt_editor" type="text"> -->
 			</td>
 		</tr>
 		<tr>
@@ -88,8 +80,8 @@
 				
 성명
 			</td>
-			<td style="background: rgb(255, 255, 255); border-width: medium 1px 1px; border-style: none solid solid; border-color: currentColor black black; padding: 5px; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;" colspan="3" class="dext_table_border_t">
-			홍길동	<!-- <input name="ename" class="ipt_editor" type="text"> -->
+			<td name="ename" style="background: rgb(255, 255, 255); border-width: medium 1px 1px; border-style: none solid solid; border-color: currentColor black black; padding: 5px; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;" colspan="3" class="dext_table_border_t">
+			<!-- <input name="ename" class="ipt_editor" type="text"> -->
 			</td>
 		</tr>
 		<tr>
@@ -102,8 +94,8 @@
 				
 휴가종류
 			</td>
-			<td style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;" colspan="3">
-				<input name="vtype" class="ipt_editor" type="text">
+			<td name="vtype" style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;" colspan="3">
+				<!-- <input name="vtype" class="ipt_editor" type="text"> -->
 			</td>
 		</tr>
 		<tr>
@@ -111,15 +103,11 @@
 				
 휴가기간
 			</td>
-			<td style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; vertical-align: middle;">
-				<input name="vtime" class="ipt_editor" type="text">~<input name="vtime" class="ipt_editor" type="text">
+			<td name="vstart" style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; vertical-align: middle;">
+				<!-- <input name="vstart" class="ipt_editor" type="text">~<input name="vend" class="ipt_editor" type="text"> -->
 			</td>
-			<td style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;">
-				
-잔여일
-			</td>
-			<td style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; vertical-align: middle;">
-			5	<!-- <input name="ename" class="ipt_editor" type="text"> -->일
+			<td name="vend" style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; vertical-align: middle;">
+				<!-- <input name="vstart" class="ipt_editor" type="text">~<input name="vend" class="ipt_editor" type="text"> -->
 			</td>
 		</tr>
 		<tr>
@@ -127,8 +115,8 @@
 				
 휴가사유
 			</td>
-			<td style="background: rgb(255, 255, 255); border-width: medium 1px 1px; border-style: none solid solid; border-color: currentColor black black; padding: 5px; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;" colspan="3" class="dext_table_border_t">
-				<input name="vreason" class="ipt_editor" type="text">
+			<td name="vreason" style="background: rgb(255, 255, 255); border-width: medium 1px 1px; border-style: none solid solid; border-color: currentColor black black; padding: 5px; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;" colspan="3" class="dext_table_border_t">
+				<!-- <input name="vreason" class="ipt_editor" type="text"> -->
 			</td>
 		</tr>
 		<tr>

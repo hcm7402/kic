@@ -25,9 +25,9 @@
   height: 0;
 }
 #cssmenu {
-  width: auto;
-  border-bottom: 3px solid #47c9af;
-  font-family: Raleway, sans-serif;
+  width: 1400px;
+  border-bottom: 3px solid #56bafc;
+  font-family:	'Malgun Gothic';
   line-height: 1;
 }
 #cssmenu ul {
@@ -86,13 +86,16 @@
 #cssmenu > ul > li.active > a:after,
 #cssmenu > ul > li:hover > a:after,
 #cssmenu > ul > li > a:hover:after {
-  background: #47c9af;
+  background: #56bafc;
 }
-.home {
-	
+#cssmenu > ul> li {
+	width: 171px;
+}
+#cssmenu > ul> li.home{
+	width: 200px;
 	height: 120%;
 	font-size: 100px;
-	background: #47c9af;
+	background: #56bafc;
 	border-top-left-radius: 8px;
 	border-top-right-radius: 8px;
 }

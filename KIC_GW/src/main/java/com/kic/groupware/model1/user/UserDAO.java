@@ -90,7 +90,7 @@ public class UserDAO {
 		to.setFlag(2);
 		
 		try {
-			String sql = "select eno, epw, level from emp where eid = ?";
+			String sql = "select eno,ename, epw, level from emp where eid = ?";
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, to.getEid());
@@ -101,6 +101,7 @@ public class UserDAO {
 					to.setFlag(0);
 					to.setEno(rs.getInt("eno"));
 					to.setLevel(rs.getInt("level"));
+					to.setEname(rs.getString("ename"));
 				}else {
 					to.setFlag(1);
 				}

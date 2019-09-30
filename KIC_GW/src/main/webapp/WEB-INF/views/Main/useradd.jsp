@@ -37,7 +37,7 @@ $(document).ready(function() {
 					
 					if(flag == 1) {
 						swal({
-							  title: '아이디를 입력하셔야 합니다.',
+							  title: '이미 존재하는 아이디입니다.',
 							  icon: 'warning'
 						});
 						idcertify = 0;
@@ -171,7 +171,7 @@ $(document).ready(function() {
 							  title: '가입 되었습니다.',
 							  icon: 'success'
 						});
-						location.href='cal.do';
+						location.href='login.do';
 					}else {
 						swal({
 							  title: '가입에 실패하였습니다.',

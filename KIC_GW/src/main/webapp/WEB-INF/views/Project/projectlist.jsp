@@ -23,7 +23,7 @@
 	    display: inline-block;
 	    padding: 10px;
 	    margin-bottom: 5px;
-	    border: 2px solid black;
+	    border: 2px solid #ccc;
 	    font-size: 12px;
 	    cursor: pointer;
 	    border-radius: 10px;

@@ -1,10 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
-
+<%
+	String enos = (String) session.getAttribute("eno");
+	String enames = (String) session.getAttribute("ename");
+%>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="./resources/styles.css">
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript">
+</script>
 <style type="text/css">
 body {
+	font-family: 'Malgun Gothic';
 	margin: 0;
 	margin-left: 40px;
 	margin-right: 40px;
@@ -47,7 +53,7 @@ li {
 	    <div class="info">
 	    <table class="info-table">
 	    	<tr>
-	    	<td>홍길동 님</td>
+	    	<td><%=enames %> 님</td>
 	    	<td><a href="./logout.do"><img src="./resources/img/logout.png" class="main-icon" /></a></td>
 	    	</tr>
 	    </table>
@@ -56,12 +62,13 @@ li {
     <div id='cssmenu'>
 	<ul>
    <li class="home"><a href="./main.do">Home</a></li>
-   <li><a href='./mypage.do'>My page</a></li>
-   <li><a href='./address.do'>주소록</a></li>
-   <li><a href='#'>게시판</a></li>
-   <li><a href='./auth.do'>전자결재</a></li>
-   <li><a href='./project.do'>프로젝트</a></li>
+   <li><a href="#">공지사항</a></li><!-- 공지 사항-->
+   <li><a href='./authpage.do'>전자결재</a></li><!-- 전자 -->
+   <li><a href='./project.do'>프로젝트</a></li><!-- 프젝 -->
+   <li><a href='#'>게시판</a></li><!-- 게시판 -->
    <li><a href='./cal.do'>캘린더</a></li>
+   <li><a href='./address.do'>조직도</a></li><!-- 조직 -->
+   <li><a href='./mypage.do'>My page</a></li><!-- 마이 -->
 	</ul>
 	</div>
 	</div>

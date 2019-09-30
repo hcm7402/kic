@@ -30,7 +30,7 @@ public class ManagementDAO {
 		}
 	}
 	
-	public int checkin( String date ) {
+	public int checkin( String eno, String date ) {
 		int flag = 1;
 		
 		PreparedStatement pstmt = null;
@@ -39,7 +39,7 @@ public class ManagementDAO {
 			String sql = "insert into management ( eno, mdate, checkin ) values ( ?, now(), ? )";
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, "1");
+			pstmt.setString(1, eno);
 			pstmt.setString(2, date);
 			
 			int result = pstmt.executeUpdate();
@@ -58,7 +58,7 @@ public class ManagementDAO {
 		return flag;
 	}
 	
-	public int checkout( String checkout ) {
+	public int checkout( String eno, String checkout ) {
 		int flag = 1;
 		
 		PreparedStatement pstmt = null;
@@ -72,7 +72,7 @@ public class ManagementDAO {
 			String sql = "select mno, checkin from management where eno = ? and mdate = date_format( now(), '%Y-%m-%d')";
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, "1");
+			pstmt.setString(1, eno);
 			
 			rs = pstmt.executeQuery();
 			if( rs.next() ) {
@@ -127,7 +127,7 @@ public class ManagementDAO {
 			pstmt.setString( 1, checkout );
 			pstmt.setString( 2, total );
 			pstmt.setString( 3, mno );
-			pstmt.setString( 4, "1" );
+			pstmt.setString( 4, eno );
 			
 			int result = pstmt.executeUpdate();
 			if( result == 1 ) {
@@ -155,11 +155,11 @@ public class ManagementDAO {
 			String sql = "select checkin, checkout from management where eno = ? and mdate = date_format( now(), '%Y-%m-%d')";
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, "1");
+			pstmt.setString(1, eno);
 			
 			rs = pstmt.executeQuery();
 			
-			if( rs.next() ) {
+			while( rs.next() ) {
 				String checkin = rs.getString("checkin");
 				String checkout = rs.getString("checkout");
 				
@@ -188,7 +188,7 @@ public ArrayList<ManagementTO> managelist( String eno ) {
 			String sql = "select * from management where eno = ?";
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, "1");
+			pstmt.setString(1, eno);
 			
 			rs = pstmt.executeQuery();
 			

@@ -48,6 +48,9 @@
    		$.ajax({
 			url : './authlist.do',
 			type : 'get',
+			data: {
+				eno: <%=eno%>
+			},
 			dataType : 'text',
 			success : function(data) {
 				$('#mainleft').html(data);
@@ -58,6 +61,9 @@
 			$.ajax({
 				url : './authlist.do',
 				type : 'get',
+				data: {
+					eno: <%=eno%>
+				},
 				dataType : 'text',
 				success : function(data) {
 					$('#mainleft').html(data);
@@ -85,6 +91,9 @@
 			$.ajax({
 				url : './busitrip.do',
 				type : 'get',
+				data: {
+					eno: <%=eno%>
+				},
 				dataType : 'text',
 				success : function(data) {
 					$('#mainleft').html(data);
@@ -97,13 +106,16 @@
 			$.ajax({
 				url : './transportation.do',
 				type : 'get',
+				data: {
+					eno: <%=eno%>
+				},
 				dataType : 'text',
 				success : function(data) {
 					$('#mainleft').html(data);
 				}
 			});
 		}
-		
+	
 		// 결재목록 클릭시
 		$('.authlist').on('click', function() {
 			authlist();
@@ -119,9 +131,6 @@
 		// 교통비신청서 클릭 시
 		$('.transportation').on('click', function() {
 			transportation();
-		});
-		$('.').on('click', function() {
-			authlist();
 		});
 		
 	});

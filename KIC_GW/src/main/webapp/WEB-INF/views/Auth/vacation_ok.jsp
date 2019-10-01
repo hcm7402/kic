@@ -3,6 +3,7 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 
+	String eno = (String)session.getAttribute("eno");
 	int flag = (Integer)request.getAttribute("flag");
 
 	out.println("<script type='text/javascript'>");

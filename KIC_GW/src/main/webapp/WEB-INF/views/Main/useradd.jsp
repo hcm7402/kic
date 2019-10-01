@@ -37,7 +37,7 @@ $(document).ready(function() {
 					
 					if(flag == 1) {
 						swal({
-							  title: '이미 존재하는 아이디입니다.',
+							  title: '존재하는 아이디입니다.',
 							  icon: 'warning'
 						});
 						idcertify = 0;
@@ -72,12 +72,6 @@ $(document).ready(function() {
 		if( $('#ename').val() == '' ) {
 			swal({
 				  title: '이름을 입력하셔야 합니다.',
-				  icon: 'warning'
-			});
-			return false;
-		}else if( $('#eid').val() == '' ) {
-			swal({
-				  title: '아이디를 입력하셔야 합니다.',
 				  icon: 'warning'
 			});
 			return false;
@@ -154,38 +148,6 @@ $(document).ready(function() {
 		}
 	});
 	
-	var useradd_ok = function( indate ) {
-		$.ajax({
-			url: './useradd_ok.do',
-			type: 'get',
-			data: {
-				date: indate
-			},
-			dataType: 'JSON',
-			success: function( json ) {
-				results = json.results;
-				$( results ).each( function() {
-					var flag = this.flag;
-					if( flag == 0 ) {
-						swal({
-							  title: '가입 되었습니다.',
-							  icon: 'success'
-						});
-						location.href='login.do';
-					}else {
-						swal({
-							  title: '가입에 실패하였습니다.',
-							  icon: 'warning'
-						});
-					}
-				});
-			},
-			error: function( xhr, status, error ) {
-				alert( '에러 : ' + status + '\n\n' + error );
-			}
-		});
-	}
-
 	$('#cancel').on('click', function() {
 		location.href='login.do';
 	});
@@ -256,7 +218,7 @@ $( document ).ready( function() {
 }
 label {
 	margin-bottom: 0;
-}
+} 
 	</style>
 </head>
 <body>
@@ -264,7 +226,7 @@ label {
 		<div class="limiter">
 		<div class="container-login100">
 		<div class="wrap-login100">
-			<form class="login100-form validate-form" action="./useradd_ok.do" name="frm" method="post">
+			<form class="login100-form validate-form" action="./useradd_ok.do" name="frm" method="post" enctype="multipart/form-data">
 				<div class="wrap-input100" data-validate = "Enter username">
 					<label>이름</label>
 					<input class="input100" name="ename" type="text" id="ename">

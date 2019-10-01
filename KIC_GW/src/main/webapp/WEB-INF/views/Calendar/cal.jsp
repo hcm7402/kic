@@ -4,7 +4,7 @@
 	String eno = (String)session.getAttribute("eno");
 	if(eno == null || eno.equals("")) {
 		out.println("<script type='text/javascript'>");
-		out.println("alert('로그인이 필요합니다.')");
+		out.println("alert('로그인이 필요합니다.')"); 
 		out.println("location.href='./login.do'");
 		out.println("</script>");
 	} 
@@ -111,12 +111,12 @@ function fn_set_calendar(events){
 		selectable: true,
 		selectHelper: true,
 		select: function(start, end) {
-            window.location = "./calone.do?date=" + date_to_str(start);
+            window.location = "./calone.do?date=" + date_to_str(start) + "&eno=" + <%= eno %>;
 		},
 		editable: true,
 		events: events,
 		eventClick:function(event) {
-        	alert(event.title + "\n" + event.start + "\n" + event.end, "wicked", "width=700,height=600");
+			window.location = "./calModify.do?cdno=" + event.cdno + "&cddiv=" + event.cddiv;
         }
 	});
 };

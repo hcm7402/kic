@@ -56,7 +56,7 @@
 		
 		totalRecord++;
 	}
-	/*
+	
 	StringBuffer html2 = new StringBuffer();
 	
 	for( AuthbusitripTO to : authVLists2) {
@@ -108,7 +108,7 @@
 		
 		totalRecord++;
 	}
-	*/
+	
 %>
 
 <!DOCTYPE html>
@@ -269,7 +269,8 @@ li {
 			</thead>
 			<tbody>
 				<%=html1 %>
-			
+				<%=html2 %>
+				<%=html3 %>
 			<!-- 
 			<tr>
 				<td>1</td>

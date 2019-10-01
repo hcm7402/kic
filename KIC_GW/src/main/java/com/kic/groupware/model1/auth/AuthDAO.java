@@ -35,20 +35,78 @@ public class AuthDAO {
 		int flag = 1;
 		
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		String sql;
 		try {
+			sql = "select * from auth_businesstrip left join emp on auth_businesstrip.eno=?";
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, to.getEno());
+			
+			rs = pstmt.executeQuery();
+			while( rs.next() ) {
+				to.setEno(rs.getString("eno"));
+				to.setEname( rs.getString("ename") );
+				to.setDeptno( rs.getString("deptno") );
+			}
 			if(count == 1) {
-				sql = "insert into auth_businesstrip values ( ?, 0, now(), ? ,? ,?, ?, ?)";
+				sql = "insert into auth_businesstrip values ( ?, ?, 0, now(), ?, ?, ?, ?, ?)";
 				pstmt = conn.prepareStatement(sql);
 				
 				pstmt.setString(1, "1");
-				pstmt.setString(2, to.getDeptno());
-				pstmt.setString(3, to.getEname());
-				pstmt.setString(4, to.getBspot());
-				pstmt.setString(5, to.getBpurpose());
-				pstmt.setString(6, "결재대기중");
-				//pstmt.setString(6, to.getAuthstate());
+				pstmt.setString(2, to.getEno());
+				pstmt.setString(3, to.getDeptno());
+				pstmt.setString(4, to.getEname());
+				pstmt.setString(5, to.getBspot());
+				pstmt.setString(6, to.getBpurpose());
+				pstmt.setString(7, "1");
+				//pstmt.setString(7, to.getAuthstate());
 				
+			}
+			
+			sql = "insert into auth_businesstrip_schedule values ( ?, 0, now(), ?, ?, ?, ?, ?, ? )";
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, to.getBno());
+			pstmt.setString(2, to.getSstart());
+			pstmt.setString(3, to.getSstarttime());
+			pstmt.setString(4, to.getSend());
+			pstmt.setString(5, to.getSendtime());
+			pstmt.setString(6, to.getTransport());
+			pstmt.setString(7, to.getBtinn());
+			
+			int result = pstmt.executeUpdate();
+			if( result == 1 ) {
+				flag = 0;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if( pstmt != null ) try { pstmt.close(); } catch(SQLException e) {};
+			if( conn != null ) try { conn.close(); } catch(SQLException e) {};
+		}
+		
+		return flag;
+	}
+	
+	public int busitripin1(AuthbusitripTO to, int count) {
+		int flag = 1;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql;
+		try {
+			sql = "select * from auth_businesstrip_schedule left join auth_businesstrip on auth_businesstrip.bno=?";
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, to.getEno());
+			
+			rs = pstmt.executeQuery();
+			while( rs.next() ) {
+				to.setEno(rs.getString("eno"));
+				to.setEname( rs.getString("ename") );
+				to.setDeptno( rs.getString("deptno") );
 			}
 			
 			sql = "insert into auth_businesstrip_schedule values ( ?, 0, now(), ?, ?, ?, ?, ?, ? )";
@@ -119,6 +177,7 @@ public class AuthDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
+			if( rs != null ) try { rs.close(); } catch(SQLException e) {};
 			if( pstmt != null ) try { pstmt.close(); } catch(SQLException e) {};
 			if( conn != null ) try { conn.close(); } catch(SQLException e) {};
 		}
@@ -206,6 +265,7 @@ public class AuthDAO {
 		ResultSet rs = null;
 		
 		ArrayList<AuthvacationTO> authVLists = new ArrayList<AuthvacationTO>();
+		
 		try {
 
 			String sql = "select vno, eno, authno, ename, deptno, date_format(vdate, '%Y.%m.%d') vdate, job, vtype, vstart, vend, vreason, authstate from auth_vacation where eno=? order by vno desc";
@@ -243,7 +303,7 @@ public class AuthDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		ArrayList<AuthbusitripTO> authVLists = new ArrayList<AuthbusitripTO>();
+		ArrayList<AuthbusitripTO> authVLists2 = new ArrayList<AuthbusitripTO>();
 		try {
 
 			String sql = "select authno, eno, bno, date_format(binsertdate, '%Y.%m.%d') binsertdate, deptno, ename, bspot, bpurpose, authstate from auth_businesstrip where eno=? order by bno desc";
@@ -262,7 +322,7 @@ public class AuthDAO {
 				to.setBspot( rs.getString( "bspot" ) );
 				to.setBpurpose( rs.getString( "bpurpose" ) );
 				to.setAuthstate( rs.getString( "authstate" ) );        
-				authVLists.add( to );
+				authVLists2.add( to );
 			}
 		} catch(SQLException e) {
 			System.out.println("[에러] " + e.getMessage());
@@ -271,14 +331,14 @@ public class AuthDAO {
 			if(pstmt != null) try { pstmt.close(); } catch( SQLException e ) {}
 			if(conn != null) try { conn.close(); } catch( SQLException e ) {}
 		}
-		return authVLists;
+		return authVLists2;
 	}
 	
 	public ArrayList<AuthtransportationTO> authVList3(String eno) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		ArrayList<AuthtransportationTO> authVLists = new ArrayList<AuthtransportationTO>();
+		ArrayList<AuthtransportationTO> authVLists3 = new ArrayList<AuthtransportationTO>();
 		try {
 
 			String sql = "select atno, eno, authno, date_format(atdate, '%Y.%m.%d') atdate, deptno, job, ename, authstate from auth_transport where eno=? order by atno desc";
@@ -296,7 +356,7 @@ public class AuthDAO {
 				to.setJob( rs.getString( "job" ) );
 				to.setEname( rs.getString( "ename" ) );
 				to.setAuthstate( rs.getString( "authstate" ) );        
-				authVLists.add( to );
+				authVLists3.add( to );
 			}
 		} catch(SQLException e) {
 			System.out.println("[에러] " + e.getMessage());
@@ -305,7 +365,7 @@ public class AuthDAO {
 			if(pstmt != null) try { pstmt.close(); } catch( SQLException e ) {}
 			if(conn != null) try { conn.close(); } catch( SQLException e ) {}
 		}
-		return authVLists;
+		return authVLists3;
 	}
 
 }

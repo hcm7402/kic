@@ -46,10 +46,12 @@ public class AuthController {
 		
 		String eno = request.getParameter("eno");
 		
-		AuthDAO dao = new AuthDAO();
-		ArrayList<AuthvacationTO> authVLists1 = dao.authVList1(eno);
-		ArrayList<AuthbusitripTO> authVLists2 = dao.authVList2(eno);
-		ArrayList<AuthtransportationTO> authVLists3 = dao.authVList3(eno);
+		AuthDAO dao1 = new AuthDAO();
+		ArrayList<AuthvacationTO> authVLists1 = dao1.authVList1(eno);
+		AuthDAO dao2 = new AuthDAO();
+		ArrayList<AuthbusitripTO> authVLists2 = dao2.authVList2(eno);
+		AuthDAO dao3 = new AuthDAO();
+		ArrayList<AuthtransportationTO> authVLists3 = dao3.authVList3(eno);
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "Auth/authlist" );
@@ -79,6 +81,7 @@ public class AuthController {
 	public ModelAndView busitrip_ok( HttpServletRequest request, HttpServletResponse response) {
 		int count = 0;
 		int flag = 2;
+		
 		AuthbusitripTO to = new AuthbusitripTO();	
 		to.setAuthno(request.getParameter("auth"));
 		to.setEno(request.getParameter("eno"));
@@ -95,10 +98,11 @@ public class AuthController {
 		if(request.getParameter("sdate1") != null) count = 1; 
 		else if(request.getParameter("sdate2") != null) count = 2;
 		else if(request.getParameter("sdate3") != null) count = 3;
-	
+
 		if(count == 1) {
-			to.setBtno(request.getParameter("btno1"));
-			to.setScheno(request.getParameter("scheno1"));
+			System.out.println(count);
+			to.setBtno(request.getParameter("bno"));
+			to.setScheno(request.getParameter("scheno"));
 			to.setSdate(request.getParameter("sdate1"));
 			to.setSstart(request.getParameter("sstart1"));
 			to.setSstarttime(request.getParameter("sstarttime1"));
@@ -110,8 +114,8 @@ public class AuthController {
 			flag = dao.busitripin(to, 1);
 		}
 		else if(count == 2) {
-			to.setBtno(request.getParameter("btno1"));
-			to.setScheno(request.getParameter("scheno1"));
+			to.setBtno(request.getParameter("bno"));
+			to.setScheno(request.getParameter("scheno"));
 			to.setSdate(request.getParameter("sdate1"));
 			to.setSstart(request.getParameter("sstart1"));
 			to.setSstarttime(request.getParameter("sstarttime1"));
@@ -122,8 +126,8 @@ public class AuthController {
 
 			dao.busitripin(to, 1);
 			
-			to.setBtno(request.getParameter("btno2"));
-			to.setScheno(request.getParameter("scheno2"));
+			to.setBtno(request.getParameter("bno"));
+			to.setScheno(request.getParameter("scheno"));
 			to.setSdate(request.getParameter("sdate2"));
 			to.setSstart(request.getParameter("sstart2"));
 			to.setSstarttime(request.getParameter("sstarttime2"));
@@ -135,8 +139,8 @@ public class AuthController {
 			flag = dao.busitripin(to, 2);
 		}
 		else if(count == 3) {
-			to.setBtno(request.getParameter("btno1"));
-			to.setScheno(request.getParameter("scheno1"));
+			to.setBtno(request.getParameter("bno"));
+			to.setScheno(request.getParameter("scheno"));
 			to.setSdate(request.getParameter("sdate1"));
 			to.setSstart(request.getParameter("sstart1"));
 			to.setSstarttime(request.getParameter("sstarttime1"));
@@ -147,8 +151,8 @@ public class AuthController {
 
 			dao.busitripin(to, 1);
 			
-			to.setBtno(request.getParameter("btno2"));
-			to.setScheno(request.getParameter("scheno2"));
+			to.setBtno(request.getParameter("bno"));
+			to.setScheno(request.getParameter("scheno"));
 			to.setSdate(request.getParameter("sdate2"));
 			to.setSstart(request.getParameter("sstart2"));
 			to.setSstarttime(request.getParameter("sstarttime2"));
@@ -159,8 +163,8 @@ public class AuthController {
 			
 			dao.busitripin(to, 2);
 			
-			to.setBtno(request.getParameter("btno3"));
-			to.setScheno(request.getParameter("scheno3"));
+			to.setBtno(request.getParameter("bno"));
+			to.setScheno(request.getParameter("scheno"));
 			to.setSdate(request.getParameter("sdate3"));
 			to.setSstart(request.getParameter("sstart3"));
 			to.setSstarttime(request.getParameter("sstarttime3"));

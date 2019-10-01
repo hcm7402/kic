@@ -41,13 +41,7 @@
 	width: auto;
 	height: auto;
 }
-#cal {
-	border: 1px solid #000;
-	padding: 15px;
-	text-align: center;
-}
 
-table { width: 800px; border-collapse: collapse;}
 .timeInput {
 	font-family: 나눔고딕, NanumGothic;
 	font-size: 4em;
@@ -59,66 +53,6 @@ table { width: 800px; border-collapse: collapse;}
 	font-weight: bold;
 }
 
-.board-table {
-	border: 3px solid #47c9af;
-	width: 50%;
-}
-
-table.greenTable {
-  font-family: Georgia, serif;
-  border: 6px solid #24943A;
-  background-color: #D4EED1;
-  text-align: center;
-  width : 50%;
-}
-table.greenTable td, table.greenTable th {
-  border: 1px solid #24943A;
-  padding: 3px 2px;
-}
-table.greenTable tbody td {
-  font-size: 13px;
-}
-table.greenTable thead {
-  background: #24943A;
-  background: -moz-linear-gradient(top, #5baf6b 0%, #3a9e4d 66%, #24943A 100%);
-  background: -webkit-linear-gradient(top, #5baf6b 0%, #3a9e4d 66%, #24943A 100%);
-  background: linear-gradient(to bottom, #5baf6b 0%, #3a9e4d 66%, #24943A 100%);
-  border-bottom: 0px solid #444444;
-}
-table.greenTable thead th {
-  font-size: 19px;
-  font-weight: bold;
-  color: #F0F0F0;
-  text-align: left;
-  border-left: 2px solid #24943A;
-}
-table.greenTable thead th:first-child {
-  border-left: none;
-}
-
-table.greenTable tfoot {
-  font-size: 13px;
-  font-weight: bold;
-  color: #F0F0F0;
-  background: #24943A;
-  background: -moz-linear-gradient(top, #5baf6b 0%, #3a9e4d 66%, #24943A 100%);
-  background: -webkit-linear-gradient(top, #5baf6b 0%, #3a9e4d 66%, #24943A 100%);
-  background: linear-gradient(to bottom, #5baf6b 0%, #3a9e4d 66%, #24943A 100%);
-  border-top: 1px solid #24943A;
-}
-table.greenTable tfoot td {
-  font-size: 13px;
-}
-table.greenTable tfoot .links {
-  text-align: right;
-}
-table.greenTable tfoot .links a{
-  display: inline-block;
-  background: #FFFFFF;
-  color: #24943A;
-  padding: 2px 8px;
-  border-radius: 5px;
-}
 a {
   color: #4f4f4f;
 }
@@ -175,25 +109,13 @@ a {
   transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
 }
 </style>
-<link rel="stylesheet" href="./resources/css/bootstrap-datepicker3.css">
+<link rel="stylesheet" href="./resources/css/bootstrap-datepicker.min.css">
 <script type="text/javascript" src="./resources/js/jquery-3.4.1.js"></script>
 <script type="text/javascript" src="./resources/js/jquery.animateNumber.min.js"></script>
 <script src="./resources/js/bootstrap-datepicker.min.js"></script>
 <script src="./resources/js/bootstrap-datepicker.ko.min.js"></script>
 <script src="./resources/js/project9.js"></script>
 <script type="text/javascript">
-window.onload = function() {
-    $('#startdate').datepicker().on('changeDate', function(ev) {
-        if (ev.viewMode=="days"){
-            $('#startdate').datepicker('hide');
-        }
-    });
-    $('#enddate').datepicker().on('changeDate', function(ev) {
-        if (ev.viewMode=="days"){
-            $('#enddate').datepicker('hide');
-        }
-    });
-}
 function fn_formSubmit(){
 	if ( ! chkInputValue("#cdname", "일정명")) return false;
 	if ( ! chkInputValue("#startdate", "날짜")) return false;
@@ -208,11 +130,11 @@ function fn_formSubmit(){
 	$("#form1").submit();
 }
 $( document ).ready( function() {
-	$('#hiredate').datepicker({
+	$('#startdate').datepicker({
 		format: 'yyyy-mm-dd',
 		language: 'ko'
 	});
-	$('#birth').datepicker({
+	$('#enddate').datepicker({
 		format: 'yyyy-mm-dd',
 		language: 'ko'
 	});
@@ -227,8 +149,9 @@ $( document ).ready( function() {
 				<div class="col-sm-2">
 					<%@include file="../Menu/calmenu.jsp"%>
 				</div>
-				<form id="form1" class="col-sm-10" name="form1" role="form" action="./cal.do" method="post" >
-					<input type="hidden" name="cdno" value="<c:out value="${caldata.cdno}"/>">
+				<form id="form1" class="col-sm-10" name="form1" role="form" action="./cal_ok.do" method="post" >
+					<input type="hidden" name="eno" value="<%= eno %>">
+					<input type="hidden" name="cddiv" value="1">
 					<div id="container" style="padding-top: 0">
 						<div class="row">
 							<div class="col-sm-2"></div>
@@ -249,11 +172,21 @@ $( document ).ready( function() {
 			                            </div>
 			                        </div>
 			                        <div class="row form-group">
+			                            <label class="col-lg-2">부서 이름</label>
+			                            <div class="col-lg-2">
+											<select id="deptno" name="deptno" class="form-control">
+												<c:forEach var="dname" items="${deptList}" varStatus="status">
+										    		<option value="${status.count}" <c:if test='${status.count==deptno}'>selected</c:if>>${dname}</option>
+											 	</c:forEach>
+											</select>
+			                            </div>
+			                        </div>
+			                        <div class="row form-group">
 			                            <label class="col-lg-2">구분</label>
 			                            <div class="col-lg-2">
-											<select id="cdcolor" name="cdcolor" class="form-control">
-												<c:forTokens var="item" items="초록색,파랑색,노랑색,빨강색,주황색,보라색,갈색" delims=",">
-					                           		<option value="${item}" <c:if test='${item==caldata.cdcolor}'>selected</c:if>>${item}</option>
+											<select id="cddivision" name="cddivision" class="form-control">
+												<c:forTokens var="item" items="업무,회의,외근,출장,교육,휴가,기타" delims=",">
+					                           		<option value="${item}" <c:if test='${item==caldata.cddivision}'>selected</c:if>>${item}</option>
 											 	</c:forTokens>
 											</select>
 			                            </div>

@@ -10,6 +10,7 @@
 	request.setCharacterEncoding("UTF-8"); 
 	String eno = (String)session.getAttribute("eno");
 	String level = (String)session.getAttribute("level");
+	String cdno = request.getParameter("cdno");
 	
 	if(eno == null || eno.equals("")) {
 		out.println("<script type='text/javascript'>");
@@ -115,6 +116,7 @@ a {
 <script src="./resources/js/bootstrap-datepicker.min.js"></script>
 <script src="./resources/js/bootstrap-datepicker.ko.min.js"></script>
 <script src="./resources/js/project9.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
 function fn_formSubmit(){
 	if ( ! chkInputValue("#cdname", "일정명")) return false;
@@ -129,6 +131,26 @@ function fn_formSubmit(){
 	
 	$("#form1").submit();
 }
+
+function fn_Delete(){
+	swal({
+		  title: "삭제하시겠습니까?",
+		  icon: "warning",
+		  dangerMode: true,
+		  buttons: [true, "삭제"],
+		})
+		.then((willDelete) => {
+		  if (willDelete) {
+		    swal("삭제완료!", {
+		      icon: "success",
+		    });
+		    location.href='./caldelete.do?cdno=' + <%=cdno %> + "&eno=" + <%=eno %>;
+		  } else {
+		    close: true;
+		  }
+	});
+};
+
 $( document ).ready( function() {
 	$('#startdate').datepicker({
 		format: 'yyyy-mm-dd',
@@ -149,10 +171,11 @@ $( document ).ready( function() {
 				<div class="col-sm-2">
 					<%@include file="../Menu/calmenu.jsp"%>
 				</div>
-				<form id="form1" class="col-sm-10" name="form1" role="form" action="./cal_ok.do" method="post" >
-					<input type="hidden" name="eno" value="<%= eno %>">
-					<input type="hidden" name="deptno" value="0">
+				<form id="form1" class="col-sm-10" name="form1" role="form" action="./calmodify_ok.do" method="post" >
+				<input type="hidden" name="eno" value="<%=eno %>">
+				<input type="hidden" name="cdno" value="<%=cdno %>">
 					<input type="hidden" name="cddiv" value="0">
+					<input type="hidden" name="deptno" value="0">
 					<div id="container" style="padding-top: 0">
 						<div class="row">
 							<div class="col-sm-2"></div>
@@ -184,12 +207,12 @@ $( document ).ready( function() {
 			                        </div>
 									<div class="row form-group">
 										<label class="col-lg-2">일정 날짜</label>
-										<div class="col-lg-2">
-										<input class="form-control" size="16" id="startdate" name="startdate" value="<c:if test='${searchVO.date != null and caldata.cdno == null}'>${searchVO.date}</c:if><c:if test='${caldata.cdno != null}'><c:out value="${caldata.startdate}"/></c:if>" readonly>
+										<div class="col-lg-3">
+										<input class="form-control" size="16" id="startdate" name="startdate" value="<c:if test='${caldata.startdate != null}'><c:out value="${caldata.startdate}"/></c:if>" readonly>
 										</div>
 										<div class="col-sm-1" style="text-align: center;"><p>~</p></div>
-										<div class="col-lg-2">
-										<input class="form-control" size="16" id="enddate" name="enddate" value="<c:if test='${searchVO.date != null and caldata.cdno == null}'>${searchVO.date}</c:if><c:if test='${caldata.cdno != null}'><c:out value="${caldata.enddate}"/></c:if>" readonly>
+										<div class="col-lg-3">
+										<input class="form-control" size="16" id="enddate" name="enddate" value="<c:if test='${caldata.enddate != null}'><c:out value="${caldata.enddate}"/></c:if>" readonly>
 										</div>
 										<div class="col-sm-2"></div>
 									</div>
@@ -200,7 +223,8 @@ $( document ).ready( function() {
 			                            </div>
 			                        </div>
 			                        <div class="row form-group" style="float: right; margin-right: 138px">
-			                            <a onclick="fn_formSubmit()" class="button" style="text-decoration:none">등록</a>
+			                            <a onclick="fn_formSubmit()" class="button" style="text-decoration:none">수정</a>
+			                            <a onclick="fn_Delete()" class="button" style="margin-left:10px; text-decoration:none">삭제</a>
 			                      		<a href="./cal.do" class="button" style="margin-left:10px; text-decoration:none">취소</a>
 			                        </div>
 								</div>

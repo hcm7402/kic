@@ -36,6 +36,7 @@ public class UserDAO {
 			pstmt = conn.prepareStatement(sql);
 			
 			rs = pstmt.executeQuery();
+			rs.next();
 			while( rs.next() ) {
 				deptLists.add(rs.getString("dname"));
 			}
@@ -47,6 +48,30 @@ public class UserDAO {
 			if(conn != null) try {conn.close();} catch(SQLException e) {}
 		}
 		return deptLists;
+	}
+	
+	public String deptno(String eno) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String deptno = null;
+		try {
+			String sql = "select deptno from emp where eno = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, eno);
+			
+			rs = pstmt.executeQuery();
+			while( rs.next() ) {
+				deptno = rs.getString("deptno");
+			}
+		} catch(SQLException e) {
+			System.out.println("[에러] " + e.getMessage());
+		} finally {
+			if(rs != null) try {rs.close();} catch(SQLException e) {}
+			if(pstmt != null) try {pstmt.close();} catch(SQLException e) {}
+			if(conn != null) try {conn.close();} catch(SQLException e) {}
+		}
+		return deptno;
 	}
 	
 	public int useradd(UserTO to) {

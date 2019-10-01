@@ -146,8 +146,10 @@ $( document ).ready( function() {
 				<div class="col-sm-2">
 					<%@include file="../Menu/calmenu.jsp"%>
 				</div>
-				<form id="form1" class="col-sm-10" name="form1" role="form" action="./calone_ok.do" method="post" >
-					<input type="hidden" name="cdno" value="<c:out value="${caldata.cdno}"/>">
+				<form id="form1" class="col-sm-10" name="form1" role="form" action="./cal_ok.do" method="post" >
+					<input type="hidden" name="eno" value="<%= eno %>">
+					<input type="hidden" name="deptno" value="0">
+					<input type="hidden" name="cddiv" value="2">
 					<div id="container" style="padding-top: 0">
 						<div class="row">
 							<div class="col-sm-2"></div>
@@ -170,9 +172,9 @@ $( document ).ready( function() {
 			                        <div class="row form-group">
 			                            <label class="col-lg-2">구분</label>
 			                            <div class="col-lg-2">
-											<select id="cdcolor" name="cdcolor" class="form-control">
+											<select id="cddivision" name="cddivision" class="form-control">
 												<c:forTokens var="item" items="업무,회의,외근,출장,교육,휴가,기타" delims=",">
-					                           		<option value="${item}" <c:if test='${item==caldata.cdcolor}'>selected</c:if>>${item}</option>
+					                           		<option value="${item}" <c:if test='${item==caldata.cddivision}'>selected</c:if>>${item}</option>
 											 	</c:forTokens>
 											</select>
 			                            </div>

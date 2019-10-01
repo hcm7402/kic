@@ -1,5 +1,7 @@
 package com.kic.groupware;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kic.groupware.model1.user.UserDAO;
@@ -59,22 +62,32 @@ public class UserController {
     }
     
     @RequestMapping(value = "/useradd_ok.do")
-    public ModelAndView useradd_ok(HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView useradd_ok(MultipartHttpServletRequest request, HttpServletResponse response) {
     	System.out.println( "useradd_ok 컨트롤러 호출" );
     	UserTO to = new UserTO();
     	to.setEname(request.getParameter("ename"));
-    	/*to.setPno(request.getParameter("pno"));*/
     	to.setHiredate(request.getParameter("hiredate"));
-    	/*to.setSal(request.getParameter("sal"));*/
     	to.setBirth(request.getParameter("birth"));
     	to.setAddress(request.getParameter("address"));
     	to.setDeptno(request.getParameter("deptno"));
     	to.setEmail(request.getParameter("email"));
-    	to.setEphoto(request.getParameter("ephoto"));
+    	to.setEphoto(request.getFile("ephoto").getOriginalFilename());
     	to.setEid(request.getParameter("eid"));
     	to.setEpw(request.getParameter("epw"));
-    	to.setAuthphoto(request.getParameter("authphoto"));
+    	to.setAuthphoto(request.getFile("authphoto").getOriginalFilename());
     	System.out.println(to.getEid());
+    	System.out.println(to.getEphoto());
+    	System.out.println(to.getAuthphoto());
+    	
+    	File ephotoFile = new File("C:/Users/kitcoop/git/kic/KIC_GW/src/main/webapp/resources/photo",to.getEphoto());
+    	File authphotoFile = new File("C:/Users/kitcoop/git/kic/KIC_GW/src/main/webapp/resources/sign",to.getAuthphoto());
+
+        try {
+        	request.getFile("ephoto").transferTo(ephotoFile);
+        	request.getFile("authphoto").transferTo(authphotoFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 		
 		UserDAO dao = new UserDAO();
 		int flag = dao.useradd(to);

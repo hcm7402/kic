@@ -1,3 +1,4 @@
+<%@page import="java.io.Console"%>
 <%@ page import="java.util.Calendar"%>
 <%@ page import="com.kic.groupware.model1.calendar.MonthTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -7,21 +8,18 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
-	request.setCharacterEncoding("UTF-8"); 
+	request.setCharacterEncoding("UTF-8");
 	String eno = (String)session.getAttribute("eno");
 	String level = (String)session.getAttribute("level");
-	
+	String cdno = request.getParameter("cdno");
+	 
 	if(eno == null || eno.equals("")) {
 		out.println("<script type='text/javascript'>");
 		out.println("alert('로그인이 필요합니다.')");
 		out.println("location.href='./login.do'");
 		out.println("</script>");
-	} /* else if(level == "4") {
-		out.println("<script type='text/javascript'>");
-		out.println("alert('권한이 필요합니다.')");
-		out.println("location.href='./login.do'");
-		out.println("</script>");
-	} */
+	}
+	System.out.println(level);
 %>
 <!DOCTYPE html>
 <html>
@@ -129,6 +127,26 @@ function fn_formSubmit(){
 	
 	$("#form1").submit();
 }
+
+function fn_Delete(){
+	swal({
+		  title: "삭제하시겠습니까?",
+		  icon: "warning",
+		  dangerMode: true,
+		  buttons: [true, "삭제"],
+		})
+		.then((willDelete) => {
+		  if (willDelete) {
+		    swal("삭제완료!", {
+		      icon: "success",
+		    });
+		    location.href='./caldelete.do?cdno=' + <%=cdno %> + "&eno=" + <%=eno %>;
+		  } else {
+		    close: true;
+		  }
+	});
+};
+
 $( document ).ready( function() {
 	$('#startdate').datepicker({
 		format: 'yyyy-mm-dd',
@@ -149,10 +167,12 @@ $( document ).ready( function() {
 				<div class="col-sm-2">
 					<%@include file="../Menu/calmenu.jsp"%>
 				</div>
-				<form id="form1" class="col-sm-10" name="form1" role="form" action="./cal_ok.do" method="post" >
+				<form id="form1" class="col-sm-10" name="form1" role="form" action="./calmodify_ok.do" method="post" >
 					<input type="hidden" name="eno" value="<%= eno %>">
+					<input type="hidden" name="cdno" value="<%=cdno %>">
 					<input type="hidden" name="deptno" value="0">
-					<input type="hidden" name="cddiv" value="0">
+					<input type="hidden" name="cddiv" value="2">
+					
 					<div id="container" style="padding-top: 0">
 						<div class="row">
 							<div class="col-sm-2"></div>
@@ -161,7 +181,7 @@ $( document ).ready( function() {
 									<div class="row form-group" style="text-align: center;">
 										<div class="col-lg-1"></div>
 										<div class="col-lg-8">
-				                            <h2>회사 일정 추가</h2>
+				                            <h2>개인 일정 추가</h2>
 				                        </div>
 				                        <div class="col-lg-2"></div>
 			                        </div>
@@ -174,9 +194,9 @@ $( document ).ready( function() {
 			                        </div>
 			                        <div class="row form-group">
 			                            <label class="col-lg-2">구분</label>
-			                           	<div class="col-lg-2">
+			                            <div class="col-lg-2">
 											<select id="cddivision" name="cddivision" class="form-control">
-												<c:forTokens var="item" items="휴일, 공지" delims=",">
+												<c:forTokens var="item" items="업무,회의,외근,출장,교육,휴가,기타" delims=",">
 					                           		<option value="${item}" <c:if test='${item==caldata.cddivision}'>selected</c:if>>${item}</option>
 											 	</c:forTokens>
 											</select>
@@ -184,12 +204,12 @@ $( document ).ready( function() {
 			                        </div>
 									<div class="row form-group">
 										<label class="col-lg-2">일정 날짜</label>
-										<div class="col-lg-2">
-										<input class="form-control" size="16" id="startdate" name="startdate" value="<c:if test='${searchVO.date != null and caldata.cdno == null}'>${searchVO.date}</c:if><c:if test='${caldata.cdno != null}'><c:out value="${caldata.startdate}"/></c:if>" readonly>
+										<div class="col-lg-3">
+										<input class="form-control" size="16" id="startdate" name="startdate" value="<c:if test='${caldata.startdate != null}'><c:out value="${caldata.startdate}"/></c:if>" readonly>
 										</div>
 										<div class="col-sm-1" style="text-align: center;"><p>~</p></div>
-										<div class="col-lg-2">
-										<input class="form-control" size="16" id="enddate" name="enddate" value="<c:if test='${searchVO.date != null and caldata.cdno == null}'>${searchVO.date}</c:if><c:if test='${caldata.cdno != null}'><c:out value="${caldata.enddate}"/></c:if>" readonly>
+										<div class="col-lg-3">
+										<input class="form-control" size="16" id="enddate" name="enddate" value="<c:if test='${caldata.enddate != null}'><c:out value="${caldata.enddate}"/></c:if>" readonly>
 										</div>
 										<div class="col-sm-2"></div>
 									</div>
@@ -200,7 +220,8 @@ $( document ).ready( function() {
 			                            </div>
 			                        </div>
 			                        <div class="row form-group" style="float: right; margin-right: 138px">
-			                            <a onclick="fn_formSubmit()" class="button" style="text-decoration:none">등록</a>
+			                            <a onclick="fn_formSubmit()" class="button" style="text-decoration:none">수정</a>
+			                            <a onclick="fn_Delete()" class="button" style="margin-left:10px; text-decoration:none">삭제</a>
 			                      		<a href="./cal.do" class="button" style="margin-left:10px; text-decoration:none">취소</a>
 			                        </div>
 								</div>
@@ -212,6 +233,5 @@ $( document ).ready( function() {
 			</div>
 		</div>
 	</div>
-	
 </body>
 </html>

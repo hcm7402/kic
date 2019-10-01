@@ -37,7 +37,7 @@ $(document).ready(function() {
 					
 					if(flag == 1) {
 						swal({
-							  title: '아이디를 입력하셔야 합니다.',
+							  title: '존재하는 아이디입니다.',
 							  icon: 'warning'
 						});
 						idcertify = 0;
@@ -72,12 +72,6 @@ $(document).ready(function() {
 		if( $('#ename').val() == '' ) {
 			swal({
 				  title: '이름을 입력하셔야 합니다.',
-				  icon: 'warning'
-			});
-			return false;
-		}else if( $('#eid').val() == '' ) {
-			swal({
-				  title: '아이디를 입력하셔야 합니다.',
 				  icon: 'warning'
 			});
 			return false;
@@ -232,7 +226,7 @@ label {
 		<div class="limiter">
 		<div class="container-login100">
 		<div class="wrap-login100">
-			<form class="login100-form validate-form" action="./useradd_ok.do" name="frm" method="post">
+			<form class="login100-form validate-form" action="./useradd_ok.do" name="frm" method="post" enctype="multipart/form-data">
 				<div class="wrap-input100" data-validate = "Enter username">
 					<label>이름</label>
 					<input class="input100" name="ename" type="text" id="ename">

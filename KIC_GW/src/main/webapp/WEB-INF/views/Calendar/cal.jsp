@@ -111,12 +111,12 @@ function fn_set_calendar(events){
 		selectable: true,
 		selectHelper: true,
 		select: function(start, end) {
-            window.location = "./calone.do?date=" + date_to_str(start);
+            window.location = "./calone.do?date=" + date_to_str(start) + "&eno=" + <%= eno %>;
 		},
 		editable: true,
 		events: events,
 		eventClick:function(event) {
-        	alert(event.title + "\n" + event.start + "\n" + event.end, "wicked", "width=700,height=600");
+			window.location = "./calModify.do?cdno=" + event.cdno + "&cddiv=" + event.cddiv;
         }
 	});
 };

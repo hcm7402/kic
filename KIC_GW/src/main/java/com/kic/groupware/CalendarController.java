@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kic.groupware.model1.calendar.CalendarDAO;
 import com.kic.groupware.model1.calendar.CalendarTO;
 import com.kic.groupware.model1.calendar.MonthTO;
+import com.kic.groupware.model1.user.UserDAO;
 
 @Controller 
 public class CalendarController {
@@ -46,9 +47,9 @@ public class CalendarController {
         return model;
     }
     
-    @RequestMapping(value = "/calone_ok.do")
+    @RequestMapping(value = "/cal_ok.do")
     public ModelAndView calOne_ok(HttpServletRequest request, HttpServletResponse response) {
-    	System.out.println( "calOne_ok 컨트롤러 호출" );
+    	System.out.println( "cal_ok 컨트롤러 호출" );
 		
 		ModelAndView model = new ModelAndView();
 		CalendarTO to = new CalendarTO();
@@ -65,17 +66,18 @@ public class CalendarController {
     	int flag = dao.caloneadd(to);
     	
     	model.addObject("flag", flag);
-    	model.setViewName( "Calendar/calOne_ok" );
+    	model.setViewName( "Calendar/cal_ok" );
         return model;
     }
     
     @RequestMapping(value = "/caldepart.do")
     public ModelAndView calDepart(HttpServletRequest request, HttpServletResponse response) {
     	System.out.println( "caldepart 컨트롤러 호출" );
-		
 		ModelAndView model = new ModelAndView();
 		MonthTO searchVO = new MonthTO();
-		
+		UserDAO userdao = new UserDAO();
+		ArrayList<String> deptList = userdao.deptList();
+		model.addObject("deptList", deptList);
     	searchVO.setDate(request.getParameter("date"));
     	model.addObject("searchVO", searchVO);
     	model.setViewName( "Calendar/calDepart" );
@@ -95,17 +97,96 @@ public class CalendarController {
         return model;
     }
     
+    @RequestMapping(value = "/calModify.do")
+    public ModelAndView calModify(HttpServletRequest request, HttpServletResponse response) {
+    	System.out.println( "calModify 컨트롤러 호출" );
+		
+		ModelAndView model = new ModelAndView();
+		String cddiv = request.getParameter("cddiv");
+		String cdno = request.getParameter("cdno");
+
+		CalendarDAO caldao = new CalendarDAO();
+		CalendarTO caldata = caldao.calModify(request.getParameter("cdno"));
+		String deptno = caldao.deptno(cdno);
+
+		if(cddiv.equals("0")) {
+			model.setViewName( "Calendar/calCompanyModify" );
+			model.addObject("caldata", caldata);
+		} else if(cddiv.equals("1")) {
+			UserDAO userdao = new UserDAO();
+			ArrayList<String> deptList = userdao.deptList();
+			model.setViewName( "Calendar/calDepartModify" );
+			model.addObject("deptList", deptList);
+			model.addObject("caldata", caldata);
+			model.addObject("deptno", deptno);
+		} else if(cddiv.equals("2")) {
+			model.setViewName( "Calendar/calOneModify" );
+			model.addObject("caldata", caldata);
+		}
+        return model;
+    }
+    
+    @RequestMapping(value = "/calmodify_ok.do")
+    public ModelAndView calModify_ok(HttpServletRequest request, HttpServletResponse response) {
+    	System.out.println( "calModify_ok 컨트롤러 호출" );
+		
+		ModelAndView model = new ModelAndView();
+		CalendarTO to = new CalendarTO();
+		to.setEno(request.getParameter("eno"));
+		to.setCdno(request.getParameter("cdno"));
+		to.setDeptno(request.getParameter("deptno"));
+		to.setCddivision(request.getParameter("cddivision"));
+		to.setCdname(request.getParameter("cdname"));
+		to.setStartdate(request.getParameter("startdate"));
+		to.setEnddate(request.getParameter("enddate"));
+		to.setContents(request.getParameter("contents"));
+		
+    	CalendarDAO dao = new CalendarDAO();
+    	int flag = dao.calModify_ok(to);
+    	
+    	model.addObject("flag", flag);
+    	model.setViewName( "Calendar/cal_ok" );
+        return model;
+    }
+
+    @RequestMapping(value = "/caldelete.do")
+    public ModelAndView calDelete(HttpServletRequest request, HttpServletResponse response) {
+    	System.out.println( "calDelete 컨트롤러 호출" );
+		
+		ModelAndView model = new ModelAndView();
+		
+		CalendarDAO caldao = new CalendarDAO();
+		CalendarTO to = new CalendarTO();
+		to.setEno(request.getParameter("eno"));
+		to.setCdno(request.getParameter("cdno"));
+		
+		int flag = caldao.calDelete(to);
+		
+		model.setViewName( "Calendar/cal_ok" );
+		model.addObject("flag", flag);
+        return model;
+    }
+    
     @RequestMapping(value = "/jsontest.do")
     public ModelAndView jsontest(HttpServletRequest request, HttpServletResponse response) {
         System.out.println( "jsontest 컨트롤러 호출" );
-        
-		String eno = (String) request.getAttribute("eno");
-		
+		String eno = request.getParameter("eno");
+
 		ModelAndView model = new ModelAndView();
-		CalendarDAO dao = new CalendarDAO();
+		CalendarDAO caldao = new CalendarDAO();
+		UserDAO userdao = new UserDAO();
+		String deptno = userdao.deptno(eno);
 		
-		ArrayList<CalendarTO> callist = dao.cdList(eno);
-		model.addObject("callist", callist);
+		System.out.println(deptno);
+		System.out.println(eno);
+		
+		ArrayList<CalendarTO> calcompanylist = caldao.cdcompanyList();
+		ArrayList<CalendarTO> caldepartlist = caldao.cddepartList(deptno);
+		ArrayList<CalendarTO> calonelist = caldao.cdoneList(eno);
+		
+		model.addObject("calonelist", calonelist);
+		model.addObject("caldepartlist", caldepartlist);
+		model.addObject("calcompanylist", calcompanylist);
 		model.setViewName( "Calendar/jsontest" );
 		
 		return model;

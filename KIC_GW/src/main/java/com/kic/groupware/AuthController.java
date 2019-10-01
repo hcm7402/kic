@@ -63,11 +63,17 @@ public class AuthController {
 	@RequestMapping(value = "/busitrip.do")
 	public ModelAndView busitrip( HttpServletRequest request, HttpServletResponse response) {
 		System.out.println( "busitrip 컨트롤러 호출" );
+
+		AuthTO to = new AuthTO();
+		to.setEno( request.getParameter( "eno" ) );
 		
-		ModelAndView model = new ModelAndView();
-		model.setViewName( "Auth/busitrip" );
-		
-		return model;
+		AuthDAO dao = new AuthDAO();
+		to = dao.authEmp( to );
+
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("Auth/busitrip");
+		modelAndView.addObject("to", to);
+		return modelAndView;
 	}
 	@RequestMapping(value = "/busitrip_ok.do")
 	public ModelAndView busitrip_ok( HttpServletRequest request, HttpServletResponse response) {
@@ -178,7 +184,6 @@ public class AuthController {
 
 		AuthTO to = new AuthTO();
 		to.setEno( request.getParameter( "eno" ) );
-		
 		AuthDAO dao = new AuthDAO();
 		to = dao.authEmp( to );
 
@@ -190,22 +195,23 @@ public class AuthController {
 	
 	@RequestMapping(value = "/vacation_ok.do")
 	public ModelAndView vacation_ok( HttpServletRequest request, HttpServletResponse response) {
-
+		
+		AuthDAO dao = new AuthDAO();
+		
 		AuthvacationTO to = new AuthvacationTO();	
 		to.setVno(request.getParameter("vno"));
-		to.setEno(request.getParameter("eno"));
+		to.setEno(request.getParameter( "eno" ));
 		to.setAuthno(request.getParameter("authno"));
-		to.setEname(request.getParameter("ename"));
-		to.setDeptno(request.getParameter("deptno"));
+		to.setEname(request.getParameter( "ename" ));
+		to.setDeptno(request.getParameter( "deptno" ));
 		to.setVdate(request.getParameter("vdate"));
-		to.setJob(request.getParameter("job"));
+		to.setJob(request.getParameter( "job" ));
 		to.setVtype(request.getParameter("vtype"));
 		to.setVstart(request.getParameter("vstart"));
 		to.setVend(request.getParameter("vend"));
 		to.setVreason(request.getParameter("vreason"));
 		to.setAuthstate(request.getParameter("authstate"));
 
-		AuthDAO dao = new AuthDAO();
 		int flag = dao.vacationin(to);
 		
 		ModelAndView modelAndView = new ModelAndView();
@@ -219,10 +225,16 @@ public class AuthController {
 	public ModelAndView transportation( HttpServletRequest request, HttpServletResponse response) {
 		System.out.println( "transportation 컨트롤러 호출" );
 		
-		ModelAndView model = new ModelAndView();
-		model.setViewName( "Auth/transportation" );
+		AuthTO to = new AuthTO();
+		to.setEno( request.getParameter( "eno" ) );
 		
-		return model;
+		AuthDAO dao = new AuthDAO();
+		to = dao.authEmp( to );
+
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("Auth/transportation");
+		modelAndView.addObject("to", to);
+		return modelAndView;
 	}
 	
 	@RequestMapping(value = "/transportation_ok.do")

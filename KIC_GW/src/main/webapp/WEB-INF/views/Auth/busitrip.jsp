@@ -1,5 +1,24 @@
+<%@page import="com.kic.groupware.model1.auth.AuthTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("UTF-8");
+
+	String eno = (String)session.getAttribute("eno");
+	
+	AuthTO to = (AuthTO)request.getAttribute( "to" );
+	
+	String date = to.getDate();
+	String ename = to.getEname();
+	String deptno = to.getDeptno();
+	if(deptno.equals("1")){
+		deptno = "개발부";
+	} else if(deptno.equals("2")){
+		deptno = "인사부";
+	} else if(deptno.equals("3")){
+		deptno = "재무부";
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>

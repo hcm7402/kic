@@ -81,21 +81,35 @@ public class AuthDAO {
 		int flag = 1;
 		
 		PreparedStatement pstmt = null;
-		
+		ResultSet rs = null;
 		try {
-			String sql = "insert into auth_vacation values ( 0, ?, ?, ?, now(), ?, ?, ?, ?, ?, ?)";
+			String sql = "select * from auth_vacation left join emp on auth_vacation.eno=?";
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, to.getEno());
+			
+			rs = pstmt.executeQuery();
+			while( rs.next() ) {
+				to.setEno(rs.getString("eno"));
+				to.setEname( rs.getString("ename") );
+				to.setJob( rs.getString("job") );
+				to.setDeptno( rs.getString("deptno") );
+			}
+			
+			sql = "insert into auth_vacation values ( 0, ?, ?, ?, ?, now(), ?, ?, ?, ?, ?, ?)";
 			
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, "2");
-			pstmt.setString(2, to.getEname());
-			pstmt.setString(3, to.getDeptno());
-			pstmt.setString(4, to.getJob());
-			pstmt.setString(5, to.getVtype());
-			pstmt.setString(6, to.getVstart());
-			pstmt.setString(7, to.getVend());
-			pstmt.setString(8, to.getVreason());
-			pstmt.setString(9, "결재대기중");
+			pstmt.setString(1, to.getEno());
+			pstmt.setString(2, "2");
+			pstmt.setString(3, to.getEname());
+			pstmt.setString(4, to.getDeptno());
+			pstmt.setString(5, to.getJob());
+			pstmt.setString(6, to.getVtype());
+			pstmt.setString(7, to.getVstart());
+			pstmt.setString(8, to.getVend());
+			pstmt.setString(9, to.getVreason());
+			pstmt.setString(10, "1");
 			
 			int result = pstmt.executeUpdate();
 			if( result == 1 ) {
@@ -170,6 +184,7 @@ public class AuthDAO {
 			
 			rs = pstmt.executeQuery();
 			while( rs.next() ) {
+				to.setEno(rs.getString("eno"));
 				to.setEname( rs.getString("ename") );
 				to.setJob( rs.getString("job") );
 				to.setDeptno( rs.getString("deptno") );
@@ -292,46 +307,5 @@ public class AuthDAO {
 		}
 		return authVLists;
 	}
-	
-	/*
-	
-	
-	public ArrayList<AuthTO> managelist( String eno ) {
-		
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		ArrayList<AuthTO> manageLists = new ArrayList<AuthTO>();
-		
-		try {
-			String sql = "select mdate, checkin, checkout from management where eno = ?";
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, "1");
-			
-			rs = pstmt.executeQuery();
-			
-			while( rs.next() ) {
-				AuthTO to = new AuthTO();
-				
-				String mdate = rs.getString("mdate");
-				String checkin = rs.getString("checkin");
-				String checkout = rs.getString("checkout");
-				
-				to.setM_date(mdate);
-				to.setCheckin(checkin);
-				to.setCheckout(checkout);
-				
-				manageLists.add(to);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if( pstmt != null ) try { pstmt.close(); } catch(SQLException e) {};
-			if( conn != null ) try { conn.close(); } catch(SQLException e) {};
-		}
-		
-		return manageLists;
-	}
-	*/
+
 }

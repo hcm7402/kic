@@ -33,7 +33,16 @@
 		String vend = to.getVend();
 		String vreason = to.getVreason();
 		String authstate = to.getAuthstate();
-		
+		if(authstate.equals("1")){
+			authstate = "결재대기중";
+		}
+		if(authno.equals("1")){
+			authno = "출장신청";
+		} else if(authno.equals("2")){
+			authno = "휴가신청";
+		} else if(authno.equals("3")){
+			authno = "교통비신청";
+		}
 		html1.append("<tr>");
 		html1.append("<td>" + vno + "</td>");
 		html1.append("<td class='left'>");

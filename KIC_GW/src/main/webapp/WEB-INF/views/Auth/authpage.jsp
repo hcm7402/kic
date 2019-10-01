@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("UTF-8");
+	String eno = (String)session.getAttribute("eno");
 %>
 <!DOCTYPE html>
 <html>
@@ -69,6 +70,9 @@
 			$.ajax({
 				url : './vacation.do',
 				type : 'get',
+				data: {
+					eno: <%=eno%>
+				},
 				dataType : 'text',
 				success : function(data) {
 					$('#mainleft').html(data);

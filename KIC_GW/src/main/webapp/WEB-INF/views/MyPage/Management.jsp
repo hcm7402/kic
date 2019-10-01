@@ -1,20 +1,15 @@
 <%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport"
-	content="width=device-width,initial-scale=1.0,minimun-scale=1.0,maximun-scale=1.0">
-
-<title>근태관리 페이지</title>
+<%
+	String enos = (String) session.getAttribute("eno");
+	System.out.println(enos);
+%>
 <style type="text/css">
 
 .board-table {
 	text-align: center;  
-	border: 3px solid #47c9af;
+	border: 3px solid #56bafc;
 	width: 100%;
 	height: 100%;
 	border-collapse: collapse;
@@ -22,14 +17,14 @@
 
 .board-table th {
 	text-align: center;   
-	border-right: 2px solid #47c9af;          
+	border-right: 2px solid #56bafc;          
 	padding: 8px;
-	background-color: #47c9af;
+	background-color: #56bafc;
 	opacity: 0.5;
 	color: black;
 }
 .board-table td {
-	border-right: 2px solid #47c9af;
+	border-right: 2px solid #56bafc;
 	text-align: center;
 	padding: 8px;
 }
@@ -47,13 +42,15 @@ tr:nth-child(even){background-color: #f2f2f2}
 	$(document).ready( function() {
 		cal();
 		drawcal();
-		var manage = function( eno ) {
+		
+		var managelist = function( enos ) {
 			$.ajax({
 				url: './managelist.do',
-				type: 'post',
+				type: 'get',
 				data: {
-					eno: eno
+					eno: enos
 				},
+				cache:false,
 				dataType: 'JSON',
 				success: function( json ) {
 					results = json.results;
@@ -66,7 +63,17 @@ tr:nth-child(even){background-color: #f2f2f2}
 						
 						var checkin = checkins.split(' ');
 						var checkout = '';
-						if( checkouts == '' || checkouts != null ) {
+						if( checkouts == '' || checkouts == null ) {
+								for ( var i =1; i<=31; i++ ) {
+									var date = $('.date'+i).text();
+									if( date == mdate ) {
+										$( '.checkin'+i ).html(checkin[1].substring(0,8));
+										$( '.checkout'+i ).html('');
+										$( '.total'+i ).html( total );
+										$( '.etc'+i ).html( etc );
+									}
+								}
+							}else {
 							checkout = checkouts.split(' ');
 							for ( var i =1; i<=31; i++ ) {
 								var date = $('.date'+i).text();
@@ -76,31 +83,14 @@ tr:nth-child(even){background-color: #f2f2f2}
 									$( '.total'+i ).html( total );
 									$( '.etc'+i ).html( etc );
 								}
-							}
-						}else {
-							for ( var i =1; i<=31; i++ ) {
-								var date = $('.date'+i).text();
-								if( date == mdate ) {
-									$( '.checkin'+i ).html(checkin[1].substring(0,8));
-									$( '.checkout'+i ).html('');
-									$( '.total'+i ).html( total );
-									$( '.etc'+i ).html( etc );
-								}
-							}
 						}
-					});
-				}
-			});
-		} //end of manage
-		
-		manage('1');
-		
-		var asd = $('.checkin23').text();
-		var total = function( eno ) {
-			for( var i = 1; i <= 31; i++ ) {
-				console.log($('.checkin'+ i ).text());
+					}
+				});
 			}
-		}
+		});
+		}//end of manage
+		managelist(<%=enos%>);
+		
 		
 		$('.lastmonth').on( 'click', function() {
 			month--;
@@ -111,7 +101,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 			firstDay = new Date(year,month-1,1);
 			lastDay = new Date(year,month,0);
 			drawcal();
-			manage('1');
+			managelist(<%=enos%>);
 		});
 		
 		$('.nextmonth').on( 'click', function() {
@@ -123,7 +113,8 @@ tr:nth-child(even){background-color: #f2f2f2}
 			firstDay = new Date(year,month-1,1);
 			lastDay = new Date(year,month,0);
 			drawcal();
-			manage('1');
+			managelist(<%=enos%>);
+			console.log('asd');
 		});
 	});
 	//달력 초기화
@@ -160,22 +151,20 @@ tr:nth-child(even){background-color: #f2f2f2}
 	}
 	
 	// 페이지 새로고침
-	/*  if (self.name != 'reload') {
+	/*   if (self.name != 'reload') {
         self.name = 'reload';
         self.location.reload(true);
     }
-    else self.name = '';  */
+    else self.name = ''; */
 </script>
-</head>
-<body>
 		
-		<div style="float: left; width: 33%;">
+		<div style="float: left; width: 33%;" >
 		<button class="lastmonth">&lt;</button>
 		</div>
 		<div style="float: left; width: 34%;">
 		<h3 style="text-align: center;">근태현황</h3>
 		</div>
-		<div style="float: left; width: 33%; text-align: right">
+		<div style="float: left; width: 33%; text-align: right;">
 		<button class="nextmonth">&gt;</button>
 		</div>
 		
@@ -193,6 +182,4 @@ tr:nth-child(even){background-color: #f2f2f2}
 		<tbody class="calendar">
 		</tbody>
 	</table>
-</body>
 
-</html>

@@ -4,6 +4,7 @@
 	request.setCharacterEncoding("UTF-8");
 	String eno = (String)session.getAttribute("eno");
 	String level = (String)session.getAttribute("level");
+	String ename = (String)session.getAttribute("ename");
 	 
 	if(eno == null || eno.equals("")) {
 		out.println("<script type='text/javascript'>");
@@ -23,6 +24,9 @@
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800&amp;subset=korean" rel="stylesheet">
 <title>메인페이지</title>
 <style type="text/css">
+body {
+	font-family: 'Malgun Gothic';
+}
 .checkin-time {
 	margin-top: 10px;
 }
@@ -51,12 +55,12 @@
 
 #clock {
 	color: black;
-	font-family: "Lato", "sans-serif";
+	font-family: 'Malgun Gothic';
 	font-size: 50px;
 }
 
 table {
-font-family: "Lato","sans-serif";
+font-family: 'Malgun Gothic';
 font-size: 18px;
 width: 100% }       /* added custom font-family  */
  
@@ -72,9 +76,8 @@ padding: 3px;       }
 th {
 text-align: center;                 
 padding: 1em;
-background-color: #47c9af;
-opacity: 0.5;
-color: white;
+background-color: #56bafc;
+color: black;
 }
  
 tr {    
@@ -97,11 +100,9 @@ background-color:#fff;      }
 <script type="text/javascript" src="./resources/js/jquery.animateNumber.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		// 현재 시각 출력 함수호출
+	/* 	// 현재 시각 출력 함수호출
 		printClock();
-		
-		var check = 0;
-		
+		 */
 		var checkinout = function( eno ) {
 			$.ajax({
 				url: './checkinout.do',
@@ -109,6 +110,7 @@ background-color:#fff;      }
 				data: {
 					eno: eno
 				},
+				cache: false,
 				dataType: 'JSON',
 				success: function( json ) {
 					results = json.results;
@@ -117,18 +119,18 @@ background-color:#fff;      }
 						var checkout = this.checkout;
 						
 						if( checkin == '' || checkin == null ) {
-							$('.checkin').prop( 'disabled', false );
+							$('.checkin-time').html('출근시간 : 미확인');
 						}else {
 							var intime = checkin.split(' ');
-							$( '.checkin-time').html( '출근시간 : ' + intime[1] );
+							$( '.checkin-time').html( '출근시간 : ' + intime[1].substring(0,8) );
 							$('.checkin').val('출근완료').prop( 'disabled', true );
 						}
 						
 						if( checkout == '' || checkout == null ) {
-							$('.checkout').prop( 'disabled', false );
-						}else {
+							$('.checkout-time').html('퇴근시간 : 미확인');
+						} else {
 							var outtime = checkout.split(' ');
-							$( '.checkout-time').html( '퇴근시간 : ' + outtime[1] );
+							$( '.checkout-time').html( '퇴근시간 : ' + outtime[1].substring(0,8) );
 							$('.checkout').val('퇴근완료').prop( 'disabled', true );
 						}
 						
@@ -139,13 +141,14 @@ background-color:#fff;      }
 		} // end of checkinout
 		
 		// 출근, 퇴근 시간 출력
+		checkinout(<%=eno%>);
 		
-		
-		var checkin = function( indate ) {
+		var checkin = function( eno, indate ) {
 			$.ajax({
 				url: './checkin.do',
 				type: 'get',
 				data: {
+					eno: eno,
 					date: indate
 				},
 				dataType: 'JSON',
@@ -175,12 +178,13 @@ background-color:#fff;      }
 				}
 			});
 		} // end of checkin
-		var checkout = function( outdate ) {
+		var checkout = function( eno, outdate ) {
 			
 			$.ajax({
 				url: './checkout.do',
 				type: 'get',
 				data: {
+					eno: eno,
 					date: outdate
 				},
 				dataType: 'JSON',
@@ -215,15 +219,14 @@ background-color:#fff;      }
 		$('.checkin').on('click', function() {
 			// 출근 시간
 			indate = printClock();
-			console.log( indate );
-			checkin( indate );
+			checkin( <%=eno %>, indate );
 			
 		});
 		var outdate = '';
 		/* 퇴근하기 눌렀을 때 */
 		$('.checkout').on('click', function() {
 				outdate = printClock();
-				checkout( outdate );
+				checkout( <%=eno%>, outdate );
 		});
 		
 		
@@ -231,7 +234,6 @@ background-color:#fff;      }
 			number: 8
 		});
 		
-		checkinout("1");
 	});
 	function printClock() {
 
@@ -280,7 +282,7 @@ background-color:#fff;      }
 	
 </script>
 </head>
-<body>
+<body onload="javascript:printClock();">
 	<div id="wrapper">
 		<%@include file="../Menu/topmenu.jsp"%>
 		<div id="container">
@@ -361,9 +363,6 @@ background-color:#fff;      }
 			</div>
 			<div class="col-sm-4">
 			<h3>캘린더</h3>
-			</div>
-			<div class="col-sm-2">
-			<h3>채팅목록</h3>
 			</div>
 			</div>
 		</div>

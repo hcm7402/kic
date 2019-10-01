@@ -38,7 +38,7 @@ public class UserController {
     
     @RequestMapping(value = "/logout.do")
     public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
-    	System.out.println( "login 컨트롤러 호출" );
+    	System.out.println( "logout 컨트롤러 호출" );
 		
 		ModelAndView model = new ModelAndView();
 
@@ -111,15 +111,10 @@ public class UserController {
 		to.setEpw(pwd);
 		UserDAO dao = new UserDAO();
 		UserTO enoflag = dao.login(to);
-		int flag = enoflag.getFlag();
-		int eno = enoflag.getEno();
-		int level = enoflag.getLevel();
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("Main/login_ok");
-		modelAndView.addObject("flag", flag);
-		modelAndView.addObject("eno", eno);
-		modelAndView.addObject("level", level);
+		modelAndView.addObject("enoflag", enoflag);
 		return modelAndView;
 	}
 	
@@ -129,11 +124,13 @@ public class UserController {
 		
 		String eno = request.getParameter("eno");
 		String level = request.getParameter("level");
+		String ename = request.getParameter("ename");
 
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("Main/session");
 		modelAndView.addObject("eno", eno);
 		modelAndView.addObject("level", level);
+		modelAndView.addObject("ename", ename);
 		return modelAndView;
 	}
 	

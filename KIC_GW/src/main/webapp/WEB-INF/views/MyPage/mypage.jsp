@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	String eno = (String) session.getAttribute("eno");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,14 +43,17 @@
    				element.siblings('li').find('ul').slideUp(200);
    			}
    		});
+		
+		
 		// 근태현황 페이지 가져오는 부분
 		function management() {
 			$.ajax({
 				url : './Management.do',
 				type : 'get',
 				dataType : 'text',
-				success : function(data) {
-					$('#mainleft').html(data);
+				cache: false,
+				success : function( data ) {
+					$('#mainleft').html( data );
 				}
 			});
 		}
@@ -55,11 +61,12 @@
 		// 내정보 페이지 가져오는 부분
 		function myinfo() {
 			$.ajax({
-				url : '주소변경만 하면됨',
+				url : './myinfo.do',
 				type : 'get',
 				dataType : 'text',
+				cache: false,
 				success : function(data) {
-					$('#mainleft').html(data);
+					$('#mainleft').html( data );
 				}
 			});
 		}
@@ -70,7 +77,7 @@
 		});
 		// 내정보 클릭시
 		$('.myinfo').on('click', function() {
-			
+			 myinfo();
 		});
 		// 내 정보 수정 클릭시
 		$('.infomodify').on('click', function() {

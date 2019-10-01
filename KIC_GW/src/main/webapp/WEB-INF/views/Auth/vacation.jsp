@@ -1,7 +1,36 @@
+<%@page import="com.kic.groupware.model1.auth.AuthTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("UTF-8");
+
+	String eno = (String)session.getAttribute("eno");
+	
+	AuthTO to = (AuthTO)request.getAttribute( "to" );
+	
+	String date = to.getDate();
+	String ename = to.getEname();
+	String job = to.getJob();
+	if(job.equals("0")){
+		job = "사원";
+	} else if(job.equals("1")){
+		job = "팀장";
+	} else if(job.equals("2")){
+		job = "과장";
+	} else if(job.equals("3")){
+		job = "부사장";
+	} else if(job.equals("4")){
+		job = "사장";
+	}
+	String deptno = to.getDeptno();
+	if(deptno.equals("1")){
+		deptno = "개발부";
+	} else if(deptno.equals("2")){
+		deptno = "인사부";
+	} else if(deptno.equals("3")){
+		deptno = "재무부";
+	}
 %>
 <!DOCTYPE html>
 <html>

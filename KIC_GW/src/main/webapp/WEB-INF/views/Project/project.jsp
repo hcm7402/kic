@@ -43,17 +43,6 @@
    				element.siblings('li').find('ul').slideUp(200);
    			}
    		});
-		// 근태현황 페이지 가져오는 부분
-		function management() {
-			$.ajax({
-				url : './Management.do',
-				type : 'get',
-				dataType : 'text',
-				success : function(data) {
-					$('#mainleft').html(data);
-				}
-			});
-		}
 		
 		// list 페이지 가져오는 부분
 		function projectlist() {
@@ -61,6 +50,7 @@
 				url : './projectlist.do',
 				type : 'get',
 				dataType : 'text',
+				cache: false,
 				success : function(data) {
 					$('#mainleft').html(data);
 				}
@@ -73,6 +63,7 @@
 				url : './projectcreate.do',
 				type : 'get',
 				dataType : 'text',
+				cache: false,
 				success : function(data) {
 					$('#mainleft').html(data);
 				}

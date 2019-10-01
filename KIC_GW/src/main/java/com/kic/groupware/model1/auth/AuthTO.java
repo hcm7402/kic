@@ -1,38 +1,33 @@
 package com.kic.groupware.model1.auth;
 
 public class AuthTO {
-	private String authno;
-	private String bno;
-	private String binsertdate;
-	private String deptno;
+	private String eno;
 	private String ename;
-	private String bspot;
-	private String bpurpose;
-	private String authstate;
+	private String job;
+	private String hiredate;
+	private String sal;
+	private String birth;
+	private String address;
+	private String deptno;
+	private String email;
+	private String ephoto;
+	private String eid;
+	private String epw;
+	private String authphoto;
+	private String level;
+	private String date;
 	
-	public String getAuthno() {
-		return authno;
+	public String getDate() {
+		return date;
 	}
-	public void setAuthno(String authno) {
-		this.authno = authno;
+	public void setDate(String date) {
+		this.date = date;
 	}
-	public String getBno() {
-		return bno;
+	public String getEno() {
+		return eno;
 	}
-	public void setBno(String bno) {
-		this.bno = bno;
-	}
-	public String getBinsertdate() {
-		return binsertdate;
-	}
-	public void setBinsertdate(String binsertdate) {
-		this.binsertdate = binsertdate;
-	}
-	public String getDeptno() {
-		return deptno;
-	}
-	public void setDeptno(String deptno) {
-		this.deptno = deptno;
+	public void setEno(String eno) {
+		this.eno = eno;
 	}
 	public String getEname() {
 		return ename;
@@ -40,23 +35,78 @@ public class AuthTO {
 	public void setEname(String ename) {
 		this.ename = ename;
 	}
-	public String getBspot() {
-		return bspot;
+	public String getJob() {
+		return job;
 	}
-	public void setBspot(String bspot) {
-		this.bspot = bspot;
+	public void setJob(String job) {
+		this.job = job;
 	}
-	public String getBpurpose() {
-		return bpurpose;
+	public String getHiredate() {
+		return hiredate;
 	}
-	public void setBpurpose(String bpurpose) {
-		this.bpurpose = bpurpose;
+	public void setHiredate(String hiredate) {
+		this.hiredate = hiredate;
 	}
-	public String getAuthstate() {
-		return authstate;
+	public String getSal() {
+		return sal;
 	}
-	public void setAuthstate(String authstate) {
-		this.authstate = authstate;
+	public void setSal(String sal) {
+		this.sal = sal;
 	}
+	public String getBirth() {
+		return birth;
+	}
+	public void setBirth(String birth) {
+		this.birth = birth;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getDeptno() {
+		return deptno;
+	}
+	public void setDeptno(String deptno) {
+		this.deptno = deptno;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getEphoto() {
+		return ephoto;
+	}
+	public void setEphoto(String ephoto) {
+		this.ephoto = ephoto;
+	}
+	public String getEid() {
+		return eid;
+	}
+	public void setEid(String eid) {
+		this.eid = eid;
+	}
+	public String getEpw() {
+		return epw;
+	}
+	public void setEpw(String epw) {
+		this.epw = epw;
+	}
+	public String getAuthphoto() {
+		return authphoto;
+	}
+	public void setAuthphoto(String authphoto) {
+		this.authphoto = authphoto;
+	}
+	public String getLevel() {
+		return level;
+	}
+	public void setLevel(String level) {
+		this.level = level;
+	}
+	
 	
 }

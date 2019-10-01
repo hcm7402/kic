@@ -218,7 +218,7 @@ $( document ).ready( function() {
 }
 label {
 	margin-bottom: 0;
-}
+} 
 	</style>
 </head>
 <body>

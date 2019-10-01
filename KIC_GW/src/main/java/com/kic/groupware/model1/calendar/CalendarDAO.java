@@ -13,7 +13,7 @@ public class CalendarDAO {
 	private Connection conn = null;
 	private Connection conn2 = null;
 	private Connection conn3 = null;
-	
+	 
 	public CalendarDAO() {
 		String url = "jdbc:mysql://localhost:3306/groupware";
 		String user = "group";

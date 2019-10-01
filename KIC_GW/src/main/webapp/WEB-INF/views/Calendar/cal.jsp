@@ -4,7 +4,7 @@
 	String eno = (String)session.getAttribute("eno");
 	if(eno == null || eno.equals("")) {
 		out.println("<script type='text/javascript'>");
-		out.println("alert('로그인이 필요합니다.')");
+		out.println("alert('로그인이 필요합니다.')"); 
 		out.println("location.href='./login.do'");
 		out.println("</script>");
 	} 

@@ -11,7 +11,7 @@
 	JSONObject logcheckInfo = new JSONObject();
 	JSONObject enoInfo = new JSONObject();
 	
-	logcheckInfo.put("flag", flag);
+	logcheckInfo.put("flag", flag); 
 	logcheckInfo.put("eno", eno);
 	logcheckInfo.put("level", level);
 	jsonObject.put("logchecks", logcheckInfo);

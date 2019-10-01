@@ -7,6 +7,7 @@
 	if(flag == 0) {
 		out.println("location.href='cal.do'");
 	}else if(flag == 1) {
+		out.println("alert('에러')");
 		out.println("history.back()");
 	} 
 	out.println("</script>");

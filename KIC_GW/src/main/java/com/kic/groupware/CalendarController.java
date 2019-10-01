@@ -20,7 +20,7 @@ import com.kic.groupware.model1.user.UserDAO;
 public class CalendarController {
 
     static final Logger LOGGER = LoggerFactory.getLogger(CalendarController.class);
-    
+     
     /**
      * 리스트.
      */

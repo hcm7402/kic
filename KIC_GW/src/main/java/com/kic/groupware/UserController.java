@@ -23,7 +23,7 @@ public class UserController {
     static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
     
     /**
-     * 리스트.
+     * 리스트. 
      */
     @RequestMapping(value = "/login.do")
     public ModelAndView login(HttpServletRequest request, HttpServletResponse response) {

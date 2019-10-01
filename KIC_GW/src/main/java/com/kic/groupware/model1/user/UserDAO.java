@@ -13,7 +13,7 @@ public class UserDAO {
 	public UserDAO() {
 		String url = "jdbc:mysql://localhost:3306/groupware";
 		String user = "group";
-		String password = "123456";
+		String password = "123456"; 
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
 			conn = DriverManager.getConnection(url, user, password);

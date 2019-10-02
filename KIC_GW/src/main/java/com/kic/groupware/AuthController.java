@@ -210,7 +210,7 @@ public class AuthController {
 		to.setEno( request.getParameter( "eno" ) );
 		AuthDAO dao1 = new AuthDAO();
 		to = dao1.authEmp( to );
-		
+		System.out.println(request.getParameter( "eno" ));
 		AuthvacationTO to1 = new AuthvacationTO();
 		to1.setVno( request.getParameter( "vno" ) );
 		AuthDAO dao2 = new AuthDAO();

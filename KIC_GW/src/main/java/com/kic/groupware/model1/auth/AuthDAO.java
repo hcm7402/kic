@@ -188,9 +188,9 @@ public class AuthDAO {
 	public AuthvacationTO vacationview(AuthvacationTO to) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+	
 		try {
-			String sql = "select * from auth_vacation where vno=?";
+			String sql = "select vno, eno, authno, ename, deptno, date_format(vdate, '%Y.%m.%d') vdate, job, vtype, vstart, vend, vreason, authstate  from auth_vacation where vno=?";
 			pstmt = conn.prepareStatement( sql );
 			pstmt.setString( 1, to.getVno() );
 			System.out.println("dfdsf");

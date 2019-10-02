@@ -112,17 +112,54 @@ a {
 <script src="./resources/js/bootstrap-datepicker.min.js"></script>
 <script src="./resources/js/bootstrap-datepicker.ko.min.js"></script>
 <script src="./resources/js/project9.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
 function fn_formSubmit(){
-	if ( ! chkInputValue("#cdname", "일정명")) return false;
-	if ( ! chkInputValue("#startdate", "날짜")) return false;
-	if ( ! chkInputValue("#enddate", "날짜")) return false;
-	if ( $("#startdate").val() > $("#enddate").val()) {
-		alert("날짜를 정확하게 입력하세요");
+	if( $('#cdname').val() == '' ) {
+		swal({
+			  title: '일정명을 입력하셔야 합니다.',
+			  icon: 'warning'
+		});
+		return false;
+	} else if ( $('#startdate').val() == '' ) {
+		swal({
+			  title: '시작날짜를 선택 하셔야 합니다.',
+			  icon: 'warning'
+		});
+		return false;
+	} else if ( $('#enddate').val() == '' ) {
+		swal({
+			  title: '끝날짜를 선택 하셔야 합니다.',
+			  icon: 'warning'
+		});
+		return false;
+	} else if ( $("#startdate").val() > $("#enddate").val() ) {
+		swal({
+			  title: '날짜를 정확하게 선택하셔야 합니다.',
+			  icon: 'warning'
+		});
 		return false;
 	}
 	
-	if (!confirm("저장 하시겠습니까?")) return;
+	swal({
+		  title: "저장하시겠습니까?",
+		  icon: "warning",
+		  dangerMode: true,
+		  buttons: [true, "저장"],
+		})
+		.then((willDelete) => {
+			if (willDelete) {
+			    swal("저장완료!", {
+			      icon: "success",
+			      button: false
+			    });
+				setTimeout(function () {
+					$("#form1").submit();
+				}, 1000);
+			} else {
+				close: true;
+			}
+	});
 	
 	$("#form1").submit();
 }

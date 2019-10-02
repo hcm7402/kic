@@ -1,3 +1,4 @@
+<%@page import="com.kic.groupware.model1.auth.AuthvacationTO"%>
 <%@page import="com.kic.groupware.model1.auth.AuthTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -10,10 +11,17 @@
 	
 	AuthTO to = (AuthTO)request.getAttribute( "to" );
 	
-	String date = to.getDate();
+	String vdate = to.getDate();
 	String ename = to.getEname();
 	String job = to.getJob();
 	String deptno = to.getDeptno();
+	
+	AuthvacationTO to1 = (AuthvacationTO)request.getAttribute("to1");
+	String vno = to1.getVno();
+	String vtype = to1.getVtype();
+	String vstart = to1.getVstart();
+	String vend = to1.getVend();
+	String vreason = to1.getVreason();	
 	
 	if(job.equals("0")){
 		job = "사원";

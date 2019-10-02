@@ -7,6 +7,7 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	String eno = (String)session.getAttribute("eno");
+	session.setAttribute("eno", eno);
 	if(eno == null || eno.equals("")) {
 	      out.println("<script type='text/javascript'>");
 	      out.println("alert('로그인이 필요합니다.')");
@@ -46,7 +47,7 @@
 		html1.append("<tr>");
 		html1.append("<td>" + vno + "</td>");
 		html1.append("<td class='left'>");
-		html1.append("	<a href='./vacation.do?vno=" + vno + "'>" + vreason + "</a>");
+		html1.append("	<a href='./vacationview.do?vno=" + vno + "'>" + vreason + "</a>");
 		html1.append("</td>");
 		html1.append("<td>" + vdate + "</td>");
 		html1.append("<td>" + authno + "</td>");
@@ -246,7 +247,22 @@ li {
 <script type="text/javascript">
 	$(document).ready(function() {
 
-	   
+		function button() {
+			$.ajax({
+				url : './vacationview.do',
+				type : 'get',
+				data: {
+					eno: <%=eno%>
+				},
+				dataType : 'text',
+				success : function(data) {
+					$('#mainleft').html(data);
+				}
+			});
+		}
+		$('.button').on('click', function() {
+			button();
+		});
 
 	});
 	

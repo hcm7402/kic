@@ -15,7 +15,7 @@ public class UserTO {
 	String epw;
 	String authphoto;
 	int level;
-	int flag; 
+	int flag;
 
 	public int getFlag() {
 		return flag;

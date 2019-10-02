@@ -74,6 +74,30 @@ public class UserDAO {
 		return deptno;
 	}
 	
+	public String empname(String eno) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String ename = null;
+		try {
+			String sql = "select ename from emp where eno = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, eno);
+			
+			rs = pstmt.executeQuery();
+			while( rs.next() ) {
+				ename = rs.getString("ename");
+			}
+		} catch(SQLException e) {
+			System.out.println("[에러] " + e.getMessage());
+		} finally {
+			if(rs != null) try {rs.close();} catch(SQLException e) {}
+			if(pstmt != null) try {pstmt.close();} catch(SQLException e) {}
+			if(conn != null) try {conn.close();} catch(SQLException e) {}
+		}
+		return ename;
+	}
+	
 	public int useradd(UserTO to) {
 		PreparedStatement pstmt = null;
 		int flag = 1;

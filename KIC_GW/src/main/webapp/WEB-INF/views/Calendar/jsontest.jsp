@@ -10,7 +10,6 @@
 	ArrayList<CalendarTO> caldepartlist = (ArrayList<CalendarTO>)request.getAttribute("caldepartlist");
 	ArrayList<CalendarTO> calcompanylist = (ArrayList<CalendarTO>)request.getAttribute("calcompanylist");
 	JSONArray arrayObj = new JSONArray();
-	JSONObject jsonObj = new JSONObject();
 
 	for(CalendarTO to : calonelist) {
 		JSONObject resultObj = new JSONObject();
@@ -21,6 +20,8 @@
 		resultObj.put("className", "green");
 		resultObj.put("cdno", to.getCdno());
 		resultObj.put("cddiv", to.getCddiv());
+		resultObj.put("contents", to.getContents());
+		resultObj.put("cddivision", to.getCddivision());
 		
 		arrayObj.add(resultObj);
 	}
@@ -33,6 +34,8 @@
 		resultObj.put("className", "orange");
 		resultObj.put("cdno", to.getCdno());
 		resultObj.put("cddiv", to.getCddiv());
+		resultObj.put("contents", to.getContents());
+		resultObj.put("cddivision", to.getCddivision());
 		
 		arrayObj.add(resultObj);
 	}
@@ -45,6 +48,8 @@
 		resultObj.put("className", "purple");
 		resultObj.put("cdno", to.getCdno());
 		resultObj.put("cddiv", to.getCddiv());
+		resultObj.put("contents", to.getContents());
+		resultObj.put("cddivision", to.getCddivision());
 		
 		arrayObj.add(resultObj);
 	}

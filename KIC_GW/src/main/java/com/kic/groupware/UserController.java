@@ -145,7 +145,7 @@ public class UserController {
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("Main/id_check");
-		modelAndView.addObject("flag", flag);
+		modelAndView.addObject("flag", flag); 
 		
 		return modelAndView;
 	}

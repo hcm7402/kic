@@ -177,7 +177,6 @@
 		
 		$('.view').on( 'click', function() {
 			var seq = $(this).attr('data-seq');
-			//location.href='./projectview.do?seq=' + seq;
 			projectview( seq );
 		});
 		

@@ -105,6 +105,9 @@ a {
   background-color: #39bda7;
   transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
 }
+.swal-button--confirm {
+    background: #39bda7;
+}
 </style>
 <link rel="stylesheet" href="./resources/css/bootstrap-datepicker.min.css">
 <script type="text/javascript" src="./resources/js/jquery-3.4.1.js"></script>
@@ -143,15 +146,13 @@ function fn_formSubmit(){
 	
 	swal({
 		  title: "저장하시겠습니까?",
-		  icon: "warning",
-		  dangerMode: true,
 		  buttons: [true, "저장"],
 		})
 		.then((willDelete) => {
 			if (willDelete) {
 			    swal("저장완료!", {
-			      icon: "success",
-			      button: false
+			      	icon: "success",
+			      	button: false,
 			    });
 				setTimeout(function () {
 					$("#form1").submit();

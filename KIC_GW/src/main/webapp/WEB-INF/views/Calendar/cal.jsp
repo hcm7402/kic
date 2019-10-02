@@ -88,7 +88,7 @@ body {
 </style>
 <script type='text/javascript'>
 $(document).ready(function() {
-	fn_get_events(<%= eno %>);
+	fn_get_events();
 });
 
 function date_to_str(format)
@@ -145,15 +145,12 @@ function fn_set_calendar(events){
         }
 	});
 };
-function fn_get_events(eno)
+function fn_get_events()
 {
 	$.ajax({
 		url: './jsontest.do', 
 		type : "post",
 		dataType: 'json',
-		data: {
-			eno: eno
-		},
 		success: function(json) {
 			fn_set_calendar(json);
 		}

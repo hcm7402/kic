@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kic.groupware.model1.user.UserDAO;
 import com.kic.groupware.model1.user.UserTO;
 
-@Controller 
+@Controller
 public class UserController {
 
     static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
@@ -114,6 +115,9 @@ public class UserController {
 		int flag = enoflag.getFlag();
 		int eno = enoflag.getEno();
 		int level = enoflag.getLevel();
+		
+		HttpSession session = request.getSession();
+        session.setAttribute("eno", eno);
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("Main/login_ok");

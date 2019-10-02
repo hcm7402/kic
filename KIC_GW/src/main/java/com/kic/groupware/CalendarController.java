@@ -181,7 +181,7 @@ public class CalendarController {
 		System.out.println(eno);
 		
 		ArrayList<CalendarTO> calcompanylist = caldao.cdcompanyList();
-		ArrayList<CalendarTO> caldepartlist = caldao.cddepartList(deptno);
+		ArrayList<CalendarTO> caldepartlist = caldao.cddepartList(eno, deptno);
 		ArrayList<CalendarTO> calonelist = caldao.cdoneList(eno);
 		
 		model.addObject("calonelist", calonelist);

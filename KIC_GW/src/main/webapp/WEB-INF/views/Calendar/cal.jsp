@@ -101,6 +101,7 @@ function date_to_str(format)
     return year + "-" + month + "-" + date;
 }
 
+var oldno = null;
 function fn_set_calendar(events){
 	var calendar = $('#calendar').fullCalendar({
 		header: {
@@ -117,6 +118,30 @@ function fn_set_calendar(events){
 		events: events,
 		eventClick:function(event) {
 			window.location = "./calModify.do?cdno=" + event.cdno + "&cddiv=" + event.cddiv;
+        },
+        eventMouseover: function (data, event, view) {
+            tooltip = '<div class="tooltiptopicevent" style="width:auto;height:auto;background:#47c9af;position:absolute;z-index:10001;padding:10px 10px 10px 10px ;  line-height: 200%;">'
+            + '일정명: ' + data.title + '</br>' + '구분: ' + data.cddivision + '</br>' + '일정기간: ' + date_to_str(data.start);
+            if(data.end != null) {
+            	tooltip += ' ~ ' + date_to_str(data.end);
+            }
+            tooltip += '</br>' + '내용: ' + data.contents + '</div>';
+
+            $("body").append(tooltip);
+            $(this).mouseover(function (e) {
+                $(this).css('z-index', 10000);
+                $('.tooltiptopicevent').fadeIn('500');
+                $('.tooltiptopicevent').fadeTo('10', 1.9);
+            }).mousemove(function (e) {
+                $('.tooltiptopicevent').css('top', e.pageY + 10);
+                $('.tooltiptopicevent').css('left', e.pageX + 20);
+            });
+        },
+        eventMouseout: function (data, event, view) {
+            $(this).css('z-index', 8);
+
+            $('.tooltiptopicevent').remove();
+
         }
 	});
 };
@@ -154,5 +179,6 @@ function fn_get_events(eno)
 			</div>
 		</div>
 	</div>
+	<div class="calendarTooltip"></div>
 </body>
 </html>

@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	String eno = (String) session.getAttribute("eno");
+	String ename = (String) session.getAttribute("ename");
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +18,7 @@
 <script type="text/javascript" src="./resources/js/jquery-3.4.1.js"></script>
 <script src="./resources/js/bootstrap-datepicker.min.js"></script>
 <script src="./resources/js/bootstrap-datepicker.ko.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style>
 .project-form {
 	width: 100%;
@@ -233,8 +239,115 @@ body {
 				
 			});
 			
+			var submit = function( leader, name, start, end, content, team ) {
+				$.ajax({
+					url: './projectcreate_ok.do',
+					type: 'get',
+					data: {
+						leader: leader,
+						name: name,
+						start: start,
+						end: end,
+						content: content,
+						team: team
+					},
+					dataType: 'JSON',
+					success: function( json ) {
+						results = json.results;
+						$(results).each( function() {
+							var flag = this.flag;
+							console.log( flag );
+							if( flag == 0 ) {
+								swal({
+									  title: "프로젝트 생성에 성공하였습니다.",
+									  icon: "success",
+									})
+									.then( function(willDelete) {
+										  if (willDelete) {
+											  location.href = 'project.do';
+										  } 
+										});
+								
+							}else {
+								swal({
+									  title: '프로젝트 생성에 실패하였습니다.',
+									  icon: 'warning'
+									})
+									.then( function(willDelete) {
+										  if (willDelete) {
+											  location.href = 'project.do';
+										  } 
+										});
+							}
+						});
+					}
+				});
+			}
+			
+			
 			$('.submit').on( 'click', function() {
-				console.log('asd');
+				var leader = <%=eno%>;
+				var name = $('#name').val();
+				var start = $('.start-date').val();
+				var end = $('.end-date').val();
+				var content = $('#project-content').val();
+				var teams = $('.addemp tr td');
+				var team = '';
+				$.each( teams, function() {
+					team += $(this).attr('data-value') + ' ';
+				});
+				
+				var starts = start.split('-');
+				var startdate = starts[0] + starts[1] + starts[2];
+				
+				var ends = end.split('-');
+				var enddate = ends[0] + ends[1] + ends[2];
+				if( parseInt(startdate) > parseInt(enddate) ) {
+					swal({
+						  title: '시작일이 마감일보다 늦습니다.',
+						  icon: 'warning'
+						});
+				}else if( leader == '' || leader == null ) {
+					swal({
+						  title: '담당자가 존재하지 않습니다.',
+						  icon: 'warning'
+						});
+					return false;
+				}else if( name == '' || name == null ) {
+					swal({
+						  title: '프로젝트 이름을 입력하셔야 합니다.',
+						  icon: 'warning'
+						});
+					return false;
+				}else if( start == '' || start == null ) {
+					swal({
+						  title: '프로젝트 시작날짜를 입력하셔야 합니다.',
+						  icon: 'warning'
+						});
+					return false;
+				}else if( end == '' || end == null ) {
+					swal({
+						  title: '프로젝트 마감날짜를 입력하셔야 합니다.',
+						  icon: 'warning'
+						});
+					return false;
+				}else if( content == '' || content == null ) {
+					swal({
+						  title: '프로젝트 개요를 입력하셔야 합니다.',
+						  icon: 'warning'
+						});
+					return false;
+				}else if( team == '' || team == null ) {
+					swal({
+						  title: '프로젝트 팀원을 선택하셔야 합니다.',
+						  icon: 'warning'
+						});
+					return false;
+				} else {
+					submit( leader, name, start, end, content, team );
+				}
+				
+				
 			});
 		
 	});
@@ -257,7 +370,7 @@ body {
 				<div class="pro-title">
 					<h5>프로젝트 담당자</h5>
 				</div>
-				<div class="leader ">사원 홍길동</div>
+				<div class="leader"><%=ename %></div>
 				<div class="etc">* 프로젝트 담당자는 프로젝트를 생성한 사람입니다</div>
 				<label for="name">프로젝트 이름</label>
 				<input type="text" class="form-control col-md-6 name" id="name" placeholder="프로젝트 이름 입력" /><br />
@@ -273,7 +386,7 @@ body {
 				</div>
 				<label for="project-content">프로젝트 개요</label>
 				<textarea class="form-control col-md-8" id="project-content"
-					rows="3"></textarea>
+					rows="3" placeholder="개요를 입력하세요"></textarea>
 			</div>
 
 			<div class="create2 form-group">

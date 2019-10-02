@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%
 	String eno = (String)session.getAttribute("eno");
+
 	if(eno != null) {
 		out.println("<script type='text/javascript'>");
 		out.println("location.href='./main.do'"); 
@@ -69,10 +70,15 @@
 							});
 						}else {
 							swal({
-								  title: '로그인 성공!',
-								  icon: 'success'
-							});
-							session( eno, level, ename );
+								  title: "로그인에 성공하였습니다.",
+								  icon: "success",
+								})
+								.then( function(willDelete) {
+									  if (willDelete) {
+										  session( eno, level, ename );
+									  } 
+									});
+							
 						}
 					});
 					

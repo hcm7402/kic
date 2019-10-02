@@ -188,12 +188,38 @@ public class AuthController {
 
 		AuthTO to = new AuthTO();
 		to.setEno( request.getParameter( "eno" ) );
-		AuthDAO dao = new AuthDAO();
-		to = dao.authEmp( to );
+		AuthDAO dao1 = new AuthDAO();
+		to = dao1.authEmp( to );
+		
+		AuthvacationTO to1 = new AuthvacationTO();
+		to1.setVno( request.getParameter( "vno" ) );
+		AuthDAO dao2 = new AuthDAO();
+		to1 = dao2.vacationview( to1 );
 
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("Auth/vacation");
 		modelAndView.addObject("to", to);
+		modelAndView.addObject("to1", to1);
+		return modelAndView;
+	}
+	@RequestMapping(value = "/vacationview.do")
+	public ModelAndView vacationview( HttpServletRequest request, HttpServletResponse response) {
+		System.out.println( "vacationview 컨트롤러 호출" );
+
+		AuthTO to = new AuthTO();
+		to.setEno( request.getParameter( "eno" ) );
+		AuthDAO dao1 = new AuthDAO();
+		to = dao1.authEmp( to );
+		System.out.println(request.getParameter( "eno" ));
+		AuthvacationTO to1 = new AuthvacationTO();
+		to1.setVno( request.getParameter( "vno" ) );
+		AuthDAO dao2 = new AuthDAO();
+		to1 = dao2.vacationview( to1 );
+
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("Auth/vacationview");
+		modelAndView.addObject("to", to);
+		modelAndView.addObject("to1", to1);
 		return modelAndView;
 	}
 	

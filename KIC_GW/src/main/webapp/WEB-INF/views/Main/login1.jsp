@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%
 	String eno = (String)session.getAttribute("eno");
+
 	if(eno != null) {
 		out.println("<script type='text/javascript'>");
 		out.println("location.href='./main.do'");

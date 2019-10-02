@@ -252,6 +252,7 @@ public class ProjectDAO {
 				rst = pstmt2.executeQuery();
 				
 				if( rst.next() ) {
+					
 					ProjectTO to = new ProjectTO();
 					String teamm = rst.getString("ename");
 					String authPhoto = rst.getString("authphoto");

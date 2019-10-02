@@ -13,6 +13,5 @@
 	jsonObject.put("results", results );
 	
 	String json = jsonObject.toJSONString();
-	System.out.println( json );
 %>
 <%=json %>

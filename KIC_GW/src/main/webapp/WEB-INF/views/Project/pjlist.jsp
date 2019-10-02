@@ -12,6 +12,7 @@
 	
 	
 	for( ProjectTO to : pjLists ) {
+		
 		String pjseq = to.getPjseq();
 		String pjleader = to.getPjleader();
 		String pjname = to.getPjname();

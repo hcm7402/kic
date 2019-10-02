@@ -150,7 +150,6 @@
 		100% { width: 50%;}
 	}
 	
-	
 	.project-com {
 		height: 20px;
 		background: #ccc;

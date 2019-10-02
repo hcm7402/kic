@@ -45,7 +45,6 @@
 	    border-radius: 50%;
 	    float: left;
 	}
-	
 	.img {
 	    display: inline;
 	    margin: 0 auto;

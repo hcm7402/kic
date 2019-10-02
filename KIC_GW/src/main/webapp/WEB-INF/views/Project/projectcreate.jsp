@@ -3,6 +3,7 @@
 <%
 	String eno = (String) session.getAttribute("eno");
 	String ename = (String) session.getAttribute("ename");
+	
 %>
 <!DOCTYPE html>
 <html>

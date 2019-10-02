@@ -15,7 +15,6 @@ public class ProjectTO {
 	private String pjpercent;
 	private String authPhoto;
 	
-	
 	public String getAuthPhoto() {
 		return authPhoto;
 	}

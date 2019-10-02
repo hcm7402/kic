@@ -10,7 +10,6 @@
 	JSONObject jsonObject = new JSONObject();
 	JSONArray arr = new JSONArray();
 	
-	
 	for( ProjectTO to : percentLists ) {
 		String pjseq = to.getPjseq();
 		String pjstate = to.getPjstate();

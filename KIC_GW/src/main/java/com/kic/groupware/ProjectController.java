@@ -39,6 +39,7 @@ public class ProjectController {
 		String pjseq = request.getParameter("seq");
 		
 		ProjectDAO dao = new ProjectDAO();
+		
 		ProjectTO to = dao.view(pjseq);
 		ProjectDAO dao2 = new ProjectDAO();
 		ArrayList<ProjectTO> teamsList = dao2.teams(pjseq);

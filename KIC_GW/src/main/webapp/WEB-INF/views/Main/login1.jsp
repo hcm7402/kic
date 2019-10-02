@@ -69,10 +69,15 @@
 							});
 						}else {
 							swal({
-								  title: '로그인 성공!',
-								  icon: 'success'
-							});
-							session( eno, level, ename );
+								  title: "로그인에 성공하였습니다.",
+								  icon: "success",
+								})
+								.then( function(willDelete) {
+									  if (willDelete) {
+										  session( eno, level, ename );
+									  } 
+									});
+							
 						}
 					});
 					

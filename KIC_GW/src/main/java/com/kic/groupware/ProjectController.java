@@ -32,12 +32,35 @@ public class ProjectController {
 		
 		return model;
 	}
+	@RequestMapping(value = "/projectview.do")
+	public ModelAndView projectview( HttpServletRequest request, HttpServletResponse response) {
+		System.out.println( "projectview 컨트롤러 호출" );
+		
+		String pjseq = request.getParameter("seq");
+		
+		ProjectDAO dao = new ProjectDAO();
+		ProjectTO to = dao.view(pjseq);
+		ProjectDAO dao2 = new ProjectDAO();
+		ArrayList<ProjectTO> teamsList = dao2.teams(pjseq);
+		
+		ModelAndView model = new ModelAndView();
+		model.setViewName( "Project/projectview" );
+		model.addObject("to", to);
+		model.addObject("teamsList", teamsList );
+		
+		return model;
+	}
+	
 	@RequestMapping(value = "/projectlist.do")
 	public ModelAndView projectlist( HttpServletRequest request, HttpServletResponse response) {
 		System.out.println( "projectlist 컨트롤러 호출" );
 		
+		ProjectDAO dao = new ProjectDAO();
+		ArrayList<ProjectTO> pjLists = dao.pjlist();
+		
 		ModelAndView model = new ModelAndView();
 		model.setViewName( "Project/projectlist" );
+		model.addObject("pjLists", pjLists);
 		
 		return model;
 	}
@@ -50,6 +73,30 @@ public class ProjectController {
 		
 		ModelAndView model = new ModelAndView();
 		model.setViewName( "Project/projectcreate" );
+		model.addObject("eno", eno);
+		
+		return model;
+	}
+	
+	@RequestMapping(value = "/projectcreate_ok.do")
+	public ModelAndView projectcreate_ok( HttpServletRequest request, HttpServletResponse response) {
+		System.out.println( "projectcreate_ok 컨트롤러 호출" );
+		
+		String leader = request.getParameter("leader");
+		String name = request.getParameter("name");
+		String start = request.getParameter("start");
+		String end = request.getParameter("end");
+		String content = request.getParameter("content");
+		String team = request.getParameter("team");
+		
+		ProjectDAO dao = new ProjectDAO();
+		int flag = dao.create(leader, name, start, end, content, team);
+		
+		System.out.println( flag + ": 2");
+		
+		ModelAndView model = new ModelAndView();
+		model.setViewName( "Project/projectcreate_ok" );
+		model.addObject("flag", flag );
 		
 		return model;
 	}
@@ -65,6 +112,36 @@ public class ProjectController {
 		ModelAndView model = new ModelAndView();
 		model.setViewName( "Project/teamlist" );
 		model.addObject( "teamLists", teamLists );
+		
+		return model;
+	}
+	
+	@RequestMapping(value = "/pjlist.do")
+	public ModelAndView pjlist( HttpServletRequest request, HttpServletResponse response) {
+		System.out.println( "pjlist 컨트롤러 호출" );
+		
+		ProjectDAO dao = new ProjectDAO();
+		
+		ArrayList<ProjectTO> pjLists = dao.pjlist();
+		
+		ModelAndView model = new ModelAndView();
+		model.setViewName( "Project/pjlist" );
+		model.addObject( "pjLists", pjLists );
+		
+		return model;
+	}
+	
+	@RequestMapping(value = "/pjpercent.do")
+	public ModelAndView pjpercent( HttpServletRequest request, HttpServletResponse response) {
+		System.out.println( "pjpercent 컨트롤러 호출" );
+		
+		ProjectDAO dao = new ProjectDAO();
+		
+		ArrayList<ProjectTO> percentLists = dao.pjpercent();
+		
+		ModelAndView model = new ModelAndView();
+		model.setViewName( "Project/pjpercent" );
+		model.addObject( "percentLists", percentLists );
 		
 		return model;
 	}

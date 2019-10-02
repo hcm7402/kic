@@ -1,44 +1,32 @@
 package com.kic.groupware.project;
 
 public class ProjectTO {
-	private String leader;
-	private String project_name;
+	private String pjseq;
+	private String pjleader;
+	private String pjname;
 	private String startdate;
 	private String enddate;
-	private String etc;
+	private String pjcontent;
+	private String team;
+	private String pjstate;
 	private String eno;
 	private String ename;
 	private String deptno;
+	private String pjpercent;
+	private String authPhoto;
 	
-	public String getLeader() {
-		return leader;
+	
+	public String getAuthPhoto() {
+		return authPhoto;
 	}
-	public void setLeader(String leader) {
-		this.leader = leader;
+	public void setAuthPhoto(String authPhoto) {
+		this.authPhoto = authPhoto;
 	}
-	public String getProject_name() {
-		return project_name;
+	public String getPjpercent() {
+		return pjpercent;
 	}
-	public void setProject_name(String project_name) {
-		this.project_name = project_name;
-	}
-	public String getStartdate() {
-		return startdate;
-	}
-	public void setStartdate(String startdate) {
-		this.startdate = startdate;
-	}
-	public String getEnddate() {
-		return enddate;
-	}
-	public void setEnddate(String enddate) {
-		this.enddate = enddate;
-	}
-	public String getEtc() {
-		return etc;
-	}
-	public void setEtc(String etc) {
-		this.etc = etc;
+	public void setPjpercent(String pjpercent) {
+		this.pjpercent = pjpercent;
 	}
 	public String getEno() {
 		return eno;
@@ -57,6 +45,54 @@ public class ProjectTO {
 	}
 	public void setDeptno(String deptno) {
 		this.deptno = deptno;
+	}
+	public String getPjseq() {
+		return pjseq;
+	}
+	public void setPjseq(String pjseq) {
+		this.pjseq = pjseq;
+	}
+	public String getPjleader() {
+		return pjleader;
+	}
+	public void setPjleader(String pjleader) {
+		this.pjleader = pjleader;
+	}
+	public String getPjname() {
+		return pjname;
+	}
+	public void setPjname(String pjname) {
+		this.pjname = pjname;
+	}
+	public String getStartdate() {
+		return startdate;
+	}
+	public void setStartdate(String startdate) {
+		this.startdate = startdate;
+	}
+	public String getEnddate() {
+		return enddate;
+	}
+	public void setEnddate(String enddate) {
+		this.enddate = enddate;
+	}
+	public String getPjcontent() {
+		return pjcontent;
+	}
+	public void setPjcontent(String pjcontent) {
+		this.pjcontent = pjcontent;
+	}
+	public String getTeam() {
+		return team;
+	}
+	public void setTeam(String team) {
+		this.team = team;
+	}
+	public String getPjstate() {
+		return pjstate;
+	}
+	public void setPjstate(String pjstate) {
+		this.pjstate = pjstate;
 	}
 	
 	

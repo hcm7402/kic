@@ -1,8 +1,5 @@
 @charset "UTF-8";
 .stop {
-	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
-	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
-	box-shadow:inset 0px 1px 0px 0px #ffffff;
 	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #454545), color-stop(1, #000000) );
 	background:-moz-linear-gradient( center top, #454545 5%, #000000 100% );
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#454545', endColorstr='#000000');
@@ -20,7 +17,6 @@
 	-moz-border-radius-bottomleft:24px;
 	border-bottom-left-radius:24px;
 	text-indent:0;
-	border:1px solid #ffffff;
 	display:inline-block;
 	color:#ffffff;
 	font-family:arial;
@@ -32,15 +28,6 @@
 	width:58px;
 	text-decoration:none;
 	text-align:center;
-}
-.stop:hover {
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #000000), color-stop(1, #454545) );
-	background:-moz-linear-gradient( center top, #000000 5%, #454545 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#454545');
-	background-color:#000000;
-}.stop:active {
-	position:relative;
-	top:1px;
 }
 .com {
 	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -76,15 +63,6 @@
 	text-decoration:none;
 	text-align:center;
 }
-.com:hover {
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #56bafc), color-stop(1, #56bafc) );
-	background:-moz-linear-gradient( center top, #56bafc 5%, #56bafc 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#56bafc', endColorstr='#56bafc');
-	background-color:#56bafc;
-}.com:active {
-	position:relative;
-	top:1px;
-}
 .ing {
 	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -118,13 +96,4 @@
 	width:58px;
 	text-decoration:none;
 	text-align:center;
-}
-.ing:hover {
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #6aeb6a), color-stop(1, #6aeb6a) );
-	background:-moz-linear-gradient( center top, #6aeb6a 5%, #6aeb6a 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#6aeb6a', endColorstr='#6aeb6a');
-	background-color:#6aeb6a;
-}.ing:active {
-	position:relative;
-	top:1px;
 }

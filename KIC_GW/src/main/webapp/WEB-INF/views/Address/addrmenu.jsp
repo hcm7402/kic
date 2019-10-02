@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimun-scale=1.0,maximun-scale=1.0">
@@ -39,50 +43,14 @@
 <div class="tree_box">
     <div class="con">
         <ul id="tree_menu" class="tree_menu">
-            <li class="depth_1"><strong>대금수납</strong>
+            <li class="depth_1"><strong>직원 목록</strong>
                 <ul class="depth_2" >
                     <li>
-                        <a href="#none"><em>폴더</em> 일반계좌수납</a>
+                        <a href="#none"><em>폴더</em> 부서목록</a>
                         <ul class="depth_3">
-                            <li><a href="#none">최신정보가져오기</a></li>
-                            <li><a href="#none">수납내역조회</a></li>
-                            <li><a href="#none">사납내역거래처확인</a></li>
-                            <li><a href="#none">수납내역 거래처확인결과</a></li>
-                            <li><a href="#none">매출채권관리</a></li>
-                        </ul>
-                    </li>
-                    <li class="last">
-                        <a href="#none"><em>폴더</em> 일반계좌수납</a>
-                        <ul class="depth_3">
-                            <li><a href="#none">최신정보가져오기</a></li>
-                            <li><a href="#none">수납내역조회</a></li>
-                            <li><a href="#none">사납내역거래처확인</a></li>
-                            <li><a href="#none">수납내역 거래처확인결과</a></li>
-                            <li class="end"><a href="#none">매출채권관리</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <li class="depth_1"><strong>대금수납</strong>
-                <ul class="depth_2">
-                    <li>
-                        <a href="#none"><em>폴더</em> 일반계좌수납</a>
-                        <ul class="depth_3">
-                            <li><a href="#none">최신정보가져오기</a></li>
-                            <li><a href="#none">수납내역조회</a></li>
-                            <li><a href="#none">사납내역거래처확인</a></li>
-                            <li><a href="#none">수납내역 거래처확인결과</a></li>
-                            <li><a href="#none">매출채권관리</a></li>
-                        </ul>
-                    </li>
-                    <li class="last">
-                        <a href="#none"><em>폴더</em> 일반계좌수납</a>
-                        <ul class="depth_3">
-                            <li><a href="#none">최신정보가져오기</a></li>
-                            <li><a href="#none">수납내역조회</a></li>
-                            <li><a href="#none">사납내역거래처확인</a></li>
-                            <li><a href="#none">수납내역 거래처확인결과</a></li>
-                            <li class="end"><a href="#none">매출채권관리</a></li>
+                        	<c:forEach var="dname" items="${deptList}" varStatus="status">
+								<li><a href="/address.do?deptno=${status.count}">${dname}</a></li>
+							</c:forEach>
                         </ul>
                     </li>
                 </ul>

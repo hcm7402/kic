@@ -164,8 +164,6 @@ function fn_formSubmit(){
 				close: true;
 			}
 	});
-	
-	$("#form1").submit();
 }
 
 function fn_Delete(){

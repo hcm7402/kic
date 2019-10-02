@@ -160,8 +160,6 @@ function fn_formSubmit(){
 				close: true;
 			}
 	});
-	
-	$("#form1").submit();
 }
 $( document ).ready( function() {
 	$('#startdate').datepicker({

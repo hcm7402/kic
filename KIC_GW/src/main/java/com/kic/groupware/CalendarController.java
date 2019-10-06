@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +31,10 @@ public class CalendarController {
 		
 		ModelAndView model = new ModelAndView();
 		model.setViewName( "Calendar/cal" );
+		
+		HttpSession session = request.getSession();
+        String eno = (String) session.getAttribute("eno");
+        System.out.println("session: " + eno);
 		
 		return model;
     }
@@ -170,7 +175,8 @@ public class CalendarController {
     @RequestMapping(value = "/jsontest.do")
     public ModelAndView jsontest(HttpServletRequest request, HttpServletResponse response) {
         System.out.println( "jsontest 컨트롤러 호출" );
-		String eno = request.getParameter("eno");
+        HttpSession session = request.getSession();
+        String eno = (String) session.getAttribute("eno");
 
 		ModelAndView model = new ModelAndView();
 		CalendarDAO caldao = new CalendarDAO();

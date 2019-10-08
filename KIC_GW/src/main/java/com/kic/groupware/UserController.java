@@ -3,6 +3,7 @@ package com.kic.groupware;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,7 +25,7 @@ public class UserController {
     static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
     
     /**
-     * 리스트. 
+     * 리스트.
      */
     @RequestMapping(value = "/login.do")
     public ModelAndView login(HttpServletRequest request, HttpServletResponse response) {
@@ -39,7 +40,7 @@ public class UserController {
     
     @RequestMapping(value = "/logout.do")
     public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
-    	System.out.println( "logout 컨트롤러 호출" );
+    	System.out.println( "login 컨트롤러 호출" );
 		
 		ModelAndView model = new ModelAndView();
 
@@ -66,19 +67,27 @@ public class UserController {
     public ModelAndView useradd_ok(MultipartHttpServletRequest request, HttpServletResponse response) {
     	System.out.println( "useradd_ok 컨트롤러 호출" );
     	UserTO to = new UserTO();
+    	String fileName = "";
+		
+		Calendar calendar = Calendar.getInstance();
+		fileName += calendar.get(Calendar.YEAR);
+		fileName += calendar.get(Calendar.MONTH);
+		fileName += calendar.get(Calendar.DATE);
+		fileName += calendar.get(Calendar.HOUR);
+		fileName += calendar.get(Calendar.MINUTE);
+		fileName += calendar.get(Calendar.SECOND);
+		fileName += calendar.get(Calendar.MILLISECOND);
+		
     	to.setEname(request.getParameter("ename"));
     	to.setHiredate(request.getParameter("hiredate"));
     	to.setBirth(request.getParameter("birth"));
     	to.setAddress(request.getParameter("address"));
     	to.setDeptno(request.getParameter("deptno"));
     	to.setEmail(request.getParameter("email"));
-    	to.setEphoto(request.getFile("ephoto").getOriginalFilename());
+    	to.setEphoto(fileName + request.getFile("ephoto").getOriginalFilename());
     	to.setEid(request.getParameter("eid"));
     	to.setEpw(request.getParameter("epw"));
-    	to.setAuthphoto(request.getFile("authphoto").getOriginalFilename());
-    	System.out.println(to.getEid());
-    	System.out.println(to.getEphoto());
-    	System.out.println(to.getAuthphoto());
+    	to.setAuthphoto(fileName + request.getFile("authphoto").getOriginalFilename());
     	
     	File ephotoFile = new File("C:/Users/ChangMo/git/kicgw5/KIC_GW/src/main/webapp/resources/photo",to.getEphoto());
     	File authphotoFile = new File("C:/Users/ChangMo/git/kicgw5/KIC_GW/src/main/webapp/resources/sign",to.getAuthphoto());
@@ -102,7 +111,7 @@ public class UserController {
     
     @RequestMapping(value="/login_ok.do")
 	public ModelAndView login_ok(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("login_ok() 호출");
+		System.out.println("login_ok 호출");
 		
 		String id = request.getParameter("u_id");
 		String pwd = request.getParameter("u_password");
@@ -112,6 +121,7 @@ public class UserController {
 		to.setEpw(pwd);
 		UserDAO dao = new UserDAO();
 		UserTO enoflag = dao.login(to);
+		int eno = enoflag.getEno();
 		
 		HttpSession session = request.getSession();
         session.setAttribute("eno", eno);

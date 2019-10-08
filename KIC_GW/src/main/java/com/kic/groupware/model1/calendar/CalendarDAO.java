@@ -112,17 +112,10 @@ public class CalendarDAO {
 
 		ArrayList<CalendarTO> cdoneList = new ArrayList<CalendarTO>();
 		try {
-			String sql = null;
-			if(!eno.equals("0")) {
-				sql = "select cdno, cddivision, cdname, startdate, enddate, contents from calendar_date where cddiv = ? and eno = ?";
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, "2");
-				pstmt.setString(2, eno);
-			} else {
-				sql = "select cdno, cddivision, cdname, startdate, enddate, contents from calendar_date where cddiv = ?";
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, "2");
-			}
+			String sql = "select cdno, cddivision, cdname, startdate, enddate, contents from calendar_date where cddiv = ? and eno = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "2");
+			pstmt.setString(2, eno);
 
 			rs = pstmt.executeQuery();
 			while( rs.next() ) {

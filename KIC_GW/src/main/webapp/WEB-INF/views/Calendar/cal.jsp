@@ -4,7 +4,7 @@
 	String eno = (String)session.getAttribute("eno");
 	if(eno == null || eno.equals("")) {
 		out.println("<script type='text/javascript'>");
-		out.println("alert('로그인이 필요합니다.')"); 
+		out.println("alert('로그인이 필요합니다.')");
 		out.println("location.href='./login.do'");
 		out.println("</script>");
 	} 
@@ -171,7 +171,25 @@ function fn_get_events()
 					<%@include file="../Menu/calmenu.jsp"%>
 				</div>
 				<div id="cal" class="col-sm-10">
-					<div id='calendar'></div>
+					<table>
+					<tr>
+						<td>
+							<table>
+								<tr>
+									<td><div style="width: 20px; padding: 0; margin: 0; background-color: purple;">&nbsp;</div></td>
+									<td><div style="padding: 0; margin: 0; color: purple">: 회사일정&nbsp;</div></td>
+									<td><div style="width: 20px; padding: 0; margin: 0; background-color: orange;">&nbsp;</div></td>
+									<td><div style="padding: 0; margin: 0; color: orange">: 부서일정&nbsp;</div></td>
+									<td><div style="width: 20px; padding: 0; margin: 0; background-color: green;">&nbsp;</div></td>
+									<td><div style="padding: 0; margin: 0; color: green">: 개인일정&nbsp;</div></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<td><div id='calendar'></div></td>
+					</tr>
+				</table>
 				</div>
 			</div>
 		</div>

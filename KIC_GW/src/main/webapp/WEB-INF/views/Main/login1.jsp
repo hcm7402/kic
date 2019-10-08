@@ -77,8 +77,7 @@
 									  if (willDelete) {
 										  session( eno, level, ename );
 									  } 
-									});
-							
+								});
 						}
 					});
 					

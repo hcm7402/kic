@@ -32,7 +32,9 @@ a {
 }
 
 .button {
+  width: 50%;
   height: 100%;
+  margin: auto;
   display: block;
   border: 1px solid #4f4f4f;
   border-radius: 4px;
@@ -86,6 +88,33 @@ a {
     background: #39bda7;
 }
 </style>
+<link rel="stylesheet" href="./resources/css/bootstrap.min.css">
+<script type="text/javascript" src="./resources/js/jquery-3.4.1.js"></script>
+<script type="text/javascript">
+function ad_Modify(eno){
+	var target = document.getElementById("level" + eno);
+    var level = target.options[target.selectedIndex].value;
+	swal({
+		  title: "수정하시겠습니까?",
+		  icon: "warning",
+		  dangerMode: true,
+		  buttons: [true, "수정"],
+		})
+		.then((willDelete) => {
+			if (willDelete) {
+			    swal("수정완료!", {
+			      icon: "success",
+			      button: false
+			    });
+				setTimeout(function () {
+					location.href='./addressModifyLevel_ok.do?eno=' + eno + '&level=' + level;
+				}, 1000);
+			} else {
+				close: true;
+			}
+	});
+};
+</script>
 </head>
 <body>
 <div id="wrapper">
@@ -107,6 +136,7 @@ a {
 				<col width='10%' />
 				<col width='5%' />
 				<col width='5%' />
+				<col width='10%' />
 			</colgroup>
 			<thead>
 				<tr>
@@ -117,6 +147,7 @@ a {
 					<th>아이디</th>
 					<th>직급</th>
 					<th>권한</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -130,7 +161,14 @@ a {
 						</c:forEach>
 						<td><c:out value="${addressList.eid}"/></td>
 						<td><c:out value="${addressList.job}"/></td>
-						<td><c:out value="${addressList.level}"/></td>
+						<td>
+						<select id="level${addressList.eno}" name="level${addressList.eno}" class="form-control">
+							<c:forTokens var="item" items="1,2,3,4,5" delims=",">
+					       		<option value="${item}" <c:if test='${item==addressList.level}'>selected</c:if>>${item}</option>
+						 	</c:forTokens>
+						</select>
+						</td>
+						<td><a onclick="ad_Modify(${addressList.eno})" class="button" style="text-decoration:none">권한변경</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

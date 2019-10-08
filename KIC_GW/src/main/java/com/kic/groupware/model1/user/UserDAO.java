@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 public class UserDAO {
 	private Connection conn = null;
+	private Connection conn2 = null;
 	
 	public UserDAO() {
 		String url = "jdbc:mysql://localhost:3306/groupware";
@@ -17,6 +18,7 @@ public class UserDAO {
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
 			conn = DriverManager.getConnection(url, user, password);
+			conn2 = DriverManager.getConnection(url, user, password);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -133,13 +135,14 @@ public class UserDAO {
 	
 	public UserTO login(UserTO to) {
 		// 0 - 성공 / 1 - 비밀번호가 다름 / 2 - id가 없음
+		System.out.println("loginDAO 호출");
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		to.setFlag(2);
 		
 		try {
-			String sql = "select eno,ename, epw, level from emp where eid = ?";
+			String sql = "select eno, ename, epw, level from emp where eid = ?";
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, to.getEid());
@@ -191,6 +194,159 @@ public class UserDAO {
 			e.printStackTrace();
 		} finally {
 			if(rs != null) try {rs.close();} catch(SQLException e) {}
+			if(pstmt != null) try {pstmt.close();} catch(SQLException e) {}
+			if(conn != null) try {conn.close();} catch(SQLException e) {}
+		}
+		return flag;
+	}
+	
+	public ArrayList<UserTO> addressList(String deptno) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		ArrayList<UserTO> addressList = new ArrayList<UserTO>();
+		try {
+			String sql = null;
+			if(deptno.equals("0")) {
+				sql = "select * from emp";
+				pstmt = conn2.prepareStatement(sql);
+			} else {
+				sql = "select * from emp where deptno = ?";
+				pstmt = conn2.prepareStatement(sql);
+				pstmt.setString(1, deptno);
+			}
+			
+			
+			rs = pstmt.executeQuery();
+			if(deptno.equals("0")) {
+				rs.next();
+			}
+			while( rs.next() ) {
+				UserTO to = new UserTO();
+				to.setEno(rs.getInt("eno"));
+				to.setEname(rs.getString("ename"));
+				to.setEid(rs.getString("eid"));
+				to.setJob(rs.getString("job"));
+				to.setDeptno(rs.getString("deptno"));
+				to.setEphoto(rs.getString("ephoto"));
+				to.setLevel(rs.getInt("level"));
+				
+				addressList.add(to);
+			}
+		} catch(SQLException e) {
+			System.out.println("[에러] " + e.getMessage());
+		} finally {
+			if(rs != null) try {rs.close();} catch(SQLException e) {}
+			if(pstmt != null) try {pstmt.close();} catch(SQLException e) {}
+			if(conn2 != null) try {conn2.close();} catch(SQLException e) {}
+		}
+		return addressList;
+	}
+	
+	public ArrayList<UserTO> addressListModify() {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		ArrayList<UserTO> addressList = new ArrayList<UserTO>();
+		try {
+			String sql = "select * from emp where level = 0";
+			pstmt = conn2.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			while( rs.next() ) {
+				UserTO to = new UserTO();
+				to.setEno(rs.getInt("eno"));
+				to.setEname(rs.getString("ename"));
+				to.setEid(rs.getString("eid"));
+				to.setDeptno(rs.getString("deptno"));
+				to.setJob(rs.getString("job"));
+				to.setEphoto(rs.getString("ephoto"));
+				to.setLevel(rs.getInt("level"));
+				
+				addressList.add(to);
+			}
+		} catch(SQLException e) {
+			System.out.println("[에러] " + e.getMessage());
+		} finally {
+			if(rs != null) try {rs.close();} catch(SQLException e) {}
+			if(pstmt != null) try {pstmt.close();} catch(SQLException e) {}
+			if(conn2 != null) try {conn2.close();} catch(SQLException e) {}
+		}
+		return addressList;
+	}
+	
+	public int AddressModify_ok(String eno) {
+		PreparedStatement pstmt = null;
+		int flag = 1;
+
+		try {
+			String sql = "update emp set level = 1 where eno = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, eno);
+
+			int result = pstmt.executeUpdate();
+			if(result == 1) {
+				flag = 0;
+			}
+		} catch(SQLException e) {
+			System.out.println("[에러] " + e.getMessage());
+		} finally {
+			if(pstmt != null) try {pstmt.close();} catch(SQLException e) {}
+			if(conn != null) try {conn.close();} catch(SQLException e) {}
+		}
+		return flag;
+	}
+	
+	public ArrayList<UserTO> addressListModifyLevel() {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		ArrayList<UserTO> addressList = new ArrayList<UserTO>();
+		try {
+			String sql = "select * from emp where level <> 0";
+			pstmt = conn2.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			rs.next();
+			while( rs.next() ) {
+				UserTO to = new UserTO();
+				to.setEno(rs.getInt("eno"));
+				to.setEname(rs.getString("ename"));
+				to.setEid(rs.getString("eid"));
+				to.setDeptno(rs.getString("deptno"));
+				to.setJob(rs.getString("job"));
+				to.setEphoto(rs.getString("ephoto"));
+				to.setLevel(rs.getInt("level"));
+				
+				addressList.add(to);
+			}
+		} catch(SQLException e) {
+			System.out.println("[에러] " + e.getMessage());
+		} finally {
+			if(rs != null) try {rs.close();} catch(SQLException e) {}
+			if(pstmt != null) try {pstmt.close();} catch(SQLException e) {}
+			if(conn2 != null) try {conn2.close();} catch(SQLException e) {}
+		}
+		return addressList;
+	}
+	
+	public int AddressModifyLevel_ok(String eno, String level) {
+		PreparedStatement pstmt = null;
+		int flag = 1;
+
+		try {
+			String sql = "update emp set level = ? where eno = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, level);
+			pstmt.setString(2, eno);
+
+			int result = pstmt.executeUpdate();
+			if(result == 1) {
+				flag = 0;
+			}
+		} catch(SQLException e) {
+			System.out.println("[에러] " + e.getMessage());
+		} finally {
 			if(pstmt != null) try {pstmt.close();} catch(SQLException e) {}
 			if(conn != null) try {conn.close();} catch(SQLException e) {}
 		}

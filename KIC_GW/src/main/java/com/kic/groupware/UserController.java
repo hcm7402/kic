@@ -79,8 +79,8 @@ public class UserController {
     	System.out.println(to.getEphoto());
     	System.out.println(to.getAuthphoto());
     	
-    	File ephotoFile = new File("C:/Users/kitcoop/git/kic/KIC_GW/src/main/webapp/resources/photo",to.getEphoto());
-    	File authphotoFile = new File("C:/Users/kitcoop/git/kic/KIC_GW/src/main/webapp/resources/sign",to.getAuthphoto());
+    	File ephotoFile = new File("C:/Users/ChangMo/git/kicgw5/KIC_GW/src/main/webapp/resources/photo",to.getEphoto());
+    	File authphotoFile = new File("C:/Users/ChangMo/git/kicgw5/KIC_GW/src/main/webapp/resources/sign",to.getAuthphoto());
 
         try {
         	request.getFile("ephoto").transferTo(ephotoFile);

@@ -43,6 +43,5 @@
 	}
 
 	String json = jsonObject.toJSONString();
-	System.out.println( json );
 %>
 <%=json%>

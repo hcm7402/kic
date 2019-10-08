@@ -15,12 +15,14 @@
 		String eno = to.getEno();
 		String ename = to.getEname();
 		String deptno = to.getDeptno();
+		String ePhoto = to.getePhoto();
 		
 		JSONObject results = new JSONObject();
 		
 		results.put("eno", eno);
 		results.put("ename", ename);
 		results.put("deptno", deptno);
+		results.put("ePhoto", ePhoto);
 		
 		arr.add(results);
 		

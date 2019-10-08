@@ -20,7 +20,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
 	content="width=device-width,initial-scale=1.0,minimun-scale=1.0,maximun-scale=1.0">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="./resources/css/bootstrap.min.css">
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800&amp;subset=korean" rel="stylesheet">
 <title>메인페이지</title>
 <style type="text/css">
@@ -62,7 +62,10 @@ body {
 table {
 font-family: 'Malgun Gothic';
 font-size: 18px;
-width: 100% }       /* added custom font-family  */
+width: 100% ;
+margin: 20px;
+}
+
  
 table.one {                                  
 margin-bottom: 3em; 
@@ -94,6 +97,9 @@ background-color:#fff;      }
 }
 .calday {
 	margin-bottom:0;
+}
+.title {
+	text-align: left;
 }
 </style>
 <script type="text/javascript" src="./resources/js/jquery-3.4.1.js"></script>
@@ -231,7 +237,7 @@ background-color:#fff;      }
 		
 		
 		$('.count').animateNumber({
-			number: 8
+			number: 6
 		});
 		
 	});
@@ -314,28 +320,20 @@ background-color:#fff;      }
 						</thead>
 						<tbody>
 							<tr>
-								<td class="title"><a href="#">제목</a> 아이콘 + 조회수</td>
-								<td class="date">작성일</td>
+								<td class="title"><a href="#">(공지) 하반기 실적 </a></td>
+								<td class="date">2019-09-29 14:24:32</td>
 							</tr>
 							<tr>
-								<td class="title"><a href="#">제목</a> 아이콘 + 조회수</td>
-								<td class="date">작성일</td>
+								<td class="title"><a href="#">(공지) 그룹웨어 도입</a></td>
+								<td class="date">2019-09-25 17:12:02</td>
 							</tr>
 							<tr>
-								<td class="title"><a href="#">제목</a> 아이콘 + 조회수</td>
-								<td class="date">작성일</td>
+								<td class="title"><a href="#">(공지) 회사 워크샵 공지 </a></td>
+								<td class="date">2019-09-22 11:35:09</td>
 							</tr>
 							<tr>
-								<td class="title"><a href="#">제목</a> 아이콘 + 조회수</td>
-								<td class="date">작성일</td>
-							</tr>
-							<tr>
-								<td class="title"><a href="#">제목</a> 아이콘 + 조회수</td>
-								<td class="date">작성일</td>
-							</tr>
-							<tr>
-								<td class="title"><a href="#">제목</a> 아이콘 + 조회수</td>
-								<td class="date">작성일</td>
+								<td class="title"><a href="#">(공지) 상반기 실적 </a></td>
+								<td class="date">2019-06-18 14:45:29</td>
 							</tr>
 						</tbody>
 					</table>
@@ -344,11 +342,11 @@ background-color:#fff;      }
 				</div>
 
 				<div class="sign" style="padding-top: 60px;">
-				
+				<h3>전자결재</h3>
 					<table class="greenTable">
 						<thead>
 							<tr>
-								<th colspan="5">결재대기 문서</th>
+								<th colspan="5">나의 결재대기 문서</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -361,8 +359,52 @@ background-color:#fff;      }
 						src="http://img.echosting.cafe24.com/skin/base_ko_KR/board/btn_board_more.gif" alt="더보기" /></a>
 				</div>
 			</div>
-			<div class="col-sm-4">
-			<h3>캘린더</h3>
+			<div class="col-sm-5" style="margin-left: 30px; padding: 15px;">
+			<h3>TO DO</h3>
+				<table class="todo-cop">
+						<thead>
+							<tr>
+								<th colspan="5">오늘 회사는?</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td colspan="5" style="color:black; font-size: 20px; background: #eee">
+									일정 없음
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<table class="todo-group">
+						<thead>
+							<tr>
+								<th colspan="5">오늘 우리 부서는?</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td colspan="5" style="color:black; font-size: 20px; background: #eee">
+									부서 회식
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<table class="todo-me">
+						<thead>
+							<tr>
+								<th colspan="5">오늘 나는?</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td colspan="5" style="color:black; font-size: 20px; background: #eee">
+									KIC 그룹웨어 사용법 터득하기
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<a href="#" class="more"><img
+						src="http://img.echosting.cafe24.com/skin/base_ko_KR/board/btn_board_more.gif" alt="더보기" /></a>
 			</div>
 			</div>
 		</div>

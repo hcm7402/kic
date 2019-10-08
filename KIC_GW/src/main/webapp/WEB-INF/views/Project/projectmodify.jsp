@@ -1,8 +1,25 @@
+<%@page import="com.kic.groupware.project.ProjectTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%
 	String eno = (String) session.getAttribute("eno");
 	String ename = (String) session.getAttribute("ename");
+
+	ProjectTO to = (ProjectTO) request.getAttribute("to");
+	
+	String pjseq = to.getPjseq();
+	String leader = to.getPjleader();
+	String leader_photo = to.getePhoto();
+	String title = to.getPjname();
+	String content = to.getPjcontent();
+	String start = to.getStartdate();
+	String end = to.getEnddate();
+	
+	StringBuffer br = new StringBuffer();
+	br.append("<div class='photo'>");
+	br.append("<img src='./resources/photo/" + leader_photo + "' class='img' />");
+	br.append("</div>");
+	br.append("<div class='team'>" + ename + "</div>");
 	
 %>
 <!DOCTYPE html>
@@ -10,177 +27,26 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport"
-	content="width=device-width,initial-scale=1.0,minimun-scale=1.0,maximun-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimun-scale=1.0,maximun-scale=1.0">
+<link rel="stylesheet" href="./resources/css/projectmodify.css">
 <link rel="stylesheet" href="./resources/css/bootstrap-datepicker3.css">
 <link rel="stylesheet" href="./resources/css/bootstrap.min.css">
 <script type="text/javascript" src="./resources/js/jquery-3.4.1.js"></script>
 <script src="./resources/js/bootstrap-datepicker.min.js"></script>
 <script src="./resources/js/bootstrap-datepicker.ko.min.js"></script>
+<script src="./resources/js/mdb.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<style>
-.project-form {
-	width: 100%;
-	height: 100%;
-}
-
-.create1 {
-	float: left;
-	width: 40%;
-	height: 100%;
-}
-
-.create2 {
-	float: left;
-	width: 30%;
-	height: 100%;
-}
-
-.create3 {
-	float: left;
-	width: 30%;
-	height: 100%;
-}
-
+<title>프로젝트 수정</title>
+<style type="text/css">
 body {
 	font-family: 'Malgun Gothic';
 	margin-left: 40px;
 	margin-right: 40px;
 }
-
-.etc {
-	font-size: 12px;
-	color: #47C83E;
-}
-
-.click, .click2, .click3 {
-	background-color: #56bafc;
-	-webkit-border-top-left-radius: 42px;
-	-moz-border-radius-topleft: 42px;
-	border-top-left-radius: 42px;
-	-webkit-border-top-right-radius: 42px;
-	-moz-border-radius-topright: 42px;
-	border-top-right-radius: 42px;
-	-webkit-border-bottom-right-radius: 42px;
-	-moz-border-radius-bottomright: 42px;
-	border-bottom-right-radius: 42px;
-	-webkit-border-bottom-left-radius: 42px;
-	-moz-border-radius-bottomleft: 42px;
-	border-bottom-left-radius: 42px;
-	text-indent: 0px;
-	display: inline-block;
-	color: #ffffff;
-	font-family: Arial;
-	font-size: 48px;
-	font-weight: bold;
-	font-style: normal;
-	height: 31px;
-	line-height: 31px;
-	width: 30px;
-	text-align: center;
-}
-
-.click:hover, .click2:hover, .click3:hover {
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #03ffcd
-		), color-stop(1, #47c9af));
-	background: -moz-linear-gradient(center top, #03ffcd 5%, #47c9af 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#03ffcd',
-		endColorstr='#47c9af');
-	background-color: #03ffcd;
-}
-
-.click:active, .click2:active, .click3:active {
-	position: relative;
-	top: 1px;
-}
-
-.click-option {
-	margin: 5px;
-}
-
-.submit-wrapper {
-        display: inline-block;
-        margin: 5px 5px;
-        padding: 10px;
-    }
-    .submit {
-        background: #D5D5D5;
-        border: none;
-        padding: 2px;
-        cursor: pointer;
-        display: block;
-        position: relative;
-        overflow: hidden;
-        transition: all .35s ease-in-out .35s;
-        margin: 0 auto;
-        width: 80px;
-        text-align: center;
-    }
-    .submit span {
-        display: block;
-        padding: 10px 20px;
-        background: #D5D5D5;
-        z-index: 100;
-        position: relative;
-        transition: all .35s ease-in-out .35s;
-    }
-    .submit:hover span {
-        background: #56bafc;
-        color: #fff;
-        transition: all .35s ease-in-out .35s;
-    }
-    .submit:after {
-        bottom: -100%;
-        right: -100%;
-        content: "";
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        background: #56bafc;
-        transition: all .35s ease-in-out .5s;
-    }
-    .submit:hover:after {
-        right: 0;
-        bottom: 0;
-        transition: all ease-in-out .35s;
-    }
-    .submit:before {
-        top: -100%;
-        left: -100%;
-        content: "";
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        background: #56bafc;
-        transition: all .35s ease-in-out .5s;
-    }
-    .submit:hover:before {
-        left: 0;
-        top: 0;
-        transition: all ease-in-out .35s;
-    }
-    .team {
-		line-height: 50px;
-		padding-left: 15px;
-	}
-	.photo {
-	    width: 50px;
-	    height: 50px;
-	    position: relative;
-	    overflow: hidden;
-	    border-radius: 50%;
-	    float: left;
-	    margin-right: 15px;
-	}
-	.img {
-	    display: inline;
-	    margin: 0 auto;
-	    height: 100%;
-	    width: 100%;
-	}
 </style>
 <script type="text/javascript">
-	$(document).ready(function() {
+	$(document).ready( function() {
+		
 		var teamlist = function() {
 			$.ajax({
 				url: './teamlist.do',
@@ -199,7 +65,7 @@ body {
 						if( deptno == 1 ) {
 							var html = '<li class="nav-item"><a class="nav-link push" data-dept=' +deptno+ ' data-value="' + item.eno + '">';
 							html += '<div class="photo">';
-							html += '<img src="' + ePhoto +'" class="img" />';
+							html += '<img src="./resources/photo/' + ePhoto +'" class="img" />';
 							html += '</div>';
 							html += '<div class="team">' + ename + '</div></a></li>';
 							$('.team1').append( html );
@@ -207,14 +73,14 @@ body {
 						}else if( deptno == 2 ) {
 							var html = '<li class="nav-item"><a class="nav-link push" data-dept=' +deptno+ ' data-value="' + item.eno + '">';
 							html += '<div class="photo">';
-							html += '<img src="' + ePhoto +'" class="img" />';
+							html += '<img src="./resources/photo/' + ePhoto +'" class="img" />';
 							html += '</div>';
 							html += '<div class="team">' + ename + '</div></a></li>';
 							$('.team2').append( html );
 						}else if( deptno == 3 ) {
 							var html = '<li class="nav-item"><a class="nav-link push" data-dept=' +deptno+ ' data-value="' + item.eno + '">';
 							html += '<div class="photo">';
-							html += '<img src="' + ePhoto +'" class="img" />';
+							html += '<img src="./resources/photo/' + ePhoto +'" class="img" />';
 							html += '</div>';
 							html += '<div class="team">' + ename + '</div></a></li>';
 							$('.team3').append( html );
@@ -225,6 +91,7 @@ body {
 		}
 		
 		teamlist();
+		
 		$('.start-date').datepicker({
 			format : 'yyyy-mm-dd',
 			language : 'ko'
@@ -292,17 +159,19 @@ body {
 				
 			});
 			
-			var submit = function( leader, name, start, end, content, team ) {
+			var modifyok = function( leader, name, start, end, content, team, state ) {
 				$.ajax({
-					url: './projectcreate_ok.do',
+					url: './projectmodify_ok.do',
 					type: 'get',
 					data: {
+						pjseq: <%=pjseq %>,
 						leader: leader,
 						name: name,
 						start: start,
 						end: end,
 						content: content,
-						team: team
+						team: team,
+						state: state
 					},
 					dataType: 'JSON',
 					success: function( json ) {
@@ -311,7 +180,7 @@ body {
 							var flag = this.flag;
 							if( flag == 0 ) {
 								swal({
-									  title: "프로젝트 생성에 성공하였습니다.",
+									  title: "프로젝트 수정에 성공하였습니다.",
 									  icon: "success",
 									})
 									.then( function(willDelete) {
@@ -322,7 +191,7 @@ body {
 								
 							}else {
 								swal({
-									  title: '프로젝트 생성에 실패하였습니다.',
+									  title: '프로젝트 수정에 실패하였습니다.',
 									  icon: 'warning'
 									})
 									.then( function(willDelete) {
@@ -334,10 +203,10 @@ body {
 						});
 					}
 				});
-			}
+			} // end of modifyok
 			
-			
-			$('.submit').on( 'click', function() {
+			// 수정하기 버튼 클릭 시
+			$( document ).on( 'click', '.project-modify', function() {
 				var leader = <%=eno%>;
 				var name = $('#name').val();
 				var start = $('.start-date').val();
@@ -351,6 +220,7 @@ body {
 				
 				var starts = start.split('-');
 				var startdate = starts[0] + starts[1] + starts[2];
+				var state = $('#select').val();
 				
 				var ends = end.split('-');
 				var enddate = ends[0] + ends[1] + ends[2];
@@ -395,32 +265,43 @@ body {
 						  icon: 'warning'
 						});
 					return false;
+				} else if( state == 0 || state == '' || state == null )  {
+					swal({
+						  title: '프로젝트 진행상태를 선택하셔야 합니다.',
+						  icon: 'warning'
+						});
+					return false;
 				} else {
-					submit( leader, name, start, end, content, team );
+					modifyok( leader, name, start, end, content, team, state );
 				}
-				
-				
 			});
-		
+			
+			// 취소 버튼 클릭 시
+			$( document ).on( 'click', '.project-cancle', function() {
+				swal({
+					  title: '정말 취소하시겠습니까?',
+					  text: '작성하신 내용이 저장되지 않습니다.',
+					  icon: 'warning'
+					})
+					.then( function(willDelete) {
+						  if (willDelete) {
+							  location.href = 'project.do';
+						  } 
+						});
+			});
+			
 	});
 </script>
-
 </head>
 <body>
-
-	<div class="project-form">
+<div class="project-form">
 		<div>
 			<div class="project-create col-md-6">
-				<h1>프로젝트 생성</h1>
+				<h1>프로젝트 수정</h1>
 			</div>
 			<div class="col-md-12" style="text-align: right;">
-				<div class="light-button submit-wrapper">
-					<div class="submit">
-						<span>
-							등록
-						</span>
-					</div>  
-				</div>
+				<button class="btn btn-primary project-modify" >수정</button>
+				<button class="btn btn-primary project-cancle" >취소</button>
 			</div>
 		</div>
 		<form action="" class="create-form">
@@ -428,23 +309,33 @@ body {
 				<div class="pro-title">
 					<h5>프로젝트 담당자</h5>
 				</div>
-				<div class="leader"><%=ename %></div>
-				<div class="etc">* 프로젝트 담당자는 프로젝트를 생성한 사람입니다</div>
+				<div class="leader"><%=br %></div>
+				<div class="etc">* 프로젝트 담당자는 수정할 수 없습니다.</div>
 				<label for="name">프로젝트 이름</label>
-				<input type="text" class="form-control col-md-6 name" id="name" placeholder="프로젝트 이름 입력" /><br />
+				<input type="text" class="form-control col-md-6 name" id="name" value="<%=title %>" /><br />
 				<div class="form-row">
 					<div class="form-group col-md-4">
 						<label for="start-date">시작일</label> <input type="text"
-							class="form-control start-date" id="start-date" placeholder="연도-월-일" />
+							class="form-control start-date" id="start-date" value="<%=start %>"/>
 					</div>&nbsp;&nbsp;&nbsp;&nbsp;
 					<div class="form-group col-md-4">
 						<label for="end-date">마감일</label> <input type="text"
-							class="form-control end-date" id="end-date" placeholder="연도-월-일"/>
+							class="form-control end-date" id="end-date" value="<%=end %>" />
 					</div>
 				</div>
 				<label for="project-content">프로젝트 개요</label>
 				<textarea class="form-control col-md-8" id="project-content"
-					rows="3" placeholder="개요를 입력하세요"></textarea>
+					rows="3"><%=content %></textarea>
+				<br />
+				<div class="project-state">
+				<label for="#select">진행상태</label>
+					<select class="browser-default custom-select" id="select" >
+					  <option selected value="0">진행상태</option>
+					  <option value="1">진행중</option>
+					  <option value="2">보류</option>
+					  <option value="3">완료</option>
+					</select>
+				</div>
 			</div>
 
 			<div class="create2 form-group">
@@ -489,6 +380,5 @@ body {
 			</div>
 		</form>
 	</div>
-
 </body>
 </html>

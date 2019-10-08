@@ -14,7 +14,15 @@ public class ProjectTO {
 	private String deptno;
 	private String pjpercent;
 	private String authPhoto;
+	private String ePhoto;
 	
+	
+	public String getePhoto() {
+		return ePhoto;
+	}
+	public void setePhoto(String ePhoto) {
+		this.ePhoto = ePhoto;
+	}
 	public String getAuthPhoto() {
 		return authPhoto;
 	}

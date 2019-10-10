@@ -147,7 +147,7 @@ function fn_formSubmit(){
 		  dangerMode: true,
 		  buttons: [true, "수정"],
 		})
-		.then((willDelete) => {
+		.then(function(willDelete) {
 			if (willDelete) {
 			    swal("수정완료!", {
 			      icon: "success",
@@ -169,7 +169,7 @@ function fn_Delete(){
 		  dangerMode: true,
 		  buttons: [true, "삭제"],
 		})
-		.then((willDelete) => {
+		.then(function(willDelete) {
 			if (willDelete) {
 			    swal("삭제완료!", {
 			      icon: "success",

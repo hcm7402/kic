@@ -1,5 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("UTF-8");
+	String eno = (String)session.getAttribute("eno");
+	String level = (String)session.getAttribute("level");
+	String ename = (String)session.getAttribute("ename");
+	 
+	if(eno == null || eno.equals("")) {
+		out.println("<script type='text/javascript'>");
+		out.println("alert('로그인이 필요합니다.')");
+		out.println("location.href='./login.do'");
+		out.println("</script>");
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -78,10 +91,6 @@
 		$('.lists').on('click', function() {
 			projectlist();
 		});
-		// 완료된 프로젝트 클릭시
-		$('.complete').on('click', function() {
-			
-		});
 	});
 </script>
 </head>
@@ -96,8 +105,7 @@
 							<li class='active has-sub'><a>프로젝트</a>
 								<ul>
 									<li><a class="create">프로젝트 생성</a></li>
-									<li><a class="lists">진행중 Project</a></li>
-        							<li><a class="complete">완성된 Project</a></li>
+									<li><a class="lists">프로젝트 목록</a></li>
 								</ul>
 							</li>
 							<li class='active has-sub'><a>About</a>

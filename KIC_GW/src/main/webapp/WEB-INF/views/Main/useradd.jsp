@@ -233,7 +233,7 @@ label {
 				</div>
 	
 				<div class="wrap-input100" data-validate = "Enter username">
-					<label>아이디</label><input type="button" class="btn btn-success" id="id_certify" style="float: right;" value="중복확인">
+					<label>아이디</label><input type="button" class="btn btn-primary" id="id_certify" style="float: right;" value="중복확인">
 					<input class="input100" type="text" name="eid" id="eid">
 				</div>
 				
@@ -246,26 +246,10 @@ label {
 					<label>비밀번호 확인</label>
 					<input class="input100" type="password" id="epw_ok">
 				</div>
-				<%-- <div>
-					직책 :
-					<select id="pno" id="pno" class="form-control">
-						<c:forEach var="pno" items="1,2,3,4,5" varStatus="status">
-				    		<option value="${status.count}">${pno}</option>
-					 	</c:forEach>
-					</select>
-				</div> --%>
-				<%-- <div class="wrap-input100" data-validate = "Enter pno">
-					<input class="input100" type="text" name="pno" id="pno">
-					<span class="focus-input100" data-placeholder="직책"></span>
-				</div> --%>
 				<div class="wrap-input100">
 					<label>입사일</label>
 					<input class="input100 form-control" size="16" id="hiredate" name="hiredate" readonly>
 				</div>
-				<!-- <div class="wrap-input100" data-validate = "Enter sal">
-					<label>연봉</label>
-					<input class="input70" type="text" name="sal" id="sal">
-				</div> -->
 				<div class="wrap-input100">
 					<label>생년월일</label>
 					<input class="form-control" size="16" id="birth" name="birth" readonly>
@@ -295,7 +279,7 @@ label {
 				</div>
 				<br />
 				<div class="container-login100-form-btn">
-					<input type="submit" class="login50-form-btn" id="useradd" value="가입하기" />
+					<input type="submit" class="login50-form-btn" id="useradd" value="가입하기" />&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="button" class="login50-form-btn" id="cancel" value="취소" />
 				</div>
 			</form>

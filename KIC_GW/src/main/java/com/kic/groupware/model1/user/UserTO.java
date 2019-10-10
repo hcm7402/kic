@@ -3,7 +3,7 @@ package com.kic.groupware.model1.user;
 public class UserTO {
 	int eno;
 	String ename;
-	String pno;
+	String job;
 	String hiredate;
 	String sal;
 	String birth;
@@ -14,9 +14,23 @@ public class UserTO {
 	String eid;
 	String epw;
 	String authphoto;
+	String dname;
 	int level;
 	int flag;
 
+	
+	public String getDname() {
+		return dname;
+	}
+	public void setDname(String dname) {
+		this.dname = dname;
+	}
+	public String getJob() {
+		return job;
+	}
+	public void setJob(String job) {
+		this.job = job;
+	}
 	public int getFlag() {
 		return flag;
 	}
@@ -28,12 +42,6 @@ public class UserTO {
 	}
 	public void setDeptno(String deptno) {
 		this.deptno = deptno;
-	}
-	public String getPno() {
-		return pno;
-	}
-	public void setPno(String pno) {
-		this.pno = pno;
 	}
 	public String getSal() {
 		return sal;

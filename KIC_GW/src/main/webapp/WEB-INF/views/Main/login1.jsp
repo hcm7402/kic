@@ -150,7 +150,7 @@
 .wave.-two {
   animation: drift 7000ms infinite linear;
   
-  background: yellow;
+  background: #56bafc;
 }
 
 .box:after {
@@ -176,7 +176,7 @@
   transform: translate3d(0, 0, 0);
   color: white;
   text-transform: uppercase;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Malgun Gothic';
   letter-spacing: .4em;
   font-size: 24px;
   text-shadow: 0 1px 0 rgba(black, .1);

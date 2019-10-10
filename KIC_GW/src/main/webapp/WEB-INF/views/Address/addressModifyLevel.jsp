@@ -90,24 +90,28 @@ a {
 </style>
 <link rel="stylesheet" href="./resources/css/bootstrap.min.css">
 <script type="text/javascript" src="./resources/js/jquery-3.4.1.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
 function ad_Modify(eno){
-	var target = document.getElementById("level" + eno);
-    var level = target.options[target.selectedIndex].value;
+	var leveltarget = document.getElementById("level" + eno);
+	var level = leveltarget.options[leveltarget.selectedIndex].value;
+	
+	var jobtarget = document.getElementById("job" + eno);
+    var job = jobtarget.options[jobtarget.selectedIndex].value;
 	swal({
 		  title: "수정하시겠습니까?",
 		  icon: "warning",
 		  dangerMode: true,
 		  buttons: [true, "수정"],
 		})
-		.then((willDelete) => {
+		.then(function(willDelete) {
 			if (willDelete) {
 			    swal("수정완료!", {
 			      icon: "success",
 			      button: false
 			    });
 				setTimeout(function () {
-					location.href='./addressModifyLevel_ok.do?eno=' + eno + '&level=' + level;
+					location.href='./addressModifyLevel_ok.do?eno=' + eno + '&level=' + level + '&job=' + encodeURI(job);
 				}, 1000);
 			} else {
 				close: true;
@@ -134,7 +138,7 @@ function ad_Modify(eno){
 				<col width='10%' />
 				<col width='5%' />
 				<col width='10%' />
-				<col width='5%' />
+				<col width='10%' />
 				<col width='5%' />
 				<col width='10%' />
 			</colgroup>
@@ -160,7 +164,13 @@ function ad_Modify(eno){
 							<c:if test="${addressList.deptno == status.count}"><td>${dname}</td></c:if>
 						</c:forEach>
 						<td><c:out value="${addressList.eid}"/></td>
-						<td><c:out value="${addressList.job}"/></td>
+						<td>
+						<select id="job${addressList.eno}" name="job${addressList.eno}" class="form-control">
+							<c:forTokens var="item" items="사장,부사장,과장,팀장,사원" delims=",">
+					       		<option value="${item}" <c:if test='${item==addressList.job}'>selected</c:if>>${item}</option>
+						 	</c:forTokens>
+						</select>
+						</td>
 						<td>
 						<select id="level${addressList.eno}" name="level${addressList.eno}" class="form-control">
 							<c:forTokens var="item" items="1,2,3,4,5" delims=",">
@@ -168,7 +178,7 @@ function ad_Modify(eno){
 						 	</c:forTokens>
 						</select>
 						</td>
-						<td><a onclick="ad_Modify(${addressList.eno})" class="button" style="text-decoration:none">권한변경</a></td>
+						<td><a onclick="ad_Modify(${addressList.eno})" class="button" style="text-decoration:none">변경</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

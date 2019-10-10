@@ -6,7 +6,7 @@
    <script type="text/javascript">
    	$(document).ready( function() {
    		$('#menu li.active').addClass('open').children('ul').show();
-   		$('#menu li.has-sub>a').on('click', function(){
+   		$('#menu li.has-sub>a').click(function(){
    			$(this).removeAttr('href');
    			var element = $(this).parent('li');
    			if (element.hasClass('open')) {

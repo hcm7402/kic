@@ -199,13 +199,11 @@
   					<div class='wave -three'></div>
 					<span class="login100-form-title arial s3"> KIC Groupware</span> <br /><br />
 					<div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate = "Enter username">
-						<input class="input100" type="text" id="u_id">
-						<span class="focus-input100" data-placeholder="아이디"></span>
+						<input class="input100" type="text" id="u_id" placeholder="아이디">
 					</div>
 
 					<div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
-						<input class="input100" type="password" id="u_password">
-						<span class="focus-input100" data-placeholder="비밀번호"></span>
+						<input class="input100" type="password" id="u_password" placeholder="비밀번호">
 					</div>
 
 					<div class="container-login100-form-btn">

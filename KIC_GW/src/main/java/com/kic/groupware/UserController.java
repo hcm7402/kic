@@ -81,7 +81,7 @@ public class UserController {
     	to.setEname(request.getParameter("ename"));
     	to.setHiredate(request.getParameter("hiredate"));
     	to.setBirth(request.getParameter("birth"));
-    	to.setAddress(request.getParameter("address"));
+    	to.setAddress(request.getParameter("sample6_address") + " " + request.getParameter("sample6_detailAddress"));
     	to.setDeptno(request.getParameter("deptno"));
     	to.setEmail(request.getParameter("email"));
     	to.setEphoto(fileName + request.getFile("ephoto").getOriginalFilename());

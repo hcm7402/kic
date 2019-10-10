@@ -101,6 +101,21 @@
 			});
 		}
 		
+		function vacationview( eno, vno ) {
+			$.ajax({
+				url : './vacationview.do',
+				type : 'get',
+				data: {
+					eno: eno,
+					vno: vno
+				},
+				dataType : 'text',
+				success : function(data) {
+					$('#mainleft').html(data);
+				}
+			});
+		}
+		
 		// 교통비 신청서 페이지 가져오는 부분
 		function transportation() {
 			$.ajax({
@@ -131,6 +146,10 @@
 		// 교통비신청서 클릭 시
 		$('.transportation').on('click', function() {
 			transportation();
+		});
+		$(document).on('click','a.test', function() {
+			var vno = $(this).attr('data-vno');
+			vacationview( <%=eno%>, vno );
 		});
 		
 	});

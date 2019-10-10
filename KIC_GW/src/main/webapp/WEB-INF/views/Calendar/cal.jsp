@@ -4,7 +4,7 @@
 	String eno = (String)session.getAttribute("eno");
 	if(eno == null || eno.equals("")) {
 		out.println("<script type='text/javascript'>");
-		out.println("alert('로그인이 필요합니다.')"); 
+		out.println("alert('로그인이 필요합니다.')");
 		out.println("location.href='./login.do'");
 		out.println("</script>");
 	} 
@@ -88,7 +88,7 @@ body {
 </style>
 <script type='text/javascript'>
 $(document).ready(function() {
-	fn_get_events(<%= eno %>);
+	fn_get_events();
 });
 
 function date_to_str(format)
@@ -101,6 +101,7 @@ function date_to_str(format)
     return year + "-" + month + "-" + date;
 }
 
+var oldno = null;
 function fn_set_calendar(events){
 	var calendar = $('#calendar').fullCalendar({
 		header: {
@@ -117,18 +118,39 @@ function fn_set_calendar(events){
 		events: events,
 		eventClick:function(event) {
 			window.location = "./calModify.do?cdno=" + event.cdno + "&cddiv=" + event.cddiv;
+        },
+        eventMouseover: function (data, event, view) {
+            tooltip = '<div class="tooltiptopicevent" style="width:auto;height:auto;background:#47c9af;position:absolute;z-index:10001;padding:10px 10px 10px 10px ;  line-height: 200%;">'
+            + '일정명: ' + data.title + '</br>' + '구분: ' + data.cddivision + '</br>' + '일정기간: ' + date_to_str(data.start);
+            if(data.end != null) {
+            	tooltip += ' ~ ' + date_to_str(data.end);
+            }
+            tooltip += '</br>' + '내용: ' + data.contents + '</div>';
+
+            $("body").append(tooltip);
+            $(this).mouseover(function (e) {
+                $(this).css('z-index', 10000);
+                $('.tooltiptopicevent').fadeIn('500');
+                $('.tooltiptopicevent').fadeTo('10', 1.9);
+            }).mousemove(function (e) {
+                $('.tooltiptopicevent').css('top', e.pageY + 10);
+                $('.tooltiptopicevent').css('left', e.pageX + 20);
+            });
+        },
+        eventMouseout: function (data, event, view) {
+            $(this).css('z-index', 8);
+
+            $('.tooltiptopicevent').remove();
+
         }
 	});
 };
-function fn_get_events(eno)
+function fn_get_events()
 {
 	$.ajax({
 		url: './jsontest.do', 
 		type : "post",
 		dataType: 'json',
-		data: {
-			eno: eno
-		},
 		success: function(json) {
 			fn_set_calendar(json);
 		}
@@ -149,10 +171,29 @@ function fn_get_events(eno)
 					<%@include file="../Menu/calmenu.jsp"%>
 				</div>
 				<div id="cal" class="col-sm-10">
-					<div id='calendar'></div>
+					<table>
+					<tr>
+						<td>
+							<table>
+								<tr>
+									<td><div style="width: 20px; padding: 0; margin: 0; background-color: purple;">&nbsp;</div></td>
+									<td><div style="padding: 0; margin: 0; color: purple">: 회사일정&nbsp;</div></td>
+									<td><div style="width: 20px; padding: 0; margin: 0; background-color: orange;">&nbsp;</div></td>
+									<td><div style="padding: 0; margin: 0; color: orange">: 부서일정&nbsp;</div></td>
+									<td><div style="width: 20px; padding: 0; margin: 0; background-color: green;">&nbsp;</div></td>
+									<td><div style="padding: 0; margin: 0; color: green">: 개인일정&nbsp;</div></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<td><div id='calendar'></div></td>
+					</tr>
+				</table>
 				</div>
 			</div>
 		</div>
 	</div>
+	<div class="calendarTooltip"></div>
 </body>
 </html>

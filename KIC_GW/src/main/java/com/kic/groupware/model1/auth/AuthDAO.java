@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-
 public class AuthDAO {
 	private Connection conn = null;
 	
@@ -184,6 +183,39 @@ public class AuthDAO {
 		
 		
 		return flag;
+	}
+	
+	public AuthvacationTO vacationview(AuthvacationTO to) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+	
+		try {
+			String sql = "select vno, eno, authno, ename, deptno, date_format(vdate, '%Y.%m.%d') vdate, job, vtype, vstart, vend, vreason, authstate  from auth_vacation where vno=?";
+			pstmt = conn.prepareStatement( sql );
+			pstmt.setString( 1, to.getVno() );
+			System.out.println("dfdsf");
+			rs = pstmt.executeQuery();
+			if( rs.next() ) {
+				to.setEno( rs.getString( "eno" ) );
+				to.setAuthno( rs.getString( "authno" ) );
+				to.setEname( rs.getString( "ename" ) );
+				to.setDeptno( rs.getString( "deptno" ) );
+				to.setVdate( rs.getString( "vdate" ) );
+				to.setJob( rs.getString( "job" ) );
+				to.setVtype( rs.getString( "vtype" ) );
+				to.setVstart( rs.getString( "vstart" ) );
+				to.setVend( rs.getString( "vend" ) );
+				to.setVreason( rs.getString( "vreason" ) );
+				to.setAuthstate( rs.getString( "authstate" ) );
+			}
+		} catch(SQLException e) {
+			System.out.println("[에러] " + e.getMessage());
+		} finally {
+			if(rs != null) try { rs.close(); } catch( SQLException e ) {}
+			if(pstmt != null) try { pstmt.close(); } catch( SQLException e ) {}
+			if(conn != null) try { conn.close(); } catch( SQLException e ) {}
+		}
+		return to;
 	}
 	
 	public int transportationin(AuthtransportationTO to, int count) {

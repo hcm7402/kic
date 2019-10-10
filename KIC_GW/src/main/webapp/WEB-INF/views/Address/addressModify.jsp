@@ -1,22 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	request.setCharacterEncoding("UTF-8"); 
-	String eno = (String)session.getAttribute("eno");
-	String level = (String)session.getAttribute("level");
-
-	if(eno == null || eno.equals("")) {
-		out.println("<script type='text/javascript'>");
-		out.println("alert('로그인이 필요합니다.')");
-		out.println("location.href='./login.do'");
-		out.println("</script>");
-	} /* else if(level == "3") {
-		out.println("<script type='text/javascript'>");
-		out.println("alert('권한이 필요합니다.')");
-		out.println("location.href='./login.do'");
-		out.println("</script>");
-	} */
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +15,9 @@ a {
 }
 
 .button {
+  width: 50%;
   height: 100%;
+  margin: auto;
   display: block;
   border: 1px solid #4f4f4f;
   border-radius: 4px;
@@ -86,6 +71,31 @@ a {
     background: #39bda7;
 }
 </style>
+<link rel="stylesheet" href="./resources/css/bootstrap.min.css">
+<script type="text/javascript" src="./resources/js/jquery-3.4.1.js"></script>
+<script type="text/javascript">
+function ad_Modify(eno){
+	swal({
+		  title: "허가하시겠습니까?",
+		  icon: "warning",
+		  dangerMode: true,
+		  buttons: [true, "허가"],
+		})
+		.then((willDelete) => {
+			if (willDelete) {
+			    swal("완료!", {
+			      icon: "success",
+			      button: false
+			    });
+				setTimeout(function () {
+					location.href='./addressModify_ok.do?eno=' + eno;
+				}, 1000);
+			} else {
+				close: true;
+			}
+	});
+};
+</script>
 </head>
 <body>
 <div id="wrapper">
@@ -107,6 +117,7 @@ a {
 				<col width='10%' />
 				<col width='5%' />
 				<col width='5%' />
+				<col width='10%' />
 			</colgroup>
 			<thead>
 				<tr>
@@ -117,6 +128,7 @@ a {
 					<th>아이디</th>
 					<th>직급</th>
 					<th>권한</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -131,6 +143,7 @@ a {
 						<td><c:out value="${addressList.eid}"/></td>
 						<td><c:out value="${addressList.job}"/></td>
 						<td><c:out value="${addressList.level}"/></td>
+						<td><a onclick="ad_Modify(${addressList.eno})" class="button" style="text-decoration:none">가입허가</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

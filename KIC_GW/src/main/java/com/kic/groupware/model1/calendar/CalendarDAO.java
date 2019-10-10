@@ -38,7 +38,7 @@ public class CalendarDAO {
 
 		ArrayList<CalendarTO> cdcompanyList = new ArrayList<CalendarTO>();
 		try {
-			String sql = "select cdno, cdname, startdate, enddate from calendar_date where cddiv = ?";
+			String sql = "select cdno, cddivision, cdname, startdate, enddate, contents from calendar_date where cddiv = ?";
 			pstmt = conn3.prepareStatement(sql);
 			pstmt.setString(1, "0");
 			
@@ -46,9 +46,11 @@ public class CalendarDAO {
 			while( rs.next() ) {
 				CalendarTO to = new CalendarTO();
 				to.setCdname(rs.getString("cdname"));
+				to.setCddivision(rs.getString("cddivision"));
 				to.setStartdate(rs.getString("startdate"));
 				to.setEnddate(rs.getString("enddate"));
 				to.setCdno(rs.getString("cdno"));
+				to.setContents(rs.getString("contents"));
 				to.setCddiv("0");
 				
 				cdcompanyList.add(to);
@@ -63,24 +65,33 @@ public class CalendarDAO {
 		return cdcompanyList;
 	}
 	
-	public ArrayList<CalendarTO> cddepartList(String deptno) {
+	public ArrayList<CalendarTO> cddepartList(String eno, String deptno) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		ArrayList<CalendarTO> cddepartList = new ArrayList<CalendarTO>();
 		try {
-			String sql = "select cdno, cdname, startdate, enddate from calendar_date where cddiv = ? and deptno = ?";
-			pstmt = conn2.prepareStatement(sql);
-			pstmt.setString(1, "1");
-			pstmt.setString(2, deptno);
+			String sql = null;
+			if(!eno.equals("0")) {
+				sql = "select cdno, cddivision, cdname, startdate, enddate, contents from calendar_date where cddiv = ? and deptno = ?";
+				pstmt = conn2.prepareStatement(sql);
+				pstmt.setString(1, "1");
+				pstmt.setString(2, deptno);
+			} else {
+				sql = "select cdno, cddivision, cdname, startdate, enddate, contents from calendar_date where cddiv = ?";
+				pstmt = conn2.prepareStatement(sql);
+				pstmt.setString(1, "1");
+			}
 			
 			rs = pstmt.executeQuery();
 			while( rs.next() ) {
 				CalendarTO to = new CalendarTO();
 				to.setCdname(rs.getString("cdname"));
+				to.setCddivision(rs.getString("cddivision"));
 				to.setStartdate(rs.getString("startdate"));
 				to.setEnddate(rs.getString("enddate"));
 				to.setCdno(rs.getString("cdno"));
+				to.setContents(rs.getString("contents"));
 				to.setCddiv("1");
 				
 				cddepartList.add(to);
@@ -101,7 +112,7 @@ public class CalendarDAO {
 
 		ArrayList<CalendarTO> cdoneList = new ArrayList<CalendarTO>();
 		try {
-			String sql = "select cdno, cdname, startdate, enddate from calendar_date where cddiv = ? and eno = ?";
+			String sql = "select cdno, cddivision, cdname, startdate, enddate, contents from calendar_date where cddiv = ? and eno = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "2");
 			pstmt.setString(2, eno);
@@ -110,9 +121,11 @@ public class CalendarDAO {
 			while( rs.next() ) {
 				CalendarTO to = new CalendarTO();
 				to.setCdname(rs.getString("cdname"));
+				to.setCddivision(rs.getString("cddivision"));
 				to.setStartdate(rs.getString("startdate"));
 				to.setEnddate(rs.getString("enddate"));
 				to.setCdno(rs.getString("cdno"));
+				to.setContents(rs.getString("contents"));
 				to.setCddiv("2");
 				
 				cdoneList.add(to);

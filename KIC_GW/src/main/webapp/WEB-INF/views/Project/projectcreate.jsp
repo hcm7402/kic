@@ -14,171 +14,11 @@
 	content="width=device-width,initial-scale=1.0,minimun-scale=1.0,maximun-scale=1.0">
 <link rel="stylesheet" href="./resources/css/bootstrap-datepicker3.css">
 <link rel="stylesheet" href="./resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="./resources/css/projectcreate.css">
 <script type="text/javascript" src="./resources/js/jquery-3.4.1.js"></script>
 <script src="./resources/js/bootstrap-datepicker.min.js"></script>
 <script src="./resources/js/bootstrap-datepicker.ko.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<style>
-.project-form {
-	width: 100%;
-	height: 100%;
-}
-
-.create1 {
-	float: left;
-	width: 40%;
-	height: 100%;
-}
-
-.create2 {
-	float: left;
-	width: 30%;
-	height: 100%;
-}
-
-.create3 {
-	float: left;
-	width: 30%;
-	height: 100%;
-}
-
-body {
-	font-family: 'Malgun Gothic';
-	margin-left: 40px;
-	margin-right: 40px;
-}
-
-.etc {
-	font-size: 12px;
-	color: #47C83E;
-}
-
-.click, .click2, .click3 {
-	background-color: #56bafc;
-	-webkit-border-top-left-radius: 42px;
-	-moz-border-radius-topleft: 42px;
-	border-top-left-radius: 42px;
-	-webkit-border-top-right-radius: 42px;
-	-moz-border-radius-topright: 42px;
-	border-top-right-radius: 42px;
-	-webkit-border-bottom-right-radius: 42px;
-	-moz-border-radius-bottomright: 42px;
-	border-bottom-right-radius: 42px;
-	-webkit-border-bottom-left-radius: 42px;
-	-moz-border-radius-bottomleft: 42px;
-	border-bottom-left-radius: 42px;
-	text-indent: 0px;
-	display: inline-block;
-	color: #ffffff;
-	font-family: Arial;
-	font-size: 48px;
-	font-weight: bold;
-	font-style: normal;
-	height: 31px;
-	line-height: 31px;
-	width: 30px;
-	text-align: center;
-}
-
-.click:hover, .click2:hover, .click3:hover {
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #03ffcd
-		), color-stop(1, #47c9af));
-	background: -moz-linear-gradient(center top, #03ffcd 5%, #47c9af 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#03ffcd',
-		endColorstr='#47c9af');
-	background-color: #03ffcd;
-}
-
-.click:active, .click2:active, .click3:active {
-	position: relative;
-	top: 1px;
-}
-
-.click-option {
-	margin: 5px;
-}
-
-.submit-wrapper {
-        display: inline-block;
-        margin: 5px 5px;
-        padding: 10px;
-    }
-    .submit {
-        background: #D5D5D5;
-        border: none;
-        padding: 2px;
-        cursor: pointer;
-        display: block;
-        position: relative;
-        overflow: hidden;
-        transition: all .35s ease-in-out .35s;
-        margin: 0 auto;
-        width: 80px;
-        text-align: center;
-    }
-    .submit span {
-        display: block;
-        padding: 10px 20px;
-        background: #D5D5D5;
-        z-index: 100;
-        position: relative;
-        transition: all .35s ease-in-out .35s;
-    }
-    .submit:hover span {
-        background: #56bafc;
-        color: #fff;
-        transition: all .35s ease-in-out .35s;
-    }
-    .submit:after {
-        bottom: -100%;
-        right: -100%;
-        content: "";
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        background: #56bafc;
-        transition: all .35s ease-in-out .5s;
-    }
-    .submit:hover:after {
-        right: 0;
-        bottom: 0;
-        transition: all ease-in-out .35s;
-    }
-    .submit:before {
-        top: -100%;
-        left: -100%;
-        content: "";
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        background: #56bafc;
-        transition: all .35s ease-in-out .5s;
-    }
-    .submit:hover:before {
-        left: 0;
-        top: 0;
-        transition: all ease-in-out .35s;
-    }
-    .team {
-		line-height: 50px;
-		padding-left: 15px;
-	}
-	.photo {
-	    width: 50px;
-	    height: 50px;
-	    position: relative;
-	    overflow: hidden;
-	    border-radius: 50%;
-	    float: left;
-	    margin-right: 15px;
-	}
-	.img {
-	    display: inline;
-	    margin: 0 auto;
-	    height: 100%;
-	    width: 100%;
-	}
-</style>
 <script type="text/javascript">
 	$(document).ready(function() {
 		var teamlist = function() {
@@ -199,7 +39,7 @@ body {
 						if( deptno == 1 ) {
 							var html = '<li class="nav-item"><a class="nav-link push" data-dept=' +deptno+ ' data-value="' + item.eno + '">';
 							html += '<div class="photo">';
-							html += '<img src="' + ePhoto +'" class="img" />';
+							html += '<img src="./resources/photo/' + ePhoto +'" class="img" />';
 							html += '</div>';
 							html += '<div class="team">' + ename + '</div></a></li>';
 							$('.team1').append( html );
@@ -207,14 +47,14 @@ body {
 						}else if( deptno == 2 ) {
 							var html = '<li class="nav-item"><a class="nav-link push" data-dept=' +deptno+ ' data-value="' + item.eno + '">';
 							html += '<div class="photo">';
-							html += '<img src="' + ePhoto +'" class="img" />';
+							html += '<img src="./resources/photo/' + ePhoto +'" class="img" />';
 							html += '</div>';
 							html += '<div class="team">' + ename + '</div></a></li>';
 							$('.team2').append( html );
 						}else if( deptno == 3 ) {
 							var html = '<li class="nav-item"><a class="nav-link push" data-dept=' +deptno+ ' data-value="' + item.eno + '">';
 							html += '<div class="photo">';
-							html += '<img src="' + ePhoto +'" class="img" />';
+							html += '<img src="./resources/photo/' + ePhoto +'" class="img" />';
 							html += '</div>';
 							html += '<div class="team">' + ename + '</div></a></li>';
 							$('.team3').append( html );

@@ -14,9 +14,23 @@ public class UserTO {
 	String eid;
 	String epw;
 	String authphoto;
+	String dname;
 	int level;
 	int flag;
 
+	
+	public String getDname() {
+		return dname;
+	}
+	public void setDname(String dname) {
+		this.dname = dname;
+	}
+	public String getJob() {
+		return job;
+	}
+	public void setJob(String job) {
+		this.job = job;
+	}
 	public int getFlag() {
 		return flag;
 	}
@@ -28,12 +42,6 @@ public class UserTO {
 	}
 	public void setDeptno(String deptno) {
 		this.deptno = deptno;
-	}
-	public String getJob() {
-		return job;
-	}
-	public void setJob(String job) {
-		this.job = job;
 	}
 	public String getSal() {
 		return sal;

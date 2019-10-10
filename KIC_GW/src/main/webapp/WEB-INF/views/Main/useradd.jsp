@@ -282,7 +282,7 @@ label {
 				</div>
 	
 				<div class="wrap-input100" data-validate = "Enter username">
-					<label>아이디</label><input type="button" class="btn btn-success" id="id_certify" style="float: right;" value="중복확인">
+					<label>아이디</label><input type="button" class="btn btn-primary" id="id_certify" style="float: right;" value="중복확인">
 					<input class="input100" type="text" name="eid" id="eid">
 				</div>
 				
@@ -335,7 +335,7 @@ label {
 					도장 : <input type="file" style="float: right" name="authphoto" id="authphoto">
 				</div>
 				<div class="container-login100-form-btn">
-					<input type="submit" class="login50-form-btn" id="useradd" value="가입하기" />
+					<input type="submit" class="login50-form-btn" id="useradd" value="가입하기" />&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="button" class="login50-form-btn" id="cancel" value="취소" />
 				</div>
 			</form>

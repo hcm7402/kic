@@ -137,16 +137,16 @@ iframe {
 /*//////////////////////////////////////////////////////////////////
 [ Utility ]*/
 .txt1 {
-  font-family: Poppins-Regular;
+  font-family: 'Malgun Gothic';
   font-size: 15px;
   color: #999999;
   line-height: 1.5;
 }
 
 .txt2 {
-  font-family: Poppins-Regular;
+  font-family: 'Malgun Gothic';
   font-size: 15px;
-  color: #57b846;
+  color: #56bafc;
   line-height: 1.5;
 }
 
@@ -281,7 +281,7 @@ iframe {
   -moz-transition: all 0.4s;
   transition: all 0.4s;
 
-  background: #57b846;
+  background: #56bafc;
 }
 
 .focus-input100::after {
@@ -339,7 +339,7 @@ iframe {
 .login100-form-btn {
   font-family: Poppins-Medium;
   font-size: 16px;
-  color: #fff;
+  color: #000;
   line-height: 1.2;
   text-transform: uppercase;
 
@@ -353,14 +353,9 @@ iframe {
   padding: 0 20px;
   width: 100%;
   height: 50px;
-  background-color: #57b846;
+  background-color: #56bafc;
   border-radius: 25px;
 
-  box-shadow: 0 10px 30px 0px rgba(87, 184, 70, 0.5);
-  -moz-box-shadow: 0 10px 30px 0px rgba(87, 184, 70, 0.5);
-  -webkit-box-shadow: 0 10px 30px 0px rgba(87, 184, 70, 0.5);
-  -o-box-shadow: 0 10px 30px 0px rgba(87, 184, 70, 0.5);
-  -ms-box-shadow: 0 10px 30px 0px rgba(87, 184, 70, 0.5);
 
   -webkit-transition: all 0.4s;
   -o-transition: all 0.4s;
@@ -369,12 +364,7 @@ iframe {
 }
 
 .login100-form-btn:hover  {
-  background-color: #333333;
-  box-shadow: 0 10px 30px 0px rgba(51, 51, 51, 0.5);
-  -moz-box-shadow: 0 10px 30px 0px rgba(51, 51, 51, 0.5);
-  -webkit-box-shadow: 0 10px 30px 0px rgba(51, 51, 51, 0.5);
-  -o-box-shadow: 0 10px 30px 0px rgba(51, 51, 51, 0.5);
-  -ms-box-shadow: 0 10px 30px 0px rgba(51, 51, 51, 0.5);
+  background-color: #00D8FF;
 }
 
 .login50-form-btn {
@@ -392,16 +382,10 @@ iframe {
   justify-content: center;
   align-items: center;
   padding: 0 20px;
-  width: 50%;
+  width: 40%;
   height: 50px;
-  background-color: #57b846;
+  background-color: #56bafc;
   border-radius: 25px;
-
-  box-shadow: 0 10px 30px 0px rgba(87, 184, 70, 0.5);
-  -moz-box-shadow: 0 10px 30px 0px rgba(87, 184, 70, 0.5);
-  -webkit-box-shadow: 0 10px 30px 0px rgba(87, 184, 70, 0.5);
-  -o-box-shadow: 0 10px 30px 0px rgba(87, 184, 70, 0.5);
-  -ms-box-shadow: 0 10px 30px 0px rgba(87, 184, 70, 0.5);
 
   -webkit-transition: all 0.4s;
   -o-transition: all 0.4s;
@@ -409,12 +393,7 @@ iframe {
   transition: all 0.4s;
 }
 .login50-form-btn:hover  {
-  background-color: #333333;
-  box-shadow: 0 10px 30px 0px rgba(51, 51, 51, 0.5);
-  -moz-box-shadow: 0 10px 30px 0px rgba(51, 51, 51, 0.5);
-  -webkit-box-shadow: 0 10px 30px 0px rgba(51, 51, 51, 0.5);
-  -o-box-shadow: 0 10px 30px 0px rgba(51, 51, 51, 0.5);
-  -ms-box-shadow: 0 10px 30px 0px rgba(51, 51, 51, 0.5);
+  background-color: #00AAFF;
 }
 
 /*------------------------------------------------------------------

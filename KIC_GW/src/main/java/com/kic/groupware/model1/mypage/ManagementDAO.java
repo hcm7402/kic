@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import com.kic.groupware.model1.user.UserTO;
+
 public class ManagementDAO {
 	private Connection conn = null;
 	
@@ -218,5 +220,58 @@ public ArrayList<ManagementTO> managelist( String eno ) {
 		}
 		
 		return manageLists;
+	}
+
+	public UserTO myinfo( String eno ) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		UserTO to = new UserTO();
+		
+		try {
+			String sql = "select * from emp e inner join department d on e.deptno = d.deptno where eno = ?";
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, eno);
+			
+			rs = pstmt.executeQuery();
+			
+			while( rs.next() ) {
+				String ename = rs.getString("ename");
+				String ephoto = rs.getString("ephoto");
+				String job = rs.getString("job");
+				String deptno = rs.getString("deptno");
+				String dname = rs.getString("dname");
+				String birth = rs.getString("birth");
+				String hiredate = rs.getString("hiredate");
+				String email = rs.getString("email");
+				String address = rs.getString("address");
+				
+				to.setEname(ename);
+				to.setDeptno(deptno);
+				to.setEphoto(ephoto);
+				to.setBirth(birth);
+				to.setEmail(email);
+				to.setAddress(address);
+				to.setHiredate(hiredate);
+				to.setJob(job);
+				to.setDname(dname);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if( rs != null ) try { rs.close(); } catch(SQLException e) {};
+			if( pstmt != null ) try { pstmt.close(); } catch(SQLException e) {};
+			if( conn != null ) try { conn.close(); } catch(SQLException e) {};
+		}
+		
+		return to;
+	}
+	
+	public int myinfomodify( UserTO to ) {
+		int flag = 1;
+		
+		return flag;
 	}
 }

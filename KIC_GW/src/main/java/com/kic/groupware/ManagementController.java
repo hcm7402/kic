@@ -11,6 +11,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kic.groupware.model1.mypage.ManagementDAO;
 import com.kic.groupware.model1.mypage.ManagementTO;
+import com.kic.groupware.model1.user.UserDAO;
+import com.kic.groupware.model1.user.UserTO;
 
 @Controller
 public class ManagementController {
@@ -29,8 +31,33 @@ public class ManagementController {
 	public ModelAndView myinfo( HttpServletRequest request, HttpServletResponse response) {
 		System.out.println( "myinfo 컨트롤러 호출" );
 		
+		String eno = request.getParameter("eno");
+		
+		ManagementDAO dao = new ManagementDAO();
+		UserTO to = dao.myinfo(eno);
+		
 		ModelAndView model = new ModelAndView();
 		model.setViewName( "MyPage/myinfo" );
+		model.addObject("to", to);
+		
+		return model;
+	}
+	
+	@RequestMapping(value = "/myinfomodify.do")
+	public ModelAndView myinfomodify( HttpServletRequest request, HttpServletResponse response) {
+		System.out.println( "myinfomodify 컨트롤러 호출" );
+		
+		String eno = request.getParameter("eno");
+		
+		ManagementDAO dao = new ManagementDAO();
+		UserTO to = dao.myinfo(eno);
+		UserDAO dao1 = new UserDAO();
+		ArrayList<String> deptList = dao1.deptList();
+		
+		ModelAndView model = new ModelAndView();
+		model.setViewName( "MyPage/myinfomodify" );
+		model.addObject("to", to);
+		model.addObject("deptList",deptList);
 		
 		return model;
 	}

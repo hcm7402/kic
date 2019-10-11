@@ -16,12 +16,12 @@
 		out.println("alert('로그인이 필요합니다.')");
 		out.println("location.href='./login.do'");
 		out.println("</script>");
-	} /* else if(level == "4") {
+	} else if(!level.equals("4")) {
 		out.println("<script type='text/javascript'>");
 		out.println("alert('권한이 필요합니다.')");
-		out.println("location.href='./login.do'");
+		out.println("history.back()");
 		out.println("</script>");
-	} */
+	}
 %>
 <!DOCTYPE html>
 <html>

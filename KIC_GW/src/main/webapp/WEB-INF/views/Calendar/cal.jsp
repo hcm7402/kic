@@ -50,7 +50,7 @@
 }
 
 th {
-	background-color: #47c9af;
+	background-color: #56bafc;
 }
 
 body {
@@ -101,7 +101,6 @@ function date_to_str(format)
     return year + "-" + month + "-" + date;
 }
 
-var oldno = null;
 function fn_set_calendar(events){
 	var calendar = $('#calendar').fullCalendar({
 		header: {

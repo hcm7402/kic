@@ -2,6 +2,7 @@ package com.kic.groupware.model1.auth;
 
 public class AuthvacationTO {
 	
+	
 	private String vno;
 	private String authno;
 	private String eno;

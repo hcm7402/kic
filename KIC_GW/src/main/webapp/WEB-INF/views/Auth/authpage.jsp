@@ -45,6 +45,7 @@
    			}
    		});
    		
+   		
    		$.ajax({
 			url : './authlist.do',
 			type : 'get',

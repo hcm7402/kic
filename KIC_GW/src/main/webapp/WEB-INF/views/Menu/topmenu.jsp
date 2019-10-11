@@ -81,7 +81,7 @@ li {
    	if( Integer.parseInt(levels) != 4 ) {
    		out.println("<li><a href='./authpage.do'>전자결재</a></li>");
    		out.println("<li><a href='./project.do'>프로젝트</a></li>");
-   		out.println("<li><a href='#'>게시판</a></li>");
+   		out.println("<li><a href='./boardpage.do'>게시판</a></li>");
    		out.println("<li><a href='./cal.do'>캘린더</a></li>");
    		out.println("<li><a href='./address.do'>조직도</a></li>");
    		out.println("<li><a href='./mypage.do'>My page</a></li>");

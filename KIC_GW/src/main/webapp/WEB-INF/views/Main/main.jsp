@@ -126,6 +126,7 @@ background-color:#fff;      }
 						
 						if( checkin == '' || checkin == null ) {
 							$('.checkin-time').html('출근시간 : 미확인');
+							$('.checkout').val('퇴근하기').prop( 'disabled', true );
 						}else {
 							var intime = checkin.split(' ');
 							$( '.checkin-time').html( '출근시간 : ' + intime[1].substring(0,8) );
@@ -134,6 +135,7 @@ background-color:#fff;      }
 						
 						if( checkout == '' || checkout == null ) {
 							$('.checkout-time').html('퇴근시간 : 미확인');
+							
 						} else {
 							var outtime = checkout.split(' ');
 							$( '.checkout-time').html( '퇴근시간 : ' + outtime[1].substring(0,8) );
@@ -148,6 +150,8 @@ background-color:#fff;      }
 		
 		// 출근, 퇴근 시간 출력
 		checkinout(<%=eno%>);
+		
+		var check = '';
 		
 		var checkin = function( eno, indate ) {
 			$.ajax({
@@ -184,6 +188,8 @@ background-color:#fff;      }
 				}
 			});
 		} // end of checkin
+		
+		
 		var checkout = function( eno, outdate ) {
 			
 			$.ajax({
@@ -221,18 +227,21 @@ background-color:#fff;      }
 			});
 		} // end of checkout
 		var indate = '';
+		
+		
+		
 		/* 출근하기 눌렀을때 초까지 저장 */
 		$('.checkin').on('click', function() {
 			// 출근 시간
 			indate = printClock();
 			checkin( <%=eno %>, indate );
-			
+			$('.checkout').val('퇴근하기').prop( 'disabled', false );
 		});
 		var outdate = '';
 		/* 퇴근하기 눌렀을 때 */
 		$('.checkout').on('click', function() {
-				outdate = printClock();
-				checkout( <%=eno%>, outdate );
+			outdate = printClock();
+			checkout( <%=eno%>, outdate );
 		});
 		
 		

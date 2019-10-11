@@ -7,11 +7,14 @@
     pageEncoding="UTF-8"%>
 <% request.setCharacterEncoding("UTF-8"); %>
 <%
+	String eno = (String) session.getAttribute("eno");
+
 	UserTO to = (UserTO) request.getAttribute("to");
 	
 	String ename = to.getEname();
 	String ephoto = to.getEphoto();
 	String address = to.getAddress();
+	System.out.println( address );
 	String email = to.getEmail();
 	String dname = to.getDname();
 	String hiredate = to.getHiredate();
@@ -36,8 +39,69 @@
 <script type="text/javascript" src="./resources/js/jquery-3.4.1.js"></script>
 <script type="text/javascript">
 	$( document ).ready( function() {
+		var modifyok = function( address, deptno, email ) {
+			$.ajax({
+				url: './myinfomodify_ok.do',
+				type: 'get',
+				data: {
+					address: address,
+					deptno: deptno,
+					email: email,
+					eno: <%=eno %>
+				},
+				dataType: 'JSON',
+				success: function( json ) {
+					results = json.results;
+					$(results).each( function() {
+						var flag = this.flag;
+						if( flag == 0 ) {
+							swal({
+								  title: "정보가 수정되었습니다.",
+								  icon: "success",
+								})
+								.then( function(willDelete) {
+									  if (willDelete) {
+										  location.href = 'mypage.do';
+									  } 
+									});
+							
+						}else {
+							swal({
+								  title: '정보 수정에 실패하였습니다.',
+								  icon: 'warning'
+								})
+								.then( function(willDelete) {
+									  if (willDelete) {
+										  location.href = 'mypage.do';
+									  } 
+									});
+						}
+					});
+				}
+			});
+		}
+		
 		$( document ).on( 'click', '.info-modify-cancle', function() {
 			location.href = './mypage.do';
+		});
+		$( document ).on( 'click', '.modify-ok' ,function() {
+			var address = $('.address').val();
+			var deptno = $('#deptno option:selected').val();
+			var email = $('.email').val();
+			
+			swal({
+				  title: '정말로 수정하시겠습니까?',
+				  icon: 'warning',
+				  dangerMode: true,
+				  buttons: [true, "수정"],
+				})
+				.then( function(willDelete) {
+					  if (willDelete) {
+						  modifyok( address, deptno, email );
+					  } else {
+						  close: true;
+					  }
+					});
 		});
 	});
 </script>
@@ -104,30 +168,30 @@ body {
 	<tr>
 		<td class="myinfo-sub">입사일</td>
 		<td class="myinfo-hiredate" >
-			<input type="text" class="form-controll" disabled="disabled" value=<%=hiredate %> />
+			<input type="text" class="form-controll" disabled="disabled" value="<%=hiredate %>" />
 		</td>
 	</tr>
 	<tr>
 		<td class="myinfo-sub">생년월일</td>
 		<td class="myinfo-birth" >
-			<input type="text" class="form-controll" disabled="disabled" value=<%=birth %> />
+			<input type="text" class="form-controll" disabled="disabled" value="<%=birth %>" />
 		</td>
 	</tr>
 	<tr>
 		<td class="myinfo-sub">주 소</td>
 		<td class="myinfo-addr" >
-			<input type="text" class="form-controll address" value=<%=address %> />
+			<input type="text" class="address" width="200" value="<%=address %>" />
 		</td>
 	</tr>
 	<tr>
 		<td class="myinfo-sub">메 일</td>
 		<td class="myinfo-mail" >
-			<input type="text" class="form-controll email" value=<%=email %> />
+			<input type="text" class="form-controll email" value="<%=email %>" />
 		</td>
 	</tr>
 	</table>
 	<div class="align-right">
-		<button class="btn btn-primary info-modify-ok">수정</button>
+		<button class="btn btn-primary modify-ok">수정</button>
 		<button class="btn btn-primary info-modify-cancle">취소</button>
 	</div>
 </body>

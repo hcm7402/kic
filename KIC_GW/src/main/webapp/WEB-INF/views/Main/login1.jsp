@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	String eno = (String)session.getAttribute("eno");
+	/* String eno = (String)session.getAttribute("eno");
 
 	if(eno != null) {
 		out.println("<script type='text/javascript'>");
 		out.println("location.href='./main.do'"); 
 		out.println("</script>");
-	}
+	} */
 %>
 <!DOCTYPE html>
 <html>
@@ -69,15 +69,28 @@
 								  icon: 'warning'
 							});
 						}else {
-							swal({
-								  title: "로그인에 성공하였습니다.",
-								  icon: "success",
-								})
-								.then( function(willDelete) {
-									  if (willDelete) {
-										  session( eno, level, ename );
-									  } 
-								});
+							if( level == 0 ) {
+								swal({
+									  title: "관리자 허가가 필요합니다",
+									  icon: "warning",
+									})
+									.then( function(willDelete) {
+										  if (willDelete) {
+											  location.href = './login.do';
+										  } 
+									});
+								return false;
+							} else {
+								swal({
+									  title: "로그인에 성공하였습니다.",
+									  icon: "success",
+									})
+									.then( function(willDelete) {
+										  if (willDelete) {
+											  session( eno, level, ename );
+										  } 
+									});
+							}
 						}
 					});
 					

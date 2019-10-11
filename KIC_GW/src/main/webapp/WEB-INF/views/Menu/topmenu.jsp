@@ -1,7 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%
 	String enos = (String) session.getAttribute("eno");
-	String enames = (String) session.getAttribute("ename");
+	String levels = (String) session.getAttribute("level");
+	String enames = "";
+	
+	if( Integer.parseInt(levels) == 4 ) {
+		enames = "관리자";
+	} else {
+		enames = (String) session.getAttribute("ename");
+	}
+	
+	if(enos == null || enos.equals("")) {
+		out.println("<script type='text/javascript'>");
+		out.println("alert('로그인이 필요합니다.')");
+		out.println("location.href='./login.do'");
+		out.println("</script>");
+	}
 %>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="./resources/styles.css">
@@ -63,12 +77,19 @@ li {
 	<ul>
    <li class="home"><a href="./main.do">Home</a></li>
    <li><a href="#">공지사항</a></li><!-- 공지 사항-->
-   <li><a href='./authpage.do'>전자결재</a></li><!-- 전자 -->
-   <li><a href='./project.do'>프로젝트</a></li><!-- 프젝 -->
-   <li><a href='./boardpage.do'>게시판</a></li><!-- 게시판 -->
-   <li><a href='./cal.do'>캘린더</a></li>
-   <li><a href='./address.do'>조직도</a></li><!-- 조직 -->
-   <li><a href='./mypage.do'>My page</a></li><!-- 마이 -->
+   <%
+   	if( Integer.parseInt(levels) != 4 ) {
+   		out.println("<li><a href='./authpage.do'>전자결재</a></li>");
+   		out.println("<li><a href='./project.do'>프로젝트</a></li>");
+   		out.println("<li><a href='./boardpage.do'>게시판</a></li>");
+   		out.println("<li><a href='./cal.do'>캘린더</a></li>");
+   		out.println("<li><a href='./address.do'>조직도</a></li>");
+   		out.println("<li><a href='./mypage.do'>My page</a></li>");
+   	} else {
+   		out.println("<li><a href='./cal.do'>캘린더</a></li>");
+   		out.println("<li><a href='./address.do'>조직도</a></li>");
+   	}
+   %>
 	</ul>
 	</div>
 	</div>

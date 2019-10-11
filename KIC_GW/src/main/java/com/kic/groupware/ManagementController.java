@@ -62,6 +62,42 @@ public class ManagementController {
 		return model;
 	}
 	
+	@RequestMapping(value = "/myinfomodify_ok.do")
+	public ModelAndView myinfomodify_ok( HttpServletRequest request, HttpServletResponse response) {
+		System.out.println( "myinfomodify_ok 컨트롤러 호출" );
+		
+		String eno = request.getParameter("eno");
+		String address = request.getParameter("address");
+		String deptno = request.getParameter("deptno");
+		String email = request.getParameter("email");
+		
+		ManagementDAO dao = new ManagementDAO();
+		int flag = dao.modifyok(eno, address, deptno, email);
+		
+		ModelAndView model = new ModelAndView();
+		model.setViewName( "MyPage/myinfomodify_ok" );
+		model.addObject("flag", flag);
+		
+		return model;
+	}
+	
+	@RequestMapping(value = "/password.do")
+	public ModelAndView password( HttpServletRequest request, HttpServletResponse response) {
+		System.out.println( "password 컨트롤러 호출" );
+		
+		String eno = request.getParameter("eno");
+		String password = request.getParameter("password");
+		
+		ManagementDAO dao = new ManagementDAO();
+		int flag = dao.password(eno, password);
+		
+		ModelAndView model = new ModelAndView();
+		model.setViewName( "MyPage/password" );
+		model.addObject("flag", flag);
+		
+		return model;
+	}
+	
 	@RequestMapping(value = "/Management.do")
 	public ModelAndView management( HttpServletRequest request, HttpServletResponse response) {
 		System.out.println( "management 컨트롤러 호출" );

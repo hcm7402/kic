@@ -382,6 +382,13 @@ public class ProjectDAO {
 			
 			pstmt2.executeUpdate();
 			
+			sql = "delete from project_comment where pjseq = ?";
+			pstmt2 = conn.prepareStatement(sql);
+			
+			pstmt2.setString(1, pjseq);
+			
+			pstmt2.executeUpdate();
+			
 			sql = "delete from project where pjseq = ? and pjleader = ?";
 			pstmt2 =conn.prepareStatement(sql);
 			

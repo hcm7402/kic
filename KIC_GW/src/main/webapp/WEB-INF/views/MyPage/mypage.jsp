@@ -83,10 +83,7 @@
 		$('.myinfo').on('click', function() {
 			 myinfo();
 		});
-		// 비밀번호 수정 클릭시
-		$('.infopassword').on('click', function() {
-			
-		});
+		
 	});
 </script>
 </head>
@@ -116,31 +113,7 @@
 		</div>
 
 	</div>
-	<!-- 비밀번호 변경 modal -->
-	<div class="modal" id="password_modal" role="dialog"  data-backdrop="static" data-keyboard="false">
-		<div class = "modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class= "modal-title">비밀번호 변경</h4>
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-				</div>
-				<div class="modal-body">
-				<div>
-					<div class="delete-form form-group" style="text-align: center;">
-						<label for="password1" style="font-size: 25px;">변경할 비밀번호를 입력하세요.</label><br />
-						<input class="form-controll project-password" id="password1" type="password" style="width: 300px; height: 40px" placeholder="비밀번호를 입력하세요." /><br />
-						<label for="password2" style="font-size: 25px;">비밀번호 확인</label><br />
-						<input class="form-controll project-password" id="password2" type="password" style="width: 300px; height: 40px" placeholder="비밀번호를 입력하세요." /><br />
-					</div>
-				</div>
-				</div>
-				<div class="modal-footer">
-					<input type="button" class="btn btn-primary dialog-password" value="변경하기" />
-					<input type="button" data-dismiss="modal" class="btn btn-primary cancle" value="취소" />
-				</div>
-			</div>
-		</div>
-	</div>
+	
 	<script src="./resources/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

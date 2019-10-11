@@ -243,11 +243,13 @@ public ArrayList<ManagementTO> managelist( String eno ) {
 				String deptno = rs.getString("deptno");
 				String dname = rs.getString("dname");
 				String birth = rs.getString("birth");
+				String epw = rs.getString("epw");
 				String hiredate = rs.getString("hiredate");
 				String email = rs.getString("email");
 				String address = rs.getString("address");
 				
 				to.setEname(ename);
+				to.setEpw(epw);
 				to.setDeptno(deptno);
 				to.setEphoto(ephoto);
 				to.setBirth(birth);
@@ -271,6 +273,62 @@ public ArrayList<ManagementTO> managelist( String eno ) {
 	
 	public int myinfomodify( UserTO to ) {
 		int flag = 1;
+		
+		return flag;
+	}
+	
+	public int modifyok( String eno, String address, String deptno, String email ) {
+		PreparedStatement pstmt = null;
+		
+		int flag = 1;
+		
+		try {
+			String sql = "update emp set address = ?, deptno = ?, email = ? where eno = ?";
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, address);
+			pstmt.setString(2, deptno);
+			pstmt.setString(3, email);
+			pstmt.setString(4, eno);
+			
+			int result = pstmt.executeUpdate();
+			if( result == 1 ) {
+				flag = 0;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  finally {
+			if( pstmt != null ) try { pstmt.close(); } catch(SQLException e) {};
+			if( conn != null ) try { conn.close(); } catch(SQLException e) {};
+		}
+		
+		return flag;
+	}
+	
+	public int password( String eno, String password ) {
+		PreparedStatement pstmt = null;
+		
+		int flag = 1;
+		
+		try {
+			String sql = "update emp set epw = ? where eno = ?";
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, password);
+			pstmt.setString(2, eno);
+			
+			int result = pstmt.executeUpdate();
+			if( result == 1 ) {
+				flag = 0;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  finally {
+			if( pstmt != null ) try { pstmt.close(); } catch(SQLException e) {};
+			if( conn != null ) try { conn.close(); } catch(SQLException e) {};
+		}
 		
 		return flag;
 	}

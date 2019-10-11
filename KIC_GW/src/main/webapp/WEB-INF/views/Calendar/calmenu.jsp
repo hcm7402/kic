@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%
+	String level = (String)session.getAttribute("level");
+%>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="stylesheet" href="./resources/menu.css">
@@ -29,9 +33,19 @@
 <ul>
    <li class='active has-sub'><a href='#'>켈린더 관리</a>
       <ul>
-         <li><a href='./calcompany.do'>회사 일정 관리</a></li>
-         <li><a href='./caldepart.do'>부서별 일정 관리</a></li>
-         <li><a href='./calone.do'>개인 일정 관리</a></li>
+      <%
+      	if ( Integer.parseInt(level) == 4 ) {
+      		out.println("<li><a href='./calcompany.do'>회사 일정 관리</a></li>");
+      	} else if( Integer.parseInt(level) == 3 ) {
+      		out.println("<li><a href='./caldepart.do'>부서별 일정 관리</a></li>");
+      		out.println("<li><a href='./calone.do'>개인 일정 관리</a></li>");
+      	} else if( Integer.parseInt(level) == 2 ) {
+      		out.println("<li><a href='./caldepart.do'>부서별 일정 관리</a></li>");
+      		out.println("<li><a href='./calone.do'>개인 일정 관리</a></li>");
+      	} else {
+      		out.println("<li><a href='./calone.do'>개인 일정 관리</a></li>");
+      	}
+      %>
       </ul>
    </li>
    <li><a href='./cal.do'>전체 일정</a></li>

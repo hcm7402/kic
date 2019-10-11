@@ -1729,7 +1729,7 @@ function _renderDaySegs(segs, rowCnt, view, minLeft, maxLeft, getRow, dayContent
 
 setDefaults({
 	allDaySlot: true,
-	allDayText: 'all-day',
+	allDayText: '오늘',
 	firstHour: 6,
 	slotMinutes: 30,
 	defaultEventMinutes: 120,

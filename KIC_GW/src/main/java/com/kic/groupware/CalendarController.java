@@ -135,9 +135,12 @@ public class CalendarController {
     public ModelAndView calModify_ok(HttpServletRequest request, HttpServletResponse response) {
     	System.out.println( "calModify_ok 컨트롤러 호출" );
 		
+    	HttpSession session = request.getSession();
+        String eno = (String)session.getAttribute("eno");
+        
 		ModelAndView model = new ModelAndView();
 		CalendarTO to = new CalendarTO();
-		to.setEno(request.getParameter("eno"));
+		to.setEno(eno);
 		to.setCdno(request.getParameter("cdno"));
 		to.setDeptno(request.getParameter("deptno"));
 		to.setCddivision(request.getParameter("cddivision"));
@@ -160,9 +163,12 @@ public class CalendarController {
 		
 		ModelAndView model = new ModelAndView();
 		
+		HttpSession session = request.getSession();
+        String eno = (String)session.getAttribute("eno");
+		
 		CalendarDAO caldao = new CalendarDAO();
 		CalendarTO to = new CalendarTO();
-		to.setEno(request.getParameter("eno"));
+		to.setEno(eno);
 		to.setCdno(request.getParameter("cdno"));
 		
 		int flag = caldao.calDelete(to);

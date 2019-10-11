@@ -226,7 +226,7 @@ public class CalendarDAO {
 		int flag = 1;
 
 		try {
-			String sql = "update calendar_date set deptno=?, cddivision=?, cdname=?, startdate=?, enddate=?, contents=? where cdno=?";
+			String sql = "update calendar_date set deptno=?, cddivision=?, cdname=?, startdate=?, enddate=?, contents=? where cdno=? and eno=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, to.getDeptno());
 			pstmt.setString(2, to.getCddivision());
@@ -235,6 +235,7 @@ public class CalendarDAO {
 			pstmt.setString(5, to.getEnddate());
 			pstmt.setString(6, to.getContents());
 			pstmt.setString(7, to.getCdno());
+			pstmt.setString(8, to.getEno());
 
 			int result = pstmt.executeUpdate();
 			if(result == 1) {

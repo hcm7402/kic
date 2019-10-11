@@ -176,7 +176,7 @@ function fn_Delete(){
 			      button: false
 			    });
 				setTimeout(function () {
-					location.href='./caldelete.do?cdno=' + <%=cdno %> + "&eno=" + <%=eno %>;
+					location.href='./caldelete.do?cdno=' + <%=cdno %>;
 				}, 1000);
 			} else {
 				close: true;
@@ -205,7 +205,6 @@ $( document ).ready( function() {
 					<%@include file="../Menu/calmenu.jsp"%>
 				</div>
 				<form id="form1" class="col-sm-10" name="form1" role="form" action="./calmodify_ok.do" method="post" >
-					<input type="hidden" name="eno" value="<%= eno %>">
 					<input type="hidden" name="cdno" value="<%=cdno %>">
 					<input type="hidden" name="deptno" value="0">
 					<input type="hidden" name="cddiv" value="2">

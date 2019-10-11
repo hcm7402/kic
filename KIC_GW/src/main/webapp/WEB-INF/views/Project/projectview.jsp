@@ -303,13 +303,17 @@
 			
 			swal({
 				  title: '정말로 삭제하시겠습니까?',
-				  text: 'Task도 삭제됩니다!',
-				  icon: 'warning'
+				  text: 'Task와 댓글도 모두 삭제됩니다!',
+				  icon: 'warning',
+				  dangerMode: true,
+				  buttons: [true, "삭제"],
 				})
 				.then( function(willDelete) {
 					  if (willDelete) {
 						  deleteproject( <%=pjseq %>, password );
-					  } 
+					  } else {
+						  close: true;
+					  }
 					});
 		});
 		
@@ -538,12 +542,16 @@
 			
 			swal({
 				  title: '정말로 삭제하시겠습니까?',
-				  icon: 'warning'
+				  icon: 'warning',
+				  dangerMode: true,
+				  buttons: [true, "삭제"],
 				})
 				.then( function(willDelete) {
 					  if (willDelete) {
 						  commentdelete( c_seq );
-					  } 
+					  } else {
+						  close: true;
+					  }
 					});
 		});
 		

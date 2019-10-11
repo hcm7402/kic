@@ -732,7 +732,7 @@
 
 <!-- 삭제 모달 -->
 <div class="modal" id="delete_modal" role="dialog"  data-backdrop="static" data-keyboard="false">
-	<div class = "modal-dialog"><!-- modal-lg 추가해서 팀원리스트 -->
+	<div class = "modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class= "modal-title">프로젝트 삭제</h4>

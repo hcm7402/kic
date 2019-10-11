@@ -149,7 +149,7 @@
 .wave.-two {
   animation: drift 7000ms infinite linear;
   
-  background: yellow;
+  background: #56bafc;
 }
 
 .box:after {
@@ -175,7 +175,7 @@
   transform: translate3d(0, 0, 0);
   color: white;
   text-transform: uppercase;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Malgun Gothic';
   letter-spacing: .4em;
   font-size: 24px;
   text-shadow: 0 1px 0 rgba(black, .1);
@@ -199,13 +199,11 @@
   					<div class='wave -three'></div>
 					<span class="login100-form-title arial s3"> KIC Groupware</span> <br /><br />
 					<div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate = "Enter username">
-						<input class="input100" type="text" id="u_id">
-						<span class="focus-input100" data-placeholder="아이디"></span>
+						<input class="input100" type="text" id="u_id" placeholder="아이디">
 					</div>
 
 					<div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
-						<input class="input100" type="password" id="u_password">
-						<span class="focus-input100" data-placeholder="비밀번호"></span>
+						<input class="input100" type="password" id="u_password" placeholder="비밀번호">
 					</div>
 
 					<div class="container-login100-form-btn">

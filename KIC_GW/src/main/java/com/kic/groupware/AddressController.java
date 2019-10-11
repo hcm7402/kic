@@ -108,7 +108,8 @@ public class AddressController {
     	ModelAndView model = new ModelAndView();
 		UserDAO userdao = new UserDAO();
 		System.out.println(request.getParameter("level"));
-		int flag = userdao.AddressModifyLevel_ok(request.getParameter("eno"), request.getParameter("level"));
+		System.out.println(request.getParameter("job"));
+		int flag = userdao.AddressModifyLevel_ok(request.getParameter("eno"), request.getParameter("level"), request.getParameter("job"));
 
 		model.addObject("flag", flag);
     	model.setViewName( "Address/addressModifyLevel_ok" );

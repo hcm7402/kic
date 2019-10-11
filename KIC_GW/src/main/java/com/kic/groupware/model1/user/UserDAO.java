@@ -105,12 +105,10 @@ public class UserDAO {
 		int flag = 1;
 
 		try {
-			String sql = "insert into emp values(0, ?, 0, ?, 0, ?, ?, ?, ?, ?, ?, ?, ?, 0)";
+			String sql = "insert into emp values(0, ?, '사원', ?, 0, ?, ?, ?, ?, ?, ?, ?, ?, 0)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, to.getEname());
-			/*pstmt.setString(2, to.getPno());*/
 			pstmt.setString(2, to.getHiredate());
-			/*pstmt.setString(3, to.getSal());*/
 			pstmt.setString(3, to.getBirth());
 			pstmt.setString(4, to.getAddress());
 			pstmt.setString(5, to.getDeptno());
@@ -330,15 +328,17 @@ public class UserDAO {
 		return addressList;
 	}
 	
-	public int AddressModifyLevel_ok(String eno, String level) {
+	public int AddressModifyLevel_ok(String eno, String level, String job) {
+		System.out.println("AddressModifyLevel_ok 호출");
 		PreparedStatement pstmt = null;
 		int flag = 1;
 
 		try {
-			String sql = "update emp set level = ? where eno = ?";
+			String sql = "update emp set level = ?, job = ? where eno = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, level);
-			pstmt.setString(2, eno);
+			pstmt.setString(2, job);
+			pstmt.setString(3, eno);
 
 			int result = pstmt.executeUpdate();
 			if(result == 1) {

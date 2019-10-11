@@ -148,7 +148,7 @@ function fn_formSubmit(){
 		  title: "저장하시겠습니까?",
 		  buttons: [true, "저장"],
 		})
-		.then((willDelete) => {
+		.then(function(willDelete) {
 			if (willDelete) {
 			    swal("저장완료!", {
 			      	icon: "success",

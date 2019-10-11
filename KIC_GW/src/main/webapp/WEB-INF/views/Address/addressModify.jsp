@@ -73,6 +73,7 @@ a {
 </style>
 <link rel="stylesheet" href="./resources/css/bootstrap.min.css">
 <script type="text/javascript" src="./resources/js/jquery-3.4.1.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
 function ad_Modify(eno){
 	swal({
@@ -81,7 +82,7 @@ function ad_Modify(eno){
 		  dangerMode: true,
 		  buttons: [true, "허가"],
 		})
-		.then((willDelete) => {
+		.then(function(willDelete) {
 			if (willDelete) {
 			    swal("완료!", {
 			      icon: "success",
@@ -143,7 +144,7 @@ function ad_Modify(eno){
 						<td><c:out value="${addressList.eid}"/></td>
 						<td><c:out value="${addressList.job}"/></td>
 						<td><c:out value="${addressList.level}"/></td>
-						<td><a onclick="ad_Modify(${addressList.eno})" class="button" style="text-decoration:none">가입허가</a></td>
+						<td><a onclick="ad_Modify(${addressList.eno})" class="button" style="text-decoration: none;">가입허가</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

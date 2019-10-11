@@ -16,7 +16,7 @@
 	String job = to.getJob();
 	String deptno = to.getDeptno();
 	
-	if(job.equals("0")){
+	/* if(job.equals("0")){
 		job = "사원";
 	} else if(job.equals("1")){
 		job = "팀장";
@@ -26,12 +26,14 @@
 		job = "부사장";
 	} else if(job.equals("4")){
 		job = "사장";
-	}
+	} */
 	if(deptno.equals("1")){
 		deptno = "개발부";
 	} else if(deptno.equals("2")){
 		deptno = "인사부";
 	} else if(deptno.equals("3")){
+		deptno = "총무부";
+	} else if(deptno.equals("4")){
 		deptno = "재무부";
 	}
 	
@@ -374,8 +376,8 @@ li {
 				
 휴가기간
 			</td>
-			<td style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; vertical-align: middle;">
-			<%=vstart %>~<%=vend %>
+			<td style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; vertical-align: middle;">
+			<%=vstart %> ~ <%=vend %>
 			</td>
 			
 		</tr>

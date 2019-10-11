@@ -47,32 +47,20 @@ public class AuthDAO {
 				to.setEno(rs.getString("eno"));
 				to.setEname( rs.getString("ename") );
 				to.setDeptno( rs.getString("deptno") );
-			}
-			if(count == 1) {
-				sql = "insert into auth_businesstrip values ( ?, ?, 0, now(), ?, ?, ?, ?, ?)";
-				pstmt = conn.prepareStatement(sql);
-				
-				pstmt.setString(1, "1");
-				pstmt.setString(2, to.getEno());
-				pstmt.setString(3, to.getDeptno());
-				pstmt.setString(4, to.getEname());
-				pstmt.setString(5, to.getBspot());
-				pstmt.setString(6, to.getBpurpose());
-				pstmt.setString(7, "1");
-				//pstmt.setString(7, to.getAuthstate());
-				
+				System.out.println(rs.getString("ename"));
 			}
 			
-			sql = "insert into auth_businesstrip_schedule values ( ?, 0, now(), ?, ?, ?, ?, ?, ? )";
+			sql = "insert into auth_businesstrip values ( ?, ?, 0, now(), ?, ?, ?, ?, ?)";
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, to.getBno());
-			pstmt.setString(2, to.getSstart());
-			pstmt.setString(3, to.getSstarttime());
-			pstmt.setString(4, to.getSend());
-			pstmt.setString(5, to.getSendtime());
-			pstmt.setString(6, to.getTransport());
-			pstmt.setString(7, to.getBtinn());
+			pstmt.setString(1, "1");
+			pstmt.setString(2, to.getEno());
+			pstmt.setString(3, to.getDeptno());
+			pstmt.setString(4, to.getEname());
+			pstmt.setString(5, to.getBspot());
+			pstmt.setString(6, to.getBpurpose());
+			pstmt.setString(7, "1");
+			//pstmt.setString(7, to.getAuthstate());
 			
 			int result = pstmt.executeUpdate();
 			if( result == 1 ) {
@@ -108,16 +96,17 @@ public class AuthDAO {
 				to.setDeptno( rs.getString("deptno") );
 			}
 			
-			sql = "insert into auth_businesstrip_schedule values ( ?, 0, now(), ?, ?, ?, ?, ?, ? )";
+			sql = "insert into auth_businesstrip_schedule values ( ?, ?, 0, now(), ?, ?, ?, ?, ?, ? )";
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, to.getBno());
-			pstmt.setString(2, to.getSstart());
-			pstmt.setString(3, to.getSstarttime());
-			pstmt.setString(4, to.getSend());
-			pstmt.setString(5, to.getSendtime());
-			pstmt.setString(6, to.getTransport());
-			pstmt.setString(7, to.getBtinn());
+			pstmt.setString(2, to.getEno());
+			pstmt.setString(3, to.getSstart());
+			pstmt.setString(4, to.getSstarttime());
+			pstmt.setString(5, to.getSend());
+			pstmt.setString(6, to.getSendtime());
+			pstmt.setString(7, to.getTransport());
+			pstmt.setString(8, to.getBtinn());
 			
 			int result = pstmt.executeUpdate();
 			if( result == 1 ) {
@@ -140,11 +129,10 @@ public class AuthDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			String sql = "select * from auth_vacation left join emp on auth_vacation.eno=?";
+			String sql = "select * from emp where eno=?";
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, to.getEno());
-			
 			rs = pstmt.executeQuery();
 			while( rs.next() ) {
 				to.setEno(rs.getString("eno"));
@@ -190,10 +178,10 @@ public class AuthDAO {
 		ResultSet rs = null;
 	
 		try {
-			String sql = "select vno, eno, authno, ename, deptno, date_format(vdate, '%Y.%m.%d') vdate, job, vtype, vstart, vend, vreason, authstate  from auth_vacation where vno=?";
+			String sql = "select vno, eno, authno, ename, deptno, date_format(vdate, '%Y년%m월%d일') vdate, job, vtype, date_format(vstart, '%Y년%m월%d일') vstart, date_format(vend, '%Y년%m월%d일') vend, vreason, authstate  from auth_vacation where vno=?";
 			pstmt = conn.prepareStatement( sql );
 			pstmt.setString( 1, to.getVno() );
-			System.out.println("dfdsf");
+
 			rs = pstmt.executeQuery();
 			if( rs.next() ) {
 				to.setEno( rs.getString( "eno" ) );
@@ -290,6 +278,81 @@ public class AuthDAO {
 			if(conn != null) try { conn.close(); } catch( SQLException e ) {}
 		}
 		return to;
+	}
+	
+	public String authNum(String eno) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {			
+			String sql = "select count(if(authstate=1, authstate, null)) as count from auth_vacation where eno=?";
+			pstmt = conn.prepareStatement( sql );
+			pstmt.setString(1, eno);
+			System.out.println(eno);
+			rs = pstmt.executeQuery();
+			while( rs.next() ) {
+				eno = rs.getString("count");
+				
+			}
+			
+		} catch(SQLException e) {
+			System.out.println("[에러] " + e.getMessage());
+		} finally {
+			if(rs != null) try { rs.close(); } catch( SQLException e ) {}
+			if(pstmt != null) try { pstmt.close(); } catch( SQLException e ) {}
+			if(conn != null) try { conn.close(); } catch( SQLException e ) {}
+		}
+		return eno;
+	}
+	
+	public ArrayList<AuthTO> authteam(String eno) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		PreparedStatement pstmt1 = null;
+		ResultSet rs1 = null;
+		String sql1 = null;
+		String deptno = null;
+
+		AuthTO to = new AuthTO();
+		ArrayList<AuthTO> authTeams = new ArrayList<AuthTO>();
+		try {
+			String sql = "select eno, ename, job, deptno from emp where eno=?";
+			pstmt = conn.prepareStatement( sql );
+			pstmt.setString(1, eno);
+			
+			rs = pstmt.executeQuery();
+
+			while( rs.next() ) {
+				to.setEno(rs.getString("eno"));
+				to.setDeptno(rs.getString("deptno"));
+				eno = rs.getString("eno");
+				deptno = rs.getString("deptno");
+			}
+
+			sql1 = "select * from emp where deptno=?";
+			pstmt1 = conn.prepareStatement( sql1 );
+			pstmt1.setString(1, deptno);
+
+			rs1 = pstmt1.executeQuery();
+			while( rs1.next() ) {
+				AuthTO to1 = new AuthTO();
+				if(!eno.equals(rs1.getString("eno"))) {
+					to1.setEno(rs1.getString("eno"));
+					to1.setEname(rs1.getString("ename"));
+					System.out.println(rs1.getString("eno"));
+					authTeams.add(to1);
+				}		
+				
+			}
+			
+		} catch(SQLException e) {
+			System.out.println("[에러] " + e.getMessage());
+		} finally {
+			if(rs != null) try { rs.close(); } catch( SQLException e ) {}
+			if(pstmt != null) try { pstmt.close(); } catch( SQLException e ) {}
+			if(conn != null) try { conn.close(); } catch( SQLException e ) {}
+		}
+		return authTeams;
 	}
 	
 	public ArrayList<AuthvacationTO> authVList1(String eno) {

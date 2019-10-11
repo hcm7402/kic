@@ -65,7 +65,7 @@ li {
    <li><a href="#">공지사항</a></li><!-- 공지 사항-->
    <li><a href='./authpage.do'>전자결재</a></li><!-- 전자 -->
    <li><a href='./project.do'>프로젝트</a></li><!-- 프젝 -->
-   <li><a href='#'>게시판</a></li><!-- 게시판 -->
+   <li><a href='./boardpage.do'>게시판</a></li><!-- 게시판 -->
    <li><a href='./cal.do'>캘린더</a></li>
    <li><a href='./address.do'>조직도</a></li><!-- 조직 -->
    <li><a href='./mypage.do'>My page</a></li><!-- 마이 -->

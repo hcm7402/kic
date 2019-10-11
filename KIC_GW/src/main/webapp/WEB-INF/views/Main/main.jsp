@@ -1,3 +1,8 @@
+<%@page import="com.kic.groupware.model1.auth.AuthDAO"%>
+<%@page import="com.kic.groupware.model1.auth.AuthTO"%>
+<%@page import="com.kic.groupware.model1.board.BoardDAO"%>
+<%@page import="com.kic.groupware.model1.board.BoardTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
@@ -12,6 +17,35 @@
 		out.println("location.href='./login.do'");
 		out.println("</script>");
 	}
+	
+	BoardDAO dao1 = new BoardDAO();
+	ArrayList<BoardTO> boardLists = dao1.boardList();
+
+	StringBuffer html = new StringBuffer();
+	int totalRecord = 0;
+	for(BoardTO to : boardLists){
+		String seq=to.getSeq();
+		String subject = to.getSubject();
+		String writer = to.getWriter();
+		String wdate = to.getWdate();
+		String hit = to.getHit();
+		int wgap = to.getWgap();
+		html.append("<tr>");
+		html.append("<td class='title'>");
+		html.append("	<a style='padding-left: 100px;' class='button_view' data-seqv=" + seq + ">" + subject + "</a>");
+		html.append("</td>");
+		html.append("<td class='date'>" + wdate + "</td>");
+		html.append("</tr>");
+
+		totalRecord++;
+		if(totalRecord == 4){
+			break;
+		}
+	}
+	AuthTO to = new AuthTO();
+	AuthDAO dao2 = new AuthDAO();
+	String count = dao2.authNum(eno);
+
 %>
 <!DOCTYPE html>
 <html>
@@ -237,7 +271,7 @@ background-color:#fff;      }
 		
 		
 		$('.count').animateNumber({
-			number: 6
+			number: <%=count%>
 		});
 		
 	});
@@ -314,27 +348,12 @@ background-color:#fff;      }
 					<table class="board-table">
 						<thead>
 							<tr>
-								<th scope="col" class="title">제목</th>
-								<th scope="col" class="date">작성일</th>
+								<th scope="col" style="padding-left: 100px;" class="title">제목</th>
+								<th scope="col"  class="date">작성일</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td class="title"><a href="#">(공지) 하반기 실적 </a></td>
-								<td class="date">2019-09-29 14:24:32</td>
-							</tr>
-							<tr>
-								<td class="title"><a href="#">(공지) 그룹웨어 도입</a></td>
-								<td class="date">2019-09-25 17:12:02</td>
-							</tr>
-							<tr>
-								<td class="title"><a href="#">(공지) 회사 워크샵 공지 </a></td>
-								<td class="date">2019-09-22 11:35:09</td>
-							</tr>
-							<tr>
-								<td class="title"><a href="#">(공지) 상반기 실적 </a></td>
-								<td class="date">2019-06-18 14:45:29</td>
-							</tr>
+							<%=html %>
 						</tbody>
 					</table>
 					<a href="#" class="more"><img

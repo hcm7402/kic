@@ -46,8 +46,8 @@
 		}
 		html1.append("<tr>");
 		html1.append("<td>" + vno + "</td>");
-		html1.append("<td class='left'>");
-		html1.append("	<a class='test' data-vno=" + vno + ">" + vreason + "</a>");
+		html1.append("<td class='center'>");
+		html1.append("	<a style='text-align:center;' class='test' data-vno=" + vno + ">" + vreason + "</a>");
 		html1.append("</td>");
 		html1.append("<td>" + vdate + "</td>");
 		html1.append("<td>" + authno + "</td>");
@@ -57,8 +57,8 @@
 		
 		totalRecord++;
 	}
-	
-	StringBuffer html2 = new StringBuffer();
+	/*
+	 StringBuffer html2 = new StringBuffer();
 	
 	for( AuthbusitripTO to : authVLists2) {
 		String authno = to.getAuthno();
@@ -73,7 +73,7 @@
 		html2.append("<tr>");
 		html2.append("<td>" + bno + "</td>");
 		html2.append("<td class='left'>");
-		html2.append("	<a href='./busitrip.do?bno=" + bno + "'>" + bpurpose + "</a>");
+		html2.append("	<a class='test1' data-bno=" + bno + "'>" + bpurpose + "</a>");
 		html2.append("</td>");
 		html2.append("<td>" + binsertdate + "</td>");
 		html2.append("<td>" + authno + "</td>");
@@ -109,7 +109,7 @@
 		
 		totalRecord++;
 	}
-	
+	*/
 %>
 
 <!DOCTYPE html>
@@ -154,7 +154,7 @@
 th {
 	text-align: center;                 
 	padding: 1em;
-	background-color: #47c9af;
+	background-color: #56bafc;
 	opacity: 0.5;
 	color: white;
 }
@@ -285,8 +285,6 @@ li {
 			</thead>
 			<tbody>
 				<%=html1 %>
-				<%=html2 %>
-				<%=html3 %>
 			<!-- 
 			<tr>
 				<td>1</td>

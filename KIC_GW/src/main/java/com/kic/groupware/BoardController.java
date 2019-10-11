@@ -42,6 +42,7 @@ public class BoardController {
    		return model;
    	}
     
+    
     @RequestMapping(value = "/boardlist.do")
 	public ModelAndView boardlist( HttpServletRequest request, HttpServletResponse response) {
 		System.out.println( "boardlist 컨트롤러 호출" );

@@ -40,7 +40,6 @@ public class AuthController {
    		return model;
    	}
     
-    
     @RequestMapping(value = "/authlist.do")
 	public ModelAndView authlist( HttpServletRequest request, HttpServletResponse response) {
 		System.out.println( "authlist 컨트롤러 호출" );

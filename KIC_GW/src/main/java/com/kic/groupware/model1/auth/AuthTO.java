@@ -17,6 +17,7 @@ public class AuthTO {
 	private String level;
 	private String date;
 	
+	
 	public String getDate() {
 		return date;
 	}

@@ -248,6 +248,7 @@ public class AuthDAO {
 		
 		return flag;
 	}
+	
 	public AuthTO authEmp(AuthTO to) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

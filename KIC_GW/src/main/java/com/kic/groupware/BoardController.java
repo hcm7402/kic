@@ -30,6 +30,7 @@ public class BoardController {
     /**
      * 리스트.
      */
+    
     		 
     @RequestMapping(value = "/boardpage.do")
    	public ModelAndView boardpage( HttpServletRequest request, HttpServletResponse response) {

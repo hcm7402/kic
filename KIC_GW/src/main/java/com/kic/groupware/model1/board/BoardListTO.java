@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class BoardListTO {
 
+	
 	private int cpage;
 	private int recordPerPage;
 	private int blockPerPage;

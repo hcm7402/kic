@@ -359,6 +359,7 @@ li {
 				});
 			}
 			
+			
 			$(document).on('click','.button_list', function() {
 				boardlist( <%=eno%>);
 			});

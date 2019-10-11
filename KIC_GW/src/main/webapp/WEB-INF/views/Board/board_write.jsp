@@ -151,6 +151,7 @@ $(function(){
 				}
 			});
 		}
+		
 
 		
 		$(document).on('click','.button_list', function() {

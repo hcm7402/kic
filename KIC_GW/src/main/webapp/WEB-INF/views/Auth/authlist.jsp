@@ -5,6 +5,7 @@
 <%@page import="com.kic.groupware.model1.auth.AuthvacationTO"%>
 <%@page import="java.util.ArrayList"%>
 <%
+
 	request.setCharacterEncoding("UTF-8");
 	String eno = (String)session.getAttribute("eno");
 	

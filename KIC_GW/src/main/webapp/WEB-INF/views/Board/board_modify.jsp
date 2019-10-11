@@ -222,6 +222,7 @@ $(function(){
 			});
 		}
 
+		
 		$(document).on('click','.button_view2', function() {
 			boardview2( <%=eno%>, <%=seq%> );
 		});

@@ -2,6 +2,7 @@ package com.kic.groupware.model1.board;
 
 public class BoardTO {
 	
+	
 	private String seq;
 	private String eno;
 	private String subject;

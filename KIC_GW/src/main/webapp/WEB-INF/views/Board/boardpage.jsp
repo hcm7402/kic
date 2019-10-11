@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="./resources/menu.css">
 <title>마이페이지</title>
+
 <style type="text/css">
 	.row {
 	padding-left: 14px;

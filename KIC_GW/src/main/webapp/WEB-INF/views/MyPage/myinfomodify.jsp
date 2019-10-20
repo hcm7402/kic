@@ -18,17 +18,9 @@
 	String email = to.getEmail();
 	String dname = to.getDname();
 	String hiredate = to.getHiredate();
-	int job = Integer.parseInt(to.getJob());
+	String job = to.getJob();
 	String birth = to.getBirth();
-	String myjob = "";
-	
-	if ( job == 1 || job == 0 ) {
-		myjob = "사원";
-	}else if( job == 2 ) {
-		myjob = "팀장";
-	} else if( job == 3 ) {
-		myjob = "부장";
-	}
+
 %>
 <!DOCTYPE html>
 <html>
@@ -162,7 +154,7 @@ body {
 	<tr>
 		<td class="myinfo-sub">직 책</td>
 		<td class="myinfo-job" >
-			<input type="text" class="form-controll" disabled="disabled" value=<%=myjob %> />
+			<input type="text" class="form-controll" disabled="disabled" value=<%=job %> />
 		</td>
 	</tr>
 	<tr>

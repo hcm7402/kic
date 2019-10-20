@@ -217,11 +217,11 @@ $( document ).ready( function() {
 			                        </div>
 									<div class="row form-group">
 										<label class="col-lg-2">일정 날짜</label>
-										<div class="col-lg-2">
+										<div class="col-lg-3">
 										<input class="form-control" size="16" id="startdate" name="startdate" value="<c:if test='${searchVO.date != null and caldata.cdno == null}'>${searchVO.date}</c:if><c:if test='${caldata.cdno != null}'><c:out value="${caldata.startdate}"/></c:if>" readonly>
 										</div>
 										<div class="col-sm-1" style="text-align: center;"><p>~</p></div>
-										<div class="col-lg-2">
+										<div class="col-lg-3">
 										<input class="form-control" size="16" id="enddate" name="enddate" value="<c:if test='${searchVO.date != null and caldata.cdno == null}'>${searchVO.date}</c:if><c:if test='${caldata.cdno != null}'><c:out value="${caldata.enddate}"/></c:if>" readonly>
 										</div>
 										<div class="col-sm-2"></div>
@@ -233,8 +233,8 @@ $( document ).ready( function() {
 			                            </div>
 			                        </div>
 			                        <div class="row form-group" style="float: right; margin-right: 138px">
-			                            <a onclick="fn_formSubmit()" class="button" style="text-decoration:none">등록</a>
-			                      		<a href="./cal.do" class="button" style="margin-left:10px; text-decoration:none">취소</a>
+			                            <button onclick="fn_formSubmit()" class="btn btn-primary">등록</button>
+			                      		<a href="./cal.do" class="btn btn-primary" style="margin-left:10px;">취소</a>
 			                        </div>
 								</div>
 							</div>

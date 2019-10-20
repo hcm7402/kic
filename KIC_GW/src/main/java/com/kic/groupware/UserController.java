@@ -89,8 +89,8 @@ public class UserController {
     	to.setEpw(request.getParameter("epw"));
     	to.setAuthphoto(fileName + request.getFile("authphoto").getOriginalFilename());
     	
-    	File ephotoFile = new File("C:/Users/ChangMo/git/kicgw5/KIC_GW/src/main/webapp/resources/photo",to.getEphoto());
-    	File authphotoFile = new File("C:/Users/ChangMo/git/kicgw5/KIC_GW/src/main/webapp/resources/sign",to.getAuthphoto());
+    	File ephotoFile = new File("C:/Users/ChangMo/git/kicgw7/KIC_GW/src/main/webapp/resources/photo",to.getEphoto());
+    	File authphotoFile = new File("C:/Users/ChangMo/git/kicgw7/KIC_GW/src/main/webapp/resources/sign",to.getAuthphoto());
 
         try {
         	request.getFile("ephoto").transferTo(ephotoFile);

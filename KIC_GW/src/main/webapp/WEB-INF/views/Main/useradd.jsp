@@ -318,7 +318,7 @@ label {
 				<div class="wrap-input100">
 					<label>주소</label><br />
 					<input type="text" id="sample6_postcode" placeholder="우편번호" disabled="disabled">
-					<input class="btn btn-success" style="float: right; font-size: 12px" type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+					<input class="btn btn-primary" style="float: right; font-size: 12px" type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
 					<input class="input100" type="text" id="sample6_address" name="sample6_address" placeholder="주소">
 					<input class="input100" style="margin: 0" type="text" id="sample6_detailAddress" name="sample6_detailAddress" placeholder="상세주소">
 				</div>
@@ -334,6 +334,7 @@ label {
 				<div class="wrap-input100" style="padding-bottom: 10px">
 					도장 : <input type="file" style="float: right" name="authphoto" id="authphoto">
 				</div>
+				<br />
 				<div class="container-login100-form-btn">
 					<input type="submit" class="login50-form-btn" id="useradd" value="가입하기" />&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="button" class="login50-form-btn" id="cancel" value="취소" />

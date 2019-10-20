@@ -183,7 +183,7 @@ $( document ).ready( function() {
 		<div id="container">
 			<div class="row">
 				<div class="col-sm-2">
-					<%@include file="../Menu/calmenu.jsp" %>
+					<%@include file="../Menu/calmenu.jsp"%>
 				</div>
 				<form id="form1" class="col-sm-10" name="form1" role="form" action="./cal_ok.do" method="post" >
 					<input type="hidden" name="eno" value="<%= eno %>">

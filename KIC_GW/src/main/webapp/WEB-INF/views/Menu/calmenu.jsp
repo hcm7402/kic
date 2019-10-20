@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <%
-	String level = (String)session.getAttribute("level");
+	String lv = (String)session.getAttribute("level");
 %>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,12 +34,12 @@
    <li class='active has-sub'><a href='#'>켈린더 관리</a>
       <ul>
       <%
-      	if ( Integer.parseInt(level) == 4 ) {
+      	if ( Integer.parseInt(lv) == 4 ) {
       		out.println("<li><a href='./calcompany.do'>회사 일정 관리</a></li>");
-      	} else if( Integer.parseInt(level) == 3 ) {
+      	} else if( Integer.parseInt(lv) == 3 ) {
       		out.println("<li><a href='./caldepart.do'>부서별 일정 관리</a></li>");
       		out.println("<li><a href='./calone.do'>개인 일정 관리</a></li>");
-      	} else if( Integer.parseInt(level) == 2 ) {
+      	} else if( Integer.parseInt(lv) == 2 ) {
       		out.println("<li><a href='./caldepart.do'>부서별 일정 관리</a></li>");
       		out.println("<li><a href='./calone.do'>개인 일정 관리</a></li>");
       	} else {
